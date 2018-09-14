@@ -1,6 +1,6 @@
 import React from "react";
 // import { Layout } from "antd";
-import { NavBar, Card, WhiteSpace, WingBlank } from "antd-mobile";
+import { NavBar, WhiteSpace, WingBlank } from "antd-mobile";
 
 // const { Footer, Content } = Layout;
 
@@ -9,11 +9,7 @@ const MainLayout = ({ children }) => (
     <NavBar mode="dark">ICMM 2019</NavBar>
     <WingBlank size="lg">
       <WhiteSpace size="lg" />
-      <Card>
-        <Card.Body>
-          <div>{children}</div>
-        </Card.Body>
-      </Card>
+      <div>{children}</div>
       <WhiteSpace size="lg" />
     </WingBlank>
   </div>
