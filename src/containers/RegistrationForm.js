@@ -8,20 +8,26 @@ const FormItem = Form.Item;
 
 class RegistrationForm extends Component {
   handleSubmit = e => {
+
+    this.onSetState()
+    
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log("Received values of form: ", values);
-        this.props.history.push("/2");
+        
+        // this.props.history.push("/2");
       }
     });
   };
   constructor(props, context) {
     super(props, context);
+    this.onSetState = this.onSetState.bind(this);
     this.onLoadRecaptcha = this.onLoadRecaptcha.bind(this);
     this.verifyCallback = this.verifyCallback.bind(this);
     this.state = {
-      recaptchaToken: undefined
+      recaptchaToken: undefined,
+      userInformation : "null"
     }
   }
 
@@ -35,6 +41,13 @@ class RegistrationForm extends Component {
       this.captchaDemo.reset();
     }
   }
+  onSetState() {
+
+    this.setState({ userInformation : 3 })
+    console.log("state has been add")
+    console.log(this.state.userInformation)
+  }
+
   verifyCallback(recaptchaToken) {
     this.setState({ recaptchaToken });
   }
@@ -73,12 +86,12 @@ class RegistrationForm extends Component {
     };
     return (
       <Form onSubmit={this.handleSubmit}>
-        <FormItem {...formItemLayout} label="Surname">
-          {getFieldDecorator("surname", {
+        <FormItem {...formItemLayout} label="Name">
+          {getFieldDecorator("name", {
             rules: [
               {
                 required: true,
-                message: "Please input your surname!"
+                message: "Please input your name!"
               }
             ]
           })(<Input />)}
