@@ -98,9 +98,6 @@ class RegistrationForm extends Component {
             ]
           })(<Input/>)}
         </FormItem>
-
-        <input type="email" className="form-control" name="email" placeholder="Enter email" onChange={this.handleChange}/>
-
         <FormItem {...formItemLayout} label="Tel">
           {getFieldDecorator("tel", {
             rules: [
