@@ -9,44 +9,44 @@ const FormItem = Form.Item;
 class RegistrationForm extends Component {
   handleSubmit = e => {
 
-    this.onSetState()
+
     
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log("Received values of form: ", values);
+        this.state.userInformation = values
+        this.setState(
+            this.state , console.log(this.state.userInformation)
+        )
         
-        // this.props.history.push("/2");
+        this.props.history.push("/2");
       }
     });
   };
   constructor(props, context) {
     super(props, context);
-    this.onSetState = this.onSetState.bind(this);
     this.onLoadRecaptcha = this.onLoadRecaptcha.bind(this);
     this.verifyCallback = this.verifyCallback.bind(this);
     this.state = {
       recaptchaToken: undefined,
-      userInformation : "null"
+      userInformation: {},
     }
   }
+
 
   componentDidMount() {
     if (this.captchaDemo) {
       this.captchaDemo.reset();
     }
   }
+
   onLoadRecaptcha() {
     if (this.captchaDemo) {
       this.captchaDemo.reset();
     }
   }
-  onSetState() {
 
-    this.setState({ userInformation : 3 })
-    console.log("state has been add")
-    console.log(this.state.userInformation)
-  }
 
   verifyCallback(recaptchaToken) {
     this.setState({ recaptchaToken });
@@ -60,6 +60,7 @@ class RegistrationForm extends Component {
     return;
   };
   render() {
+   
     const { getFieldDecorator } = this.props.form;
 
     const formItemLayout = {
@@ -86,7 +87,8 @@ class RegistrationForm extends Component {
     };
     return (
       <Form onSubmit={this.handleSubmit}>
-        <FormItem {...formItemLayout} label="Name">
+        <FormItem {...formItemLayout} label="Name"
+         >
           {getFieldDecorator("name", {
             rules: [
               {
@@ -94,8 +96,11 @@ class RegistrationForm extends Component {
                 message: "Please input your name!"
               }
             ]
-          })(<Input />)}
+          })(<Input/>)}
         </FormItem>
+
+        <input type="email" className="form-control" name="email" placeholder="Enter email" onChange={this.handleChange}/>
+
         <FormItem {...formItemLayout} label="Tel">
           {getFieldDecorator("tel", {
             rules: [
