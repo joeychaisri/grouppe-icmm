@@ -213,6 +213,18 @@ class InformationForm extends Component {
             })(<Input />)}
           </FormItem>
         )}
+        {getFieldValue("alunmi") === "false" && (
+          <FormItem {...formItemLayout} label="ชื่อ-สกุล ผู้ลงทะเบียนให้">
+            {getFieldDecorator("referalName", {
+              rules: [
+                {
+                  required: true,
+                  message: "กรุณากรอกชื่อ-สกุล ผู้ลงทะเบียนให้"
+                }
+              ]
+            })(<Input />)}
+          </FormItem>
+        )}
         <FormItem {...formItemLayout} label="ชื่อบนบิบ">
           {getFieldDecorator("nameOnBib", {
             rules: [
