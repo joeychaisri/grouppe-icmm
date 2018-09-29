@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { ReCaptcha } from "react-recaptcha-google";
-import { Form, Input, Button, Checkbox , Divider } from "antd";
-import DateInput from "../components/DateInput";
+import { Form, Button, Checkbox , Divider } from "antd";
 
-const FormItem = Form.Item;
 
 class Termandcondition extends Component {
 
   constructor(props, context) {
     super(props, context);
     this.onEnter = this.onEnter.bind(this);
+    this.onTickCheckbox = this.onTickCheckbox.bind(this);
     this.state = {
+      acceptCondition : false
 
     }
   }
@@ -20,35 +19,16 @@ class Termandcondition extends Component {
     
   }
 
+  onTickCheckbox(){
+    this.setState({ acceptCondition : true });
+  }
+
   onEnter(){
     this.props.history.push("/2");
   }
 
   render() {
-    const { getFieldDecorator } = this.props.form;
 
-    const formItemLayout = {
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 }
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 }
-      }
-    };
-    const tailFormItemLayout = {
-      wrapperCol: {
-        xs: {
-          span: 24,
-          offset: 0
-        },
-        sm: {
-          span: 16,
-          offset: 8
-        }
-      }
-    };
     return (
       // <Form >
         <div >
@@ -89,8 +69,10 @@ class Termandcondition extends Component {
 
         <Divider style= {{ marginTop : "5vh" }} />
         <div style= {{display : "flex", flexFlow: "column wrap" }} >
-        <Checkbox style={{ marginLeft : "20vh"  }}> คุณได้ยอมรับเงื่อนไขด้านบนทั้งหมดแล้ว</Checkbox>
-        <Button style= {{ width : "50vh" , margin: "0 auto" , marginTop : "2vh"}}  
+        <Checkbox style={{ marginLeft : "20vh"  }} onClick={this.onTickCheckbox} > คุณได้ยอมรับเงื่อนไขด้านบนทั้งหมดแล้ว</Checkbox>
+        <Button  
+        style= {{ width : "50vh" , margin: "0 auto" , marginTop : "2vh"}} 
+        disabled={this.state.acceptCondition ? false : true} 
         type="primary"
         onClick={this.onEnter}> ตกลง </Button>
         </div>
