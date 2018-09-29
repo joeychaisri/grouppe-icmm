@@ -12,6 +12,7 @@ class RegistrationForm extends Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log("Received values of form: ", values);
+        this.props.set(values);
         this.props.history.push("/2");
       }
     });
@@ -20,9 +21,7 @@ class RegistrationForm extends Component {
     super(props, context);
     this.onLoadRecaptcha = this.onLoadRecaptcha.bind(this);
     this.verifyCallback = this.verifyCallback.bind(this);
-    this.state = {
-      recaptchaToken: undefined
-    }
+    this.state = {};
   }
 
   componentDidMount() {
@@ -73,8 +72,13 @@ class RegistrationForm extends Component {
     };
     return (
       <Form onSubmit={this.handleSubmit}>
-        <FormItem {...formItemLayout} label="Surname">
-          {getFieldDecorator("surname", {
+        {this.props.isRegistered && (
+          <FormItem {...tailFormItemLayout} style={{ margin: 0}}>
+            <p style={{ margin: 0}}>สำหรับกรอกเพื่อเพิ่มเพื่อน</p>
+          </FormItem>
+        )}
+        <FormItem {...formItemLayout} label="ชื่อ">
+          {getFieldDecorator("name", {
             rules: [
               {
                 required: true,
@@ -84,7 +88,7 @@ class RegistrationForm extends Component {
           })(<Input />)}
         </FormItem>
         <FormItem {...formItemLayout} label="Tel">
-          {getFieldDecorator("tel", {
+          {getFieldDecorator("phone", {
             rules: [
               {
                 required: true,
@@ -94,7 +98,7 @@ class RegistrationForm extends Component {
           })(<Input />)}
         </FormItem>
         <FormItem {...formItemLayout} label="Birth date">
-          {getFieldDecorator("birthdate", {
+          {getFieldDecorator("dateOfBirth", {
             rules: [{ validator: this.checkBirthDate }]
           })(<DateInput />)}
         </FormItem>

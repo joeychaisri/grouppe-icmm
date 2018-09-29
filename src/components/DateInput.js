@@ -10,7 +10,7 @@ class DateInput extends Component {
       const value = props.value || {};
       this.state = {
         day: value.day,
-        month: value.day,
+        month: value.month,
         year: value.year
       };
     }
@@ -44,7 +44,7 @@ class DateInput extends Component {
     triggerChange = changedValue => {
       const onChange = this.props.onChange;
       if (onChange) {
-        onChange(Object.assign({}, this.state, changedValue));
+        onChange(Object.assign({}, this.state, changedValue))
       }
     };
   
