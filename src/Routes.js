@@ -1,14 +1,17 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import RegistrationForm from "./containers/RegistrationForm";
-import InformationForm from "./containers/InformationForm";
+import InformationForm from "./containers/InformationForm"
+import Termandcondition from "./containers/TermandCondition"
+import SeriesAuth from "./containers/SeriesAuth"
 
 const Routes = props => {
-  console.log(props);
   return (
     <Switch>
       <Route exact path="/" render={() => <RegistrationForm {...props} />} />
       <Route exact path="/2" render={() => <InformationForm {...props} />} />
+      <Route exact path="/3" component={Termandcondition} />
+      <Route exact path="/4" component={SeriesAuth} />
     </Switch>
   );
 };
