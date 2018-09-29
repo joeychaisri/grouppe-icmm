@@ -4,6 +4,8 @@ import { ReCaptcha } from "react-recaptcha-google";
 import { Form, Input, Button } from "antd";
 import DateInput from "../components/DateInput";
 
+
+
 const FormItem = Form.Item;
 
 class RegistrationForm extends Component {

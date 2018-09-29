@@ -5,6 +5,7 @@
   "dependencies": {
     "antd": "^3.9.2",
     "antd-mobile": "^2.2.5",
+    "axios": "^0.18.0",
     "babel-plugin-import": "^1.8.0",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
@@ -12,6 +13,7 @@
     "react-app-rewire-less": "^2.1.3",
     "react-app-rewired": "^1.6.2",
     "react-dom": "^16.5.1",
+    "react-perfect-scrollbar": "^1.2.2",
     "react-recaptcha-google": "^1.1.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",

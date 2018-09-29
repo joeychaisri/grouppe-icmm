@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, Input, Button, Select } from "antd";
 import DateInput from "../components/DateInput";
+import axios from 'axios';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -12,9 +13,32 @@ class InformationForm extends Component {
       console.log(values);
       if (!err) {
         console.log("Received values of form: ", values);
+        this.state.userInformation = values
+        this.setState(
+            this.state , console.log(this.state.userInformation)
+        )
       }
     });
   };
+
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      userInformation: {},
+      person : []
+
+    }
+  }
+
+  componentDidMount() {
+    axios.get('https://5ba4b098328ae60014f305c8.mockapi.io/applicants')
+      .then(res => {
+        const persons = res.data;
+        this.setState({ persons });
+      }).then(console.log(this.state.person))
+      
+  }
+
 
   checkBirthDate = (rule, value, callback) => {
     const { day = null, month = null, year = null } = value || {};
