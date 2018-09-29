@@ -12,7 +12,7 @@ class InformationForm extends Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log("Received values of form: ", values);
-        this.props.add(values)
+        this.props.add(values);
         this.props.history.push("/");
       }
     });
@@ -31,8 +31,15 @@ class InformationForm extends Component {
     return;
   };
 
+  handleSeriesNoChange = (value) => {
+    this.props.form.setFieldsValue({ year: Number(value) - 41 > 0 ? Number(value) - 41 : 0 })
+  }
+  handleYearChange = (value) => {
+    this.props.form.setFieldsValue({ year: Number(value) + 41 })
+  }
+
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const { getFieldDecorator, getFieldValue } = this.props.form;
 
     const formItemLayout = {
       labelCol: {
@@ -155,8 +162,59 @@ class InformationForm extends Component {
             </Select>
           )}
         </FormItem>
+        <FormItem {...formItemLayout} label="Alumni">
+          {getFieldDecorator("alunmi", {
+            rules: [
+              {
+                required: true,
+                message: "กรุณาระบุการเป็นนิสิตเก่า"
+              }
+            ]
+          })(
+            <Select>
+              <Option value="true">นิสิตเก่า</Option>
+              <Option value="false">ไม่เป็นนิสิตเก่า</Option>
+            </Select>
+          )}
+        </FormItem>
+        {getFieldValue("alunmi") === "true" && (
+          <FormItem {...formItemLayout} label="หมายเลขรุ่น">
+            {getFieldDecorator("seriesNo", {
+              rules: [
+                {
+                  required: true,
+                  message: "กรุณากรอกหมายเลขรุ่น"
+                }
+              ]
+            })(<Input onBlur={e => this.handleSeriesNoChange(e.target.value)}/>)}
+          </FormItem>
+        )}
+        {getFieldValue("alunmi") === "true" && (
+          <FormItem {...formItemLayout} label="วศ">
+            {getFieldDecorator("year", {
+              rules: [
+                {
+                  required: true,
+                  message: "กรุณากรอก วศ"
+                }
+              ]
+            })(<Input onBlur={e => this.handleYearChange(e.target.value)} />)}
+          </FormItem>
+        )}
+        {getFieldValue("alunmi") === "false" && (
+          <FormItem {...formItemLayout} label="ความเกี่ยวข้อง">
+            {getFieldDecorator("relationship", {
+              rules: [
+                {
+                  required: true,
+                  message: "กรุณากรอกความเกี่ยวข้อง"
+                }
+              ]
+            })(<Input />)}
+          </FormItem>
+        )}
         <FormItem {...formItemLayout} label="ชื่อบนบิบ">
-          {getFieldDecorator("name_on_bib", {
+          {getFieldDecorator("nameOnBib", {
             rules: [
               {
                 required: true,
