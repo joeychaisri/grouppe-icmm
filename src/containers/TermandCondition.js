@@ -20,7 +20,7 @@ class Termandcondition extends Component {
   }
 
   onTickCheckbox(){
-    this.setState({ acceptCondition : true });
+    this.setState({ acceptCondition : !this.state.acceptCondition });
   }
 
   onEnter(){
