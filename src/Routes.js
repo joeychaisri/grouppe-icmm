@@ -6,6 +6,7 @@ import Termandcondition from "./containers/TermandCondition"
 import SeriesAuth from "./containers/SeriesAuth"
 import WelcomePage from "./containers/WelcomPage"
 import searchByOrder from "./containers/searchByOrder"
+import summary from "./containers/Summary"
 
 const Routes = props => {
   return (
@@ -16,6 +17,7 @@ const Routes = props => {
       <Route exact path="/4" component={SeriesAuth} />
       <Route exact path="/welcome" component={WelcomePage} />
       <Route exact path="/search" component={searchByOrder} />
+      <Route exact path="/summary" component={summary} />
     </Switch>
   );
 };
