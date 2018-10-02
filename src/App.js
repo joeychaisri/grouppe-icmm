@@ -3,7 +3,6 @@ import { BrowserRouter } from "react-router-dom";
 import MainLayout from "./components/MainLayout";
 import Routes from "./Routes";
 import { loadReCaptcha } from "react-recaptcha-google";
-import { withRouter } from "react-router-dom";
 class App extends Component {
   state = {
     data: {},
@@ -77,8 +76,8 @@ class App extends Component {
     const isRegistered = (this.state.confirmData.length > 0)
     return (
       <BrowserRouter>
-        <MainLayout confirmData={this.state.confirmData} delData={ (idx) => {this.delData(idx)} } editData={ (idx) => {this.editData(idx)} }>
-          <Routes set={data => this.setData(data)} add={newData => this.addData(newData)} data={this.state.data} isRegistered={isRegistered} />
+        <MainLayout showSider={false} confirmData={this.state.confirmData} delData={ (idx) => {this.delData(idx)} } editData={ (idx) => {this.editData(idx)} }>
+          <Routes set={data => this.setData(data)} add={newData => this.addData(newData)} data={this.state.data} confirmData={this.state.confirmData} isRegistered={isRegistered} />
         </MainLayout>
       </BrowserRouter>
     );

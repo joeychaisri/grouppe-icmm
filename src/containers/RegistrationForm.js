@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import { ReCaptcha } from "react-recaptcha-google";
 import { Form, Input, Button } from "antd";
 import DateInput from "../components/DateInput";
+import API from "../api/index"
 
 const FormItem = Form.Item;
 
@@ -25,6 +26,9 @@ class RegistrationForm extends Component {
   }
 
   componentDidMount() {
+    API.getApplicant({ name: "ปฐมพงศ์","phone": "0881112345", "dateOfBirth": "1990-03-30"}).then(res => {
+      console.log(res)
+    })
     if (this.captchaDemo) {
       this.captchaDemo.reset();
     }
