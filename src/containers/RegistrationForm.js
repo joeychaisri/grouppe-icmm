@@ -97,7 +97,7 @@ class RegistrationForm extends Component {
                 message: "Please input your name!"
               }
             ]
-          })(<Input style={{ width: "60vh"}}/>)}
+          })(<Input style={{ width: "60%"}}/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="Tel">
           {getFieldDecorator("phone", {
@@ -107,7 +107,7 @@ class RegistrationForm extends Component {
                 message: "Please input your telephone no.!"
               }
             ]
-          })(<Input style={{ width: "60vh"}} />)}
+          })(<Input style={{ width: "60%"}} />)}
         </FormItem>
         <FormItem {...formItemLayout} label="Birth date">
           {getFieldDecorator("dateOfBirth", {
@@ -129,7 +129,7 @@ class RegistrationForm extends Component {
           </div>
         </FormItem>
         <FormItem {...tailFormItemLayout}>
-          <Button
+          <Button style={{ width: "35%"}}
             type="primary"
             htmlType="submit"
             disabled={this.state.recaptchaToken ? false : true}

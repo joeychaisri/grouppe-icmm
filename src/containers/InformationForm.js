@@ -275,7 +275,7 @@ class InformationForm extends Component {
         </FormItem>
         
         <FormItem {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
+          <Button style={{ width: "35%"}} type="primary" htmlType="submit">
             Go!!
           </Button>
         </FormItem>
