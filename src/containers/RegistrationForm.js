@@ -130,8 +130,9 @@ class RegistrationForm extends Component {
             htmlType="submit"
             disabled={this.state.recaptchaToken ? false : true}
           >
-            Go!!
+            เพิ่มเพื่อน
           </Button>
+        
         </FormItem>
       </Form>
     );

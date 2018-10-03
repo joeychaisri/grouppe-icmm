@@ -22,6 +22,10 @@ class InformationForm extends Component {
     this.props.form.setFieldsValue(this.props.data);
   }
 
+  pushToSummary() {
+    this.props.history.push("/summary");
+};
+
   checkBirthDate = (rule, value, callback) => {
     const { day = null, month = null, year = null } = value || {};
     if (!value || !day || !month || !year) {
@@ -279,7 +283,11 @@ class InformationForm extends Component {
         
         <FormItem {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
-            Go!!
+            เพิ่มผู้สมัคร
+          </Button>
+          <Button style={{marginLeft : "3%" }} type="default" 
+          onClick={this.pushToSummary.bind(this)}>
+            สรุปและชำระเงิน
           </Button>
         </FormItem>
       </Form>
