@@ -235,6 +235,44 @@ class InformationForm extends Component {
             ]
           })(<Input />)}
         </FormItem>
+        <FormItem {...formItemLayout} label="คุณเคยวิ่งระยะ 10 กม มาก่อนหรือไม่">
+          {getFieldDecorator("didYouEverRun10KMBefore", {
+            rules: [
+              {
+                required: true,
+                message: "คุณเคยวิ่งระยะ 10 กม มาก่อนหรือไม่"
+              }
+            ]
+          })(
+            <Select>
+              <Option value="true">เคย</Option>
+              <Option value="false">ไม่เคย</Option>
+            </Select>
+          )}
+        </FormItem>
+        {getFieldValue("didYouEverRun10KMBefore") === "true" && (
+          <FormItem {...formItemLayout} label="เวลาส่วนตัวที่ดีที่สุดคือเท่าไหร่">
+            {getFieldDecorator("personalBestTime", {
+              rules: [
+                {
+                  required: true,
+                  message: "กรุณากรอกเวลาส่วนตัวที่ดีที่สุดคือเท่าไหร่"
+                }
+              ]
+            })(<Input />)}
+          </FormItem>
+        )}
+        <FormItem {...formItemLayout} label="ชื่อบนบิบ">
+          {getFieldDecorator("changeOnThisYear", {
+            rules: [
+              {
+                required: true,
+                message: "ปีนี้ต้องการจะ เปลี่ยนแปลง อะไร"
+              }
+            ]
+          })(<Input />)}
+        </FormItem>
+        
         <FormItem {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
             Go!!

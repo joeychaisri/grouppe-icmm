@@ -46,7 +46,10 @@ class App extends Component {
   }
 
   setData = (data = {}) => {
+
+    
     this.setState({ data });
+
   };
   
   addData = (newData = {}) => {
