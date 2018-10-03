@@ -6,13 +6,16 @@ import { Form, Input, Button ,Divider} from "antd";
 class searchByOrder extends Component {
   constructor(props, context) {
     super(props, context);
+    this.pushToSummary = this.pushToSummary.bind(this);
 
     this.state = {};
   }
 
   componentDidMount() {}
-
-
+  
+  pushToSummary() {
+    this.props.history.push("/summary");
+  };
 
   render() {
     return (
@@ -22,6 +25,7 @@ class searchByOrder extends Component {
           style={{ width: "50vh", margin: "0 auto", marginTop: "15vh" }}
         />
         <Button
+          onClick={this.pushToSummary}
           style={{
             width: "35vh",
             margin: "0 auto",

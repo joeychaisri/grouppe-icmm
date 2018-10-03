@@ -7,7 +7,7 @@ class Termandcondition extends Component {
 
   constructor(props, context) {
     super(props, context);
-    this.onEnter = this.onEnter.bind(this);
+    this.pushToInformation = this.pushToInformation.bind(this);
     this.onTickCheckbox = this.onTickCheckbox.bind(this);
     this.state = {
       acceptCondition : false
@@ -23,9 +23,9 @@ class Termandcondition extends Component {
     this.setState({ acceptCondition : !this.state.acceptCondition });
   }
 
-  onEnter(){
-    this.props.history.push("/2");
-  }
+  pushToInformation() {
+    this.props.history.push("/information");
+};
 
   render() {
 
@@ -74,7 +74,7 @@ class Termandcondition extends Component {
         style= {{ width : "50vh" , margin: "0 auto" , marginTop : "2vh"}} 
         disabled={this.state.acceptCondition ? false : true} 
         type="primary"
-        onClick={this.onEnter}> ตกลง </Button>
+        onClick={this.pushToInformation}> ตกลง </Button>
         </div>
 
 

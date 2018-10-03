@@ -11,11 +11,18 @@ import Summary from "./containers/Summary"
 const Routes = props => {
   return (
     <Switch>
-      <Route exact path="/" render={() => <RegistrationForm {...props} />} />
+      {/* <Route exact path="/" render={() => <RegistrationForm {...props} />} />
       <Route exact path="/2" render={() => <InformationForm {...props} />} />
       <Route exact path="/3" component={Termandcondition} />
       <Route exact path="/4" component={SeriesAuth} />
       <Route exact path="/welcome" component={WelcomePage} />
+      <Route exact path="/search" component={searchByOrder} />
+      <Route exact path="/summary" render={() => <Summary {...props} />} /> */}
+      <Route exact path="/" component={WelcomePage} />
+      <Route exact path="/series" component={SeriesAuth} />
+      <Route exact path="/register" render={() => <RegistrationForm {...props} />} />
+      <Route exact path="/termandcondition" component={Termandcondition} />
+      <Route exact path="/information" render={() => <InformationForm {...props} />} />
       <Route exact path="/search" component={searchByOrder} />
       <Route exact path="/summary" render={() => <Summary {...props} />} />
     </Switch>

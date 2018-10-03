@@ -14,7 +14,7 @@ class RegistrationForm extends Component {
       if (!err) {
         console.log("Received values of form: ", values);
         this.props.set(values);
-        this.props.history.push("/2");
+        this.props.history.push("/termandcondition");
       }
     });
   };

@@ -9,11 +9,13 @@ class SeriesAuth extends Component {
     this.state = {};
   }
 
+  pushToSeries() {
+    this.props.history.push("/register");
+};
+
   componentDidMount() {}
 
-  onEnter() {
-    this.props.history.push("/2");
-  }
+
 
   render() {
     return (
@@ -22,7 +24,7 @@ class SeriesAuth extends Component {
           placeholder="Please enter invitation code"
           style={{ width: "50vh", margin: "0 auto", marginTop: "15vh" }}
         />
-        <Button
+        <Button onClick={this.pushToSeries.bind(this)}
           style={{
             width: "35vh",
             margin: "0 auto",
