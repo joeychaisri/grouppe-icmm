@@ -10,8 +10,8 @@ class DateInput extends Component {
       const value = props.value || {};
       this.state = {
         day: value.day,
-        month: value.day,
-        year: value.year
+        month: value.month,
+        year: value.year || 1999
       };
     }
   
@@ -44,7 +44,7 @@ class DateInput extends Component {
     triggerChange = changedValue => {
       const onChange = this.props.onChange;
       if (onChange) {
-        onChange(Object.assign({}, this.state, changedValue));
+        onChange(Object.assign({}, this.state, changedValue))
       }
     };
   
@@ -61,6 +61,7 @@ class DateInput extends Component {
               style={{ maxWidth: 120, width: "100%" }}
               value={state.day}
               onChange={this.handleDayChange}
+              showSearch
             >
               {day.map(val => (
                 <Option key={`d-${val}`} value={val}>{val}</Option>
@@ -73,6 +74,7 @@ class DateInput extends Component {
               style={{ maxWidth: 120, width: "100%" }}
               value={state.month}
               onChange={this.handleMonthChange}
+              showSearch
             >
               {month.map(val => (
                 <Option key={`m-${val}`} value={val}>{val}</Option>
@@ -85,6 +87,7 @@ class DateInput extends Component {
               style={{ maxWidth: 120, width: "100%" }}
               value={state.year}
               onChange={this.handleYearChange}
+              showSearch
             >
               {year.map(val => (
                 <Option key={`y-${val}`} value={val}>{val}</Option>

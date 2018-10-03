@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import { ReCaptcha } from "react-recaptcha-google";
 import { Form, Input, Button } from "antd";
 import DateInput from "../components/DateInput";
+import API from "../api/index"
 
 
 
@@ -11,18 +12,12 @@ const FormItem = Form.Item;
 class RegistrationForm extends Component {
   handleSubmit = e => {
 
-
-    
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log("Received values of form: ", values);
-        this.state.userInformation = values
-        this.setState(
-            this.state , console.log(this.state.userInformation)
-        )
-        
-        this.props.history.push("/2");
+        this.props.set(values);
+        this.props.history.push("/termandcondition");
       }
     });
   };
@@ -30,14 +25,14 @@ class RegistrationForm extends Component {
     super(props, context);
     this.onLoadRecaptcha = this.onLoadRecaptcha.bind(this);
     this.verifyCallback = this.verifyCallback.bind(this);
-    this.state = {
-      recaptchaToken: undefined,
-      userInformation: {},
-    }
+    this.state = {};
   }
 
 
   componentDidMount() {
+    API.getApplicant({ name: "ปฐมพงศ์","phone": "0881112345", "dateOfBirth": "1990-03-30"}).then(res => {
+      console.log(res)
+    })
     if (this.captchaDemo) {
       this.captchaDemo.reset();
     }
@@ -89,8 +84,12 @@ class RegistrationForm extends Component {
     };
     return (
       <Form onSubmit={this.handleSubmit}>
-        <FormItem {...formItemLayout} label="Name"
-         >
+        {this.props.isRegistered && (
+          <FormItem {...tailFormItemLayout} style={{ margin: 0}}>
+            <p style={{ margin: 0}}>สำหรับกรอกเพื่อเพิ่มเพื่อน</p>
+          </FormItem>
+        )}
+        <FormItem {...formItemLayout} label="ชื่อ">
           {getFieldDecorator("name", {
             rules: [
               {
@@ -101,7 +100,7 @@ class RegistrationForm extends Component {
           })(<Input/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="Tel">
-          {getFieldDecorator("tel", {
+          {getFieldDecorator("phone", {
             rules: [
               {
                 required: true,
@@ -111,7 +110,7 @@ class RegistrationForm extends Component {
           })(<Input />)}
         </FormItem>
         <FormItem {...formItemLayout} label="Birth date">
-          {getFieldDecorator("birthdate", {
+          {getFieldDecorator("dateOfBirth", {
             rules: [{ validator: this.checkBirthDate }]
           })(<DateInput />)}
         </FormItem>
@@ -123,7 +122,7 @@ class RegistrationForm extends Component {
               }}
               size="normal"
               render="explicit"
-              sitekey="6LfP_m8UAAAAAGnl6CDkJ1i5IQ3HjpOCcahw6KQW"
+              sitekey="6LdLQXMUAAAAAJmSKLvWmTo0Tzp7h7AxP-Bamhsn"
               onloadCallback={this.onLoadRecaptcha}
               verifyCallback={this.verifyCallback}
             />

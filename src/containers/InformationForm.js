@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import { Form, Input, Button, Select } from "antd";
 import DateInput from "../components/DateInput";
 import axios from 'axios';
@@ -10,35 +11,17 @@ class InformationForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
-      console.log(values);
       if (!err) {
         console.log("Received values of form: ", values);
-        this.state.userInformation = values
-        this.setState(
-            this.state , console.log(this.state.userInformation)
-        )
+        this.props.add(values);
+        this.props.history.push("/");
       }
     });
   };
 
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      userInformation: {},
-      person : []
-
-    }
-  }
-
   componentDidMount() {
-    axios.get('https://5ba4b098328ae60014f305c8.mockapi.io/applicants')
-      .then(res => {
-        const persons = res.data;
-        this.setState({ persons });
-      }).then(console.log(this.state.person))
-      
+    this.props.form.setFieldsValue(this.props.data);
   }
-
 
   checkBirthDate = (rule, value, callback) => {
     const { day = null, month = null, year = null } = value || {};
@@ -49,8 +32,15 @@ class InformationForm extends Component {
     return;
   };
 
+  handleSeriesNoChange = (value) => {
+    this.props.form.setFieldsValue({ year: Number(value) - 41 > 0 ? Number(value) - 41 : 0 })
+  }
+  handleYearChange = (value) => {
+    this.props.form.setFieldsValue({ year: Number(value) + 41 })
+  }
+
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const { getFieldDecorator, getFieldValue } = this.props.form;
 
     const formItemLayout = {
       labelCol: {
@@ -77,7 +67,7 @@ class InformationForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormItem {...formItemLayout} label="ชื่อ">
-          {getFieldDecorator("firstname", {
+          {getFieldDecorator("name", {
             rules: [
               {
                 required: true,
@@ -87,7 +77,7 @@ class InformationForm extends Component {
           })(<Input />)}
         </FormItem>
         <FormItem {...formItemLayout} label="นามสกุล">
-          {getFieldDecorator("surname", {
+          {getFieldDecorator("lastname", {
             rules: [
               {
                 required: true,
@@ -97,7 +87,7 @@ class InformationForm extends Component {
           })(<Input />)}
         </FormItem>
         <FormItem {...formItemLayout} label="วันเกิด">
-          {getFieldDecorator("birthdate", {
+          {getFieldDecorator("dateOfBirth", {
             rules: [{ validator: this.checkBirthDate }]
           })(<DateInput />)}
         </FormItem>
@@ -112,7 +102,7 @@ class InformationForm extends Component {
           )}
         </FormItem>
         <FormItem {...formItemLayout} label="Tel.">
-          {getFieldDecorator("tel", {
+          {getFieldDecorator("phone", {
             rules: [
               {
                 required: true,
@@ -136,7 +126,7 @@ class InformationForm extends Component {
           })(<Input />)}
         </FormItem>
         <FormItem {...formItemLayout} label="Emergency Contact">
-          {getFieldDecorator("emergency_contact", {
+          {getFieldDecorator("emergencyContact", {
             rules: [
               {
                 required: true,
@@ -146,7 +136,7 @@ class InformationForm extends Component {
           })(<Input />)}
         </FormItem>
         <FormItem {...formItemLayout} label="Emergency Tel.">
-          {getFieldDecorator("emergency_tel", {
+          {getFieldDecorator("emergencyPhone", {
             rules: [
               {
                 required: true,
@@ -156,7 +146,7 @@ class InformationForm extends Component {
           })(<Input />)}
         </FormItem>
         <FormItem {...formItemLayout} label="Shirt size" hasFeedback>
-          {getFieldDecorator("shirt_size", {
+          {getFieldDecorator("shirtSize", {
             rules: [{ required: true, message: "กรุณาเลือกเพศ" }]
           })(
             <Select placeholder="เลือกขนาดเสื้อ">
@@ -165,7 +155,7 @@ class InformationForm extends Component {
           )}
         </FormItem>
         <FormItem {...formItemLayout} label="Running type" hasFeedback>
-          {getFieldDecorator("running_type", {
+          {getFieldDecorator("type", {
             rules: [{ required: true, message: "กรุณาประเภทการวิ่ง" }]
           })(
             <Select placeholder="เลือกประเภทการวิ่ง">
@@ -173,17 +163,71 @@ class InformationForm extends Component {
             </Select>
           )}
         </FormItem>
-        <FormItem {...formItemLayout} label="Alumni" hasFeedback>
-          {getFieldDecorator("alumni", {
-            rules: [{ required: true, message: "กรุณาเลือก Alumni" }]
+        <FormItem {...formItemLayout} label="Alumni">
+          {getFieldDecorator("alunmi", {
+            rules: [
+              {
+                required: true,
+                message: "กรุณาระบุการเป็นนิสิตเก่า"
+              }
+            ]
           })(
-            <Select placeholder="เลือก Alumni">
-              <Option value="alumni">ศิษย์เก่า</Option>
+            <Select>
+              <Option value="true">นิสิตเก่า</Option>
+              <Option value="false">ไม่เป็นนิสิตเก่า</Option>
             </Select>
           )}
         </FormItem>
+        {getFieldValue("alunmi") === "true" && (
+          <FormItem {...formItemLayout} label="หมายเลขรุ่น">
+            {getFieldDecorator("seriesNo", {
+              rules: [
+                {
+                  required: true,
+                  message: "กรุณากรอกหมายเลขรุ่น"
+                }
+              ]
+            })(<Input onBlur={e => this.handleSeriesNoChange(e.target.value)}/>)}
+          </FormItem>
+        )}
+        {getFieldValue("alunmi") === "true" && (
+          <FormItem {...formItemLayout} label="วศ">
+            {getFieldDecorator("year", {
+              rules: [
+                {
+                  required: true,
+                  message: "กรุณากรอก วศ"
+                }
+              ]
+            })(<Input onBlur={e => this.handleYearChange(e.target.value)} />)}
+          </FormItem>
+        )}
+        {getFieldValue("alunmi") === "false" && (
+          <FormItem {...formItemLayout} label="ความเกี่ยวข้อง">
+            {getFieldDecorator("relationship", {
+              rules: [
+                {
+                  required: true,
+                  message: "กรุณากรอกความเกี่ยวข้อง"
+                }
+              ]
+            })(<Input />)}
+          </FormItem>
+        )}
+        {getFieldValue("alunmi") === "false" && (
+          <FormItem {...formItemLayout} label="ชื่อ-สกุล ผู้ลงทะเบียนให้">
+            {getFieldDecorator("referalName", {
+              rules: [
+                {
+                  required: true,
+                  message: "กรุณากรอกชื่อ-สกุล ผู้ลงทะเบียนให้"
+                }
+              ]
+            })(<Input />)}
+          </FormItem>
+        )}
         <FormItem {...formItemLayout} label="ชื่อบนบิบ">
-          {getFieldDecorator("name_on_bill", {
+          {getFieldDecorator("nameOnBib", {
             rules: [
               {
                 required: true,
@@ -192,6 +236,44 @@ class InformationForm extends Component {
             ]
           })(<Input />)}
         </FormItem>
+        <FormItem {...formItemLayout} label="คุณเคยวิ่งระยะ 10 กม มาก่อนหรือไม่">
+          {getFieldDecorator("didYouEverRun10KMBefore", {
+            rules: [
+              {
+                required: true,
+                message: "คุณเคยวิ่งระยะ 10 กม มาก่อนหรือไม่"
+              }
+            ]
+          })(
+            <Select>
+              <Option value="true">เคย</Option>
+              <Option value="false">ไม่เคย</Option>
+            </Select>
+          )}
+        </FormItem>
+        {getFieldValue("didYouEverRun10KMBefore") === "true" && (
+          <FormItem {...formItemLayout} label="เวลาส่วนตัวที่ดีที่สุดคือเท่าไหร่">
+            {getFieldDecorator("personalBestTime", {
+              rules: [
+                {
+                  required: true,
+                  message: "กรุณากรอกเวลาส่วนตัวที่ดีที่สุดคือเท่าไหร่"
+                }
+              ]
+            })(<Input />)}
+          </FormItem>
+        )}
+        <FormItem {...formItemLayout} label="ชื่อบนบิบ">
+          {getFieldDecorator("changeOnThisYear", {
+            rules: [
+              {
+                required: true,
+                message: "ปีนี้ต้องการจะ เปลี่ยนแปลง อะไร"
+              }
+            ]
+          })(<Input />)}
+        </FormItem>
+        
         <FormItem {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
             Go!!
@@ -202,4 +284,4 @@ class InformationForm extends Component {
   }
 }
 
-export default Form.create()(InformationForm);
+export default withRouter(Form.create()(InformationForm));
