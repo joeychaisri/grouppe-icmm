@@ -7,6 +7,7 @@ import SeriesAuth from "./containers/SeriesAuth"
 import WelcomePage from "./containers/WelcomPage"
 import searchByOrder from "./containers/searchByOrder"
 import Summary from "./containers/Summary"
+import Test from "./containers/test"
 
 const Routes = props => {
   return (
@@ -25,6 +26,7 @@ const Routes = props => {
       <Route exact path="/information" render={() => <InformationForm {...props} />} />
       <Route exact path="/search" component={searchByOrder} />
       <Route exact path="/summary" render={() => <Summary {...props} />} />
+      <Route exact path="/test" render={() => <Test {...props} />} />
     </Switch>
   );
 };
