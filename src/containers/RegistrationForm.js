@@ -97,11 +97,7 @@ class RegistrationForm extends Component {
                 message: "Please input your name!"
               }
             ]
-<<<<<<< Updated upstream
-          })(<Input/>)}
-=======
           })(<Input style={{ width: "60vh"}}/>)}
->>>>>>> Stashed changes
         </FormItem>
         <FormItem {...formItemLayout} label="Tel">
           {getFieldDecorator("phone", {
