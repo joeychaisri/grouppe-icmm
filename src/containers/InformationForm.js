@@ -74,7 +74,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกชื่อ"
               }
             ]
-          })(<Input />)}
+          })(<Input style={{ width: "50%"}}/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="นามสกุล">
           {getFieldDecorator("lastname", {
@@ -84,7 +84,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกนามสกุล"
               }
             ]
-          })(<Input />)}
+          })(<Input style={{ width: "50%"}}/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="วันเกิด">
           {getFieldDecorator("dateOfBirth", {
@@ -95,7 +95,7 @@ class InformationForm extends Component {
           {getFieldDecorator("gender", {
             rules: [{ required: true, message: "กรุณาเลือกเพศ" }]
           })(
-            <Select placeholder="เลือกเพศ">
+            <Select style={{ width: "50%"}} placeholder="เลือกเพศ">
               <Option value="male">ชาย</Option>
               <Option value="female">หญิง</Option>
             </Select>
@@ -109,7 +109,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกหมายเลขโทรศัพท์"
               }
             ]
-          })(<Input />)}
+          })(<Input style={{ width: "50%"}} />)}
         </FormItem>
         <FormItem {...formItemLayout} label="E-mail">
           {getFieldDecorator("email", {
@@ -123,7 +123,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกอีเมล"
               }
             ]
-          })(<Input />)}
+          })(<Input style={{ width: "50%"}}/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="Emergency Contact">
           {getFieldDecorator("emergencyContact", {
@@ -133,7 +133,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกผู้ติดต่อสำหรับกรณีฉุกเฉิน"
               }
             ]
-          })(<Input />)}
+          })(<Input style={{ width: "50%"}}/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="Emergency Tel.">
           {getFieldDecorator("emergencyPhone", {
@@ -143,13 +143,13 @@ class InformationForm extends Component {
                 message: "กรุณากรอกหมายเลขโทรศัพท์ฉุกเฉิน"
               }
             ]
-          })(<Input />)}
+          })(<Input style={{ width: "50%"}}/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="Shirt size" hasFeedback>
           {getFieldDecorator("shirtSize", {
             rules: [{ required: true, message: "กรุณาเลือกเพศ" }]
           })(
-            <Select placeholder="เลือกขนาดเสื้อ">
+            <Select style={{ width: "50%"}} placeholder="เลือกขนาดเสื้อ">
               <Option value="xs">XS - 34"</Option>
             </Select>
           )}
@@ -158,7 +158,7 @@ class InformationForm extends Component {
           {getFieldDecorator("type", {
             rules: [{ required: true, message: "กรุณาประเภทการวิ่ง" }]
           })(
-            <Select placeholder="เลือกประเภทการวิ่ง">
+            <Select style={{ width: "50%"}} placeholder="เลือกประเภทการวิ่ง">
               <Option value="3">Fun run - 3 km"</Option>
             </Select>
           )}
@@ -172,7 +172,7 @@ class InformationForm extends Component {
               }
             ]
           })(
-            <Select>
+            <Select style={{ width: "50%"}}>
               <Option value="true">นิสิตเก่า</Option>
               <Option value="false">ไม่เป็นนิสิตเก่า</Option>
             </Select>
@@ -187,7 +187,7 @@ class InformationForm extends Component {
                   message: "กรุณากรอกหมายเลขรุ่น"
                 }
               ]
-            })(<Input onBlur={e => this.handleSeriesNoChange(e.target.value)}/>)}
+            })(<Input style={{ width: "50%"}} onBlur={e => this.handleSeriesNoChange(e.target.value)}/>)}
           </FormItem>
         )}
         {getFieldValue("alunmi") === "true" && (
@@ -199,7 +199,7 @@ class InformationForm extends Component {
                   message: "กรุณากรอก วศ"
                 }
               ]
-            })(<Input onBlur={e => this.handleYearChange(e.target.value)} />)}
+            })(<Input style={{ width: "50%"}} onBlur={e => this.handleYearChange(e.target.value)} />)}
           </FormItem>
         )}
         {getFieldValue("alunmi") === "false" && (
@@ -211,7 +211,7 @@ class InformationForm extends Component {
                   message: "กรุณากรอกความเกี่ยวข้อง"
                 }
               ]
-            })(<Input />)}
+            })(<Input style={{ width: "50%"}} />)}
           </FormItem>
         )}
         {getFieldValue("alunmi") === "false" && (
@@ -223,7 +223,7 @@ class InformationForm extends Component {
                   message: "กรุณากรอกชื่อ-สกุล ผู้ลงทะเบียนให้"
                 }
               ]
-            })(<Input />)}
+            })(<Input style={{ width: "50%"}} />)}
           </FormItem>
         )}
         <FormItem {...formItemLayout} label="ชื่อบนบิบ">
@@ -234,7 +234,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกชื่อบนบิบ"
               }
             ]
-          })(<Input />)}
+          })(<Input style={{ width: "50%"}} />)}
         </FormItem>
         <FormItem {...formItemLayout} label="คุณเคยวิ่งระยะ 10 กม มาก่อนหรือไม่">
           {getFieldDecorator("didYouEverRun10KMBefore", {
@@ -245,7 +245,7 @@ class InformationForm extends Component {
               }
             ]
           })(
-            <Select>
+            <Select style={{ width: "50%"}}>
               <Option value="true">เคย</Option>
               <Option value="false">ไม่เคย</Option>
             </Select>
@@ -260,7 +260,7 @@ class InformationForm extends Component {
                   message: "กรุณากรอกเวลาส่วนตัวที่ดีที่สุดคือเท่าไหร่"
                 }
               ]
-            })(<Input />)}
+            })(<Input style={{ width: "50%"}}/>)}
           </FormItem>
         )}
         <FormItem {...formItemLayout} label="ชื่อบนบิบ">
@@ -271,7 +271,7 @@ class InformationForm extends Component {
                 message: "ปีนี้ต้องการจะ เปลี่ยนแปลง อะไร"
               }
             ]
-          })(<Input />)}
+          })(<Input style={{ width: "50%"}}/>)}
         </FormItem>
         
         <FormItem {...tailFormItemLayout}>

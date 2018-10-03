@@ -55,7 +55,7 @@ class DateInput extends Component {
       const year = Array.from(new Array(100), (val, index) => index + 1919);
       return (
         <Row>
-          <Col span={8}>
+          <Col span={4}>
             <Select
               placeholder="Day"
               style={{ maxWidth: 120, width: "100%" }}
@@ -68,7 +68,7 @@ class DateInput extends Component {
               ))}
             </Select>
           </Col>
-          <Col span={8}>
+          <Col span={4}>
             <Select
               placeholder="Month"
               style={{ maxWidth: 120, width: "100%" }}
@@ -81,7 +81,7 @@ class DateInput extends Component {
               ))}
             </Select>
           </Col>
-          <Col span={8}>
+          <Col span={4}>
             <Select
               placeholder="Year"
               style={{ maxWidth: 120, width: "100%" }}
