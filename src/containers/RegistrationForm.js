@@ -114,7 +114,7 @@ class RegistrationForm extends Component {
               }}
               size="normal"
               render="explicit"
-              sitekey="6LfP_m8UAAAAAGnl6CDkJ1i5IQ3HjpOCcahw6KQW"
+              sitekey="6LdLQXMUAAAAAJmSKLvWmTo0Tzp7h7AxP-Bamhsn"
               onloadCallback={this.onLoadRecaptcha}
               verifyCallback={this.verifyCallback}
             />
