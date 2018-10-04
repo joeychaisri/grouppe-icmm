@@ -6,25 +6,34 @@ class SeriesAuth extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {};
+    this.state = {
+      invitationCode : null
+    };
   }
 
-  pushToSeries() {
-    this.props.history.push("/register");
+  pushToRegister() {
+    if(this.state.invitationCode != null){
+      this.props.history.push("/register");
+    }else{
+      alert("Please enter your invitation code")
+    }
+    
 };
 
   componentDidMount() {}
 
-
+  handleChange(e) {
+    this.setState({ invitationCode : e.target.value })
+  }
 
   render() {
     return (
       <div style={{ display: "flex", flexFlow: "column wrap" }}>
-        <Input
+        <Input onChange={this.handleChange.bind(this)}
           placeholder="Please enter invitation code"
           style={{ width: "50vh", margin: "0 auto", marginTop: "15vh" }}
         />
-        <Button onClick={this.pushToSeries.bind(this)}
+        <Button onClick={this.pushToRegister.bind(this)}
           style={{
             width: "35vh",
             margin: "0 auto",
