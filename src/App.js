@@ -53,6 +53,7 @@ class App extends Component {
   };
   
   addData = (newData = {}) => {
+    console.log(newData)
     const confirmData = this.state.confirmData
     confirmData.push(newData)
     this.setState({ confirmData })

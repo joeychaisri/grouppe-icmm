@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { Form, Input, Button, Select } from "antd";
+import { Form, Input, Button, Select , TimePicker } from "antd";
 import DateInput from "../components/DateInput";
+import moment from 'moment';
+
 
 const FormItem = Form.Item;
 const Option = Select.Option;
+const format = 'HH:mm';
 
 class InformationForm extends Component {
   handleSubmit = e => {
@@ -13,7 +16,7 @@ class InformationForm extends Component {
       if (!err) {
         console.log("Received values of form: ", values);
         this.props.add(values);
-        this.props.history.push("/");
+        this.props.history.push("/series");
       }
     });
   };
@@ -267,7 +270,7 @@ class InformationForm extends Component {
                   message: "กรุณากรอกเวลาส่วนตัวที่ดีที่สุดคือเท่าไหร่"
                 }
               ]
-            })(<Input />)}
+            })(<TimePicker defaultValue={moment('00:00', format)} format={format} />)}
           </FormItem>
         )}
         <FormItem {...formItemLayout} label="ชื่อบนบิบ">
