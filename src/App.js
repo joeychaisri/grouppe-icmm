@@ -59,15 +59,19 @@ class App extends Component {
   }
 
   setData = (data = {}) => {
-
-    
     this.setState({ data });
-
   };
-
+  editData = (data = {}, index = 0) => {
+    let confirmData = this.state.confirmData;
+    const { day, month, year } = data.birthDate
+    const updateData = {...data, dateOfBirth: `${year}-${('0' + month).slice(-2)}-${('0' + day).slice(-2)}`}
+    confirmData[index] = updateData
+    this.setState({ confirmData });
+  };
   addData = (newData = {}) => {
-    const confirmData = this.state.confirmData;
-    confirmData.push(newData);
+    let confirmData = this.state.confirmData;
+    const { day, month, year } = newData.birthDate
+    confirmData.push({...newData, dateOfBirth: `${year}-${('0' + month).slice(-2)}-${('0' + day).slice(-2)}`});
     this.setState({ confirmData });
   };
 

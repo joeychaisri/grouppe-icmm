@@ -97,7 +97,7 @@ class InformationForm extends Component {
           })(<Input placeholder="เม็ดแอปเปิล"/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="วันเกิด">
-          {getFieldDecorator("dateOfBirth", {
+          {getFieldDecorator("birthDate", {
             rules: [{ validator: this.checkBirthDate }]
           })(<DateInput />)}
         </FormItem>
@@ -273,7 +273,7 @@ class InformationForm extends Component {
             })(<TimePicker defaultValue={moment('00:00', format)} format={format} />)}
           </FormItem>
         )}
-        <FormItem {...formItemLayout} label="ชื่อบนบิบ">
+        <FormItem {...formItemLayout} label="ปีนี้ต้องการจะเปลี่ยนแปลงอะไร">
           {getFieldDecorator("changeOnThisYear", {
             rules: [
               {

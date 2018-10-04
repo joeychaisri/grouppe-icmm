@@ -14,7 +14,7 @@ class RegistrationForm extends Component {
       if (!err) {
         console.log("Received values of form: ", values);
         this.props.set(values);
-        this.props.history.push("/termandcondition");
+        this.props.confirmData.length > 0 ? this.props.history.push("/information") : this.props.history.push("/termandcondition");
       }
     });
   };
@@ -127,7 +127,7 @@ class RegistrationForm extends Component {
           })(<Input placeholder={"0869999999"} />)}
         </FormItem>
         <FormItem {...formItemLayout} label="Birth date">
-          {getFieldDecorator("dateOfBirth", {
+          {getFieldDecorator("birthDate", {
             rules: [{ validator: this.checkBirthDate }]
           })(<DateInput />)}
         </FormItem>
