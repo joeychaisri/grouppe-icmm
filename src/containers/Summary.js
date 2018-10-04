@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
 import API from "../api/index";
 import ReactDOM from "react-dom";
 import { Button, Divider, Collapse, Col, Row } from "antd";
@@ -10,42 +9,42 @@ class Summary extends Component {
     const data = {
       applicants: this.props.confirmData
     };
-    // API.applyEvent(data).then(res => {
-      // const { data } = res;
+    API.applyEvent(data).then(res => {
+      const { merchantID, description, orderID, currency, amount, version, redirectURL, paymentURL, hash } = res;
       const element = (
         <form
           id="myform"
           method="post"
-          action="https://demo2.2c2p.com/2C2PFrontEnd/RedirectV3/payment"
+          action={paymentURL}
           style={{ display: "none" }}
         >
-          <input type="hidden" name="version" value="7.2" />
-          <input type="hidden" name="merchant_id" value="JT04" />
-          <input type="hidden" name="currency" value="764" />
+          <input type="hidden" name="version" value={version} />
+          <input type="hidden" name="merchant_id" value={merchantID} />
+          <input type="hidden" name="currency" value={currency} />
           <input
             type="hidden"
             name="result_url_1"
-            value="https://icmm.co/order/8472DO4E1"
+            value={redirectURL}
           />
           <input
             type="hidden"
             name="hash_value"
-            value="18aaaa55f76b9934cf706e3295464fd90282f94a"
+            value={hash}
           />
           <input
             type="hidden"
             name="payment_description"
-            value="Charge for order ID: 8472DO4E1"
+            value={description}
           />
-          <input type="hidden" name="order_id" value="8472DO4E1" />
-          <input type="hidden" name="amount" value="000000002500" />
+          <input type="hidden" name="order_id" value={orderID} />
+          <input type="hidden" name="amount" value={amount} />
           <input type="submit" name="submit" value="Confirm" />
         </form>
       );
       ReactDOM.render(element, document.getElementById("payment"));
       const form = document.getElementById("myform");
       HTMLFormElement.prototype.submit.call(form);
-    // });
+    });
   };
   render() {
     const { confirmData } = this.props;
@@ -101,4 +100,4 @@ class Summary extends Component {
   }
 }
 
-export default withRouter(Summary);
+export default Summary;
