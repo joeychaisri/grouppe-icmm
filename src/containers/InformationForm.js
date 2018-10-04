@@ -84,7 +84,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกชื่อ"
               }
             ]
-          })(<Input />)}
+          })(<Input placeholder="จอห์น" />)}
         </FormItem>
         <FormItem {...formItemLayout} label="นามสกุล">
           {getFieldDecorator("lastname", {
@@ -94,7 +94,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกนามสกุล"
               }
             ]
-          })(<Input />)}
+          })(<Input placeholder="เม็ดแอปเปิล"/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="วันเกิด">
           {getFieldDecorator("dateOfBirth", {
@@ -119,7 +119,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกหมายเลขโทรศัพท์"
               }
             ]
-          })(<Input />)}
+          })(<Input placeholder="0869999999"/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="E-mail">
           {getFieldDecorator("email", {
@@ -133,7 +133,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกอีเมล"
               }
             ]
-          })(<Input />)}
+          })(<Input placeholder="johnmedapple@google.com"/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="Emergency Contact">
           {getFieldDecorator("emergencyContact", {
@@ -143,7 +143,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกผู้ติดต่อสำหรับกรณีฉุกเฉิน"
               }
             ]
-          })(<Input />)}
+          })(<Input placeholder="กรรณิการ์"/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="Emergency Tel.">
           {getFieldDecorator("emergencyPhone", {
@@ -153,7 +153,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกหมายเลขโทรศัพท์ฉุกเฉิน"
               }
             ]
-          })(<Input />)}
+          })(<Input placeholder="0869999999"/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="Shirt size" hasFeedback>
           {getFieldDecorator("shirtSize", {
@@ -197,8 +197,8 @@ class InformationForm extends Component {
                   message: "กรุณากรอกหมายเลขรุ่น"
                 }
               ]
-            })(<Input onBlur={e => this.handleSeriesNoChange(e.target.value)}/>)}
-          </FormItem>
+            })(<Input placeholder="94" onBlur={e => this.handleSeriesNoChange(e.target.value)}/>)}
+          </FormItem >
         )}
         {getFieldValue("alunmi") === "true" && (
           <FormItem {...formItemLayout} label="วศ">
@@ -209,7 +209,7 @@ class InformationForm extends Component {
                   message: "กรุณากรอก วศ"
                 }
               ]
-            })(<Input onBlur={e => this.handleYearChange(e.target.value)} />)}
+            })(<Input placeholder="53" onBlur={e => this.handleYearChange(e.target.value)} />)}
           </FormItem>
         )}
         {getFieldValue("alunmi") === "false" && (
@@ -244,7 +244,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกชื่อบนบิบ"
               }
             ]
-          })(<Input />)}
+          })(<Input placeholder="ถุงแป้ง"/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="คุณเคยวิ่งระยะ 10 กม มาก่อนหรือไม่">
           {getFieldDecorator("didYouEverRun10KMBefore", {
