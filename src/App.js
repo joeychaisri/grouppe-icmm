@@ -15,30 +15,30 @@ class App extends Component {
     //   type: "10km"
     // }
     confirmData: [
-      // {
-      //   name: "John",
-      //   lastname: "Doe",
-      //   email: "test@mail.com",
-      //   phone: "0000000000",
-      //   shirtSize: "F",
-      //   type: "10km"
-      // },
-      // {
-      //   name: "John2",
-      //   lastname: "Doe2",
-      //   email: "test@mail.com",
-      //   phone: "0000000000",
-      //   shirtSize: "F",
-      //   type: "10km"
-      // },
-      // {
-      //   name: "John2",
-      //   lastname: "Doe2",
-      //   email: "test@mail.com",
-      //   phone: "0000000000",
-      //   shirtSize: "F",
-      //   type: "10km"
-      // }
+      {
+        name: "John",
+        lastname: "Doe",
+        email: "test@mail.com",
+        phone: "0000000000",
+        shirtSize: "F",
+        type: "10km"
+      },
+      {
+        name: "John2",
+        lastname: "Doe2",
+        email: "test@mail.com",
+        phone: "0000000000",
+        shirtSize: "F",
+        type: "10km"
+      },
+      {
+        name: "John2",
+        lastname: "Doe2",
+        email: "test@mail.com",
+        phone: "0000000000",
+        shirtSize: "F",
+        type: "10km"
+      }
     ]
   };
   componentDidMount() {
@@ -80,7 +80,7 @@ class App extends Component {
     const isRegistered = (this.state.confirmData.length > 0)
     return (
       <BrowserRouter>
-        <MainLayout showSider={true} confirmData={this.state.confirmData} delData={ (idx) => {this.delData(idx)} } editData={ (idx) => {this.editData(idx)} }>
+        <MainLayout showSider={false} confirmData={this.state.confirmData} delData={ (idx) => {this.delData(idx)} } editData={ (idx) => {this.editData(idx)} }>
           <Routes set={data => this.setData(data)} add={newData => this.addData(newData)} data={this.state.data} confirmData={this.state.confirmData} isRegistered={isRegistered} />
         </MainLayout>
       </BrowserRouter>

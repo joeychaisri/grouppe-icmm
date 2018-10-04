@@ -18,6 +18,7 @@ class searchByOrder extends Component {
   
   handleChange(e) {
     this.setState({ invitationCode : e.target.value })
+    
   }
 
   pushToSummary() {

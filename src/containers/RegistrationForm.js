@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { ReCaptcha } from "react-recaptcha-google";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button , Alert} from "antd";
 import DateInput from "../components/DateInput";
 import API from "../api/index"
 
@@ -79,36 +79,52 @@ class RegistrationForm extends Component {
       }
     };
     return (
-      
-      <Form onSubmit={this.handleSubmit}>
-          <FormItem {...tailFormItemLayout} style={{ margin: 0}}>
-            <p style={{ margin: 20}}>โปรดกรอกข้อมูลด้านล่าง เพื่อทำการค้นหาข้อมูลในระบบ</p>
-          </FormItem>
 
-        {this.props.isRegistered && (
+
+    <div >
+      <p style={{textAlign : "center" , margin : "10"}}>โปรดกรอกข้อมูลด้านล่าง เพื่อทำการค้นหาข้อมูลในระบบ</p>
+      <Form onSubmit={this.handleSubmit}>
+          {/* <FormItem {...tailFormItemLayout} style={{ margin: 0}}>
+            <p style={{ margin: 20}}>โปรดกรอกข้อมูลด้านล่าง เพื่อทำการค้นหาข้อมูลในระบบ</p>
+          </FormItem> */}
+
+        {/* {this.props.isRegistered && (
           <FormItem {...tailFormItemLayout} style={{ margin: 0}}>
             <p style={{ margin: 0}}>กรอกข้อมูลเพื่อเพิ่มผู้สมัคร</p>
           </FormItem>
+        )} */}
+          {/* <Alert
+            style= {{width : "50%" , textAlign : "center" , margin : "0 auto" , marginBottom : "2%"}}
+            message="ในกรณีที่ทำการสมัครให้บุคคลอื่นโปรดใช้เบอร์โทรศัพท์ที่ไม่ซ้ำกัน"
+            type="warning"
+          /> */}
+
+           {this.props.isRegistered && (
+          <Alert
+          style= {{width : "50%" , textAlign : "center" , margin : "0 auto" , marginBottom : "2%"}}
+          message="โปรดกรอกข้อมูลเพื่อเพิ่มผู้สมัคร โดยเบอร์โทรศัพท์ต้องไม่ซ้ำกัน"
+          type="warning"
+        />
         )}
-        <FormItem {...formItemLayout} label="ชื่อ">
+          <FormItem {...formItemLayout} label="ชื่อ / Name">
           {getFieldDecorator("name", {
             rules: [
               {
                 required: true,
-                message: "Please input your surname!"
+                message: "กรุณากรอกชื่อไทย หรือ ภาษาอังกฤษ"
               }
             ]
-          })(<Input />)}
+          })(<Input placeholder={"ปฐมพงศ์"}/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="Tel">
           {getFieldDecorator("phone", {
             rules: [
               {
                 required: true,
-                message: "Please input your telephone no.!"
+                message: "โปรดใส่เบอร์ติดต่อของคุณ"
               }
             ]
-          })(<Input />)}
+          })(<Input placeholder={"0869999999"} />)}
         </FormItem>
         <FormItem {...formItemLayout} label="Birth date">
           {getFieldDecorator("dateOfBirth", {
@@ -140,6 +156,7 @@ class RegistrationForm extends Component {
         
         </FormItem>
       </Form>
+    </div>  
     );
   }
 }
