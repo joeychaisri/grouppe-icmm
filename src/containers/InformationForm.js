@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { Form, Input, Button, Select } from "antd";
+import { Form, Input, Button, Select , TimePicker } from "antd";
 import DateInput from "../components/DateInput";
+import moment from 'moment';
+
 
 const FormItem = Form.Item;
 const Option = Select.Option;
+const format = 'HH:mm';
 
 class InformationForm extends Component {
   handleSubmit = e => {
@@ -13,7 +16,7 @@ class InformationForm extends Component {
       if (!err) {
         console.log("Received values of form: ", values);
         this.props.add(values);
-        this.props.history.push("/");
+        this.props.history.push("/series");
       }
     });
   };
@@ -21,6 +24,10 @@ class InformationForm extends Component {
   componentDidMount() {
     this.props.form.setFieldsValue(this.props.data);
   }
+
+  pushToSummary() {
+    this.props.history.push("/summary");
+};
 
   checkBirthDate = (rule, value, callback) => {
     const { day = null, month = null, year = null } = value || {};
@@ -44,11 +51,15 @@ class InformationForm extends Component {
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 8 }
+        sm: { span: 8 },
+        md: { span: 8 },
+        lg: { span: 8 },
       },
       wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 }
+        sm: { span: 16 },
+        md: { span: 12 },
+        lg: { span: 8 },
       }
     };
     const tailFormItemLayout = {
@@ -73,7 +84,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกชื่อ"
               }
             ]
-          })(<Input />)}
+          })(<Input placeholder="จอห์น" />)}
         </FormItem>
         <FormItem {...formItemLayout} label="นามสกุล">
           {getFieldDecorator("lastname", {
@@ -83,7 +94,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกนามสกุล"
               }
             ]
-          })(<Input />)}
+          })(<Input placeholder="เม็ดแอปเปิล"/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="วันเกิด">
           {getFieldDecorator("dateOfBirth", {
@@ -108,7 +119,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกหมายเลขโทรศัพท์"
               }
             ]
-          })(<Input />)}
+          })(<Input placeholder="0869999999"/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="E-mail">
           {getFieldDecorator("email", {
@@ -122,7 +133,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกอีเมล"
               }
             ]
-          })(<Input />)}
+          })(<Input placeholder="johnmedapple@google.com"/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="Emergency Contact">
           {getFieldDecorator("emergencyContact", {
@@ -132,7 +143,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกผู้ติดต่อสำหรับกรณีฉุกเฉิน"
               }
             ]
-          })(<Input />)}
+          })(<Input placeholder="กรรณิการ์"/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="Emergency Tel.">
           {getFieldDecorator("emergencyPhone", {
@@ -142,7 +153,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกหมายเลขโทรศัพท์ฉุกเฉิน"
               }
             ]
-          })(<Input />)}
+          })(<Input placeholder="0869999999"/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="Shirt size" hasFeedback>
           {getFieldDecorator("shirtSize", {
@@ -186,8 +197,8 @@ class InformationForm extends Component {
                   message: "กรุณากรอกหมายเลขรุ่น"
                 }
               ]
-            })(<Input onBlur={e => this.handleSeriesNoChange(e.target.value)}/>)}
-          </FormItem>
+            })(<Input placeholder="94" onBlur={e => this.handleSeriesNoChange(e.target.value)}/>)}
+          </FormItem >
         )}
         {getFieldValue("alunmi") === "true" && (
           <FormItem {...formItemLayout} label="วศ">
@@ -198,7 +209,7 @@ class InformationForm extends Component {
                   message: "กรุณากรอก วศ"
                 }
               ]
-            })(<Input onBlur={e => this.handleYearChange(e.target.value)} />)}
+            })(<Input placeholder="53" onBlur={e => this.handleYearChange(e.target.value)} />)}
           </FormItem>
         )}
         {getFieldValue("alunmi") === "false" && (
@@ -233,11 +244,53 @@ class InformationForm extends Component {
                 message: "กรุณากรอกชื่อบนบิบ"
               }
             ]
+          })(<Input placeholder="ถุงแป้ง"/>)}
+        </FormItem>
+        <FormItem {...formItemLayout} label="คุณเคยวิ่งระยะ 10 กม มาก่อนหรือไม่">
+          {getFieldDecorator("didYouEverRun10KMBefore", {
+            rules: [
+              {
+                required: true,
+                message: "คุณเคยวิ่งระยะ 10 กม มาก่อนหรือไม่"
+              }
+            ]
+          })(
+            <Select>
+              <Option value="true">เคย</Option>
+              <Option value="false">ไม่เคย</Option>
+            </Select>
+          )}
+        </FormItem>
+        {getFieldValue("didYouEverRun10KMBefore") === "true" && (
+          <FormItem {...formItemLayout} label="เวลาส่วนตัวที่ดีที่สุดคือเท่าไหร่">
+            {getFieldDecorator("personalBestTime", {
+              rules: [
+                {
+                  required: true,
+                  message: "กรุณากรอกเวลาส่วนตัวที่ดีที่สุดคือเท่าไหร่"
+                }
+              ]
+            })(<TimePicker defaultValue={moment('00:00', format)} format={format} />)}
+          </FormItem>
+        )}
+        <FormItem {...formItemLayout} label="ชื่อบนบิบ">
+          {getFieldDecorator("changeOnThisYear", {
+            rules: [
+              {
+                required: true,
+                message: "ปีนี้ต้องการจะ เปลี่ยนแปลง อะไร"
+              }
+            ]
           })(<Input />)}
         </FormItem>
+        
         <FormItem {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
-            Go!!
+            เพิ่มผู้สมัคร
+          </Button>
+          <Button style={{marginLeft : "3%" }} type="default" 
+          onClick={this.pushToSummary.bind(this)}>
+            สรุปและชำระเงิน
           </Button>
         </FormItem>
       </Form>

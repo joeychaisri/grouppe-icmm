@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { ReCaptcha } from "react-recaptcha-google";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button , Alert} from "antd";
 import DateInput from "../components/DateInput";
 import API from "../api/index"
 
@@ -14,7 +14,7 @@ class RegistrationForm extends Component {
       if (!err) {
         console.log("Received values of form: ", values);
         this.props.set(values);
-        this.props.history.push("/2");
+        this.props.history.push("/termandcondition");
       }
     });
   };
@@ -55,11 +55,15 @@ class RegistrationForm extends Component {
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 8 }
+        sm: { span: 8 },
+        md: { span: 8 },
+        lg: { span: 8 },
       },
       wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 }
+        sm: { span: 16 },
+        md: { span: 12 },
+        lg: { span: 8 },
       }
     };
     const tailFormItemLayout = {
@@ -75,31 +79,52 @@ class RegistrationForm extends Component {
       }
     };
     return (
+
+
+    <div >
+      <p style={{textAlign : "center" , margin : "10"}}>โปรดกรอกข้อมูลด้านล่าง เพื่อทำการค้นหาข้อมูลในระบบ</p>
       <Form onSubmit={this.handleSubmit}>
-        {this.props.isRegistered && (
+          {/* <FormItem {...tailFormItemLayout} style={{ margin: 0}}>
+            <p style={{ margin: 20}}>โปรดกรอกข้อมูลด้านล่าง เพื่อทำการค้นหาข้อมูลในระบบ</p>
+          </FormItem> */}
+
+        {/* {this.props.isRegistered && (
           <FormItem {...tailFormItemLayout} style={{ margin: 0}}>
-            <p style={{ margin: 0}}>สำหรับกรอกเพื่อเพิ่มเพื่อน</p>
+            <p style={{ margin: 0}}>กรอกข้อมูลเพื่อเพิ่มผู้สมัคร</p>
           </FormItem>
+        )} */}
+          {/* <Alert
+            style= {{width : "50%" , textAlign : "center" , margin : "0 auto" , marginBottom : "2%"}}
+            message="ในกรณีที่ทำการสมัครให้บุคคลอื่นโปรดใช้เบอร์โทรศัพท์ที่ไม่ซ้ำกัน"
+            type="warning"
+          /> */}
+
+           {this.props.isRegistered && (
+          <Alert
+          style= {{width : "50%" , textAlign : "center" , margin : "0 auto" , marginBottom : "2%"}}
+          message="โปรดกรอกข้อมูลเพื่อเพิ่มผู้สมัคร โดยเบอร์โทรศัพท์ต้องไม่ซ้ำกัน"
+          type="warning"
+        />
         )}
-        <FormItem {...formItemLayout} label="ชื่อ">
+          <FormItem {...formItemLayout} label="ชื่อ / Name">
           {getFieldDecorator("name", {
             rules: [
               {
                 required: true,
-                message: "Please input your surname!"
+                message: "กรุณากรอกชื่อไทย หรือ ภาษาอังกฤษ"
               }
             ]
-          })(<Input />)}
+          })(<Input placeholder={"ปฐมพงศ์"}/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="Tel">
           {getFieldDecorator("phone", {
             rules: [
               {
                 required: true,
-                message: "Please input your telephone no.!"
+                message: "โปรดใส่เบอร์ติดต่อของคุณ"
               }
             ]
-          })(<Input />)}
+          })(<Input placeholder={"0869999999"} />)}
         </FormItem>
         <FormItem {...formItemLayout} label="Birth date">
           {getFieldDecorator("dateOfBirth", {
@@ -114,7 +139,7 @@ class RegistrationForm extends Component {
               }}
               size="normal"
               render="explicit"
-              sitekey="6LfP_m8UAAAAAGnl6CDkJ1i5IQ3HjpOCcahw6KQW"
+              sitekey="6LdLQXMUAAAAAJmSKLvWmTo0Tzp7h7AxP-Bamhsn"
               onloadCallback={this.onLoadRecaptcha}
               verifyCallback={this.verifyCallback}
             />
@@ -126,10 +151,12 @@ class RegistrationForm extends Component {
             htmlType="submit"
             disabled={this.state.recaptchaToken ? false : true}
           >
-            Go!!
+            ยืนยัน
           </Button>
+        
         </FormItem>
       </Form>
+    </div>  
     );
   }
 }
