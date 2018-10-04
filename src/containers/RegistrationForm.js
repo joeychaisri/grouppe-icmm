@@ -79,10 +79,15 @@ class RegistrationForm extends Component {
       }
     };
     return (
+      
       <Form onSubmit={this.handleSubmit}>
+          <FormItem {...tailFormItemLayout} style={{ margin: 0}}>
+            <p style={{ margin: 20}}>โปรดกรอกข้อมูลด้านล่าง เพื่อทำการค้นหาข้อมูลในระบบ</p>
+          </FormItem>
+
         {this.props.isRegistered && (
           <FormItem {...tailFormItemLayout} style={{ margin: 0}}>
-            <p style={{ margin: 0}}>สำหรับกรอกเพื่อเพิ่มเพื่อน</p>
+            <p style={{ margin: 0}}>กรอกข้อมูลเพื่อเพิ่มผู้สมัคร</p>
           </FormItem>
         )}
         <FormItem {...formItemLayout} label="ชื่อ">
@@ -130,7 +135,7 @@ class RegistrationForm extends Component {
             htmlType="submit"
             disabled={this.state.recaptchaToken ? false : true}
           >
-            เพิ่มเพื่อน
+            ยืนยัน
           </Button>
         
         </FormItem>
