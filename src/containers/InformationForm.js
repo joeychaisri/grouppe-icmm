@@ -82,7 +82,20 @@ class InformationForm extends Component {
       }
     };
     return (
+      
       <Form onSubmit={this.handleSubmit}>
+      {this.props.isRegistered && (
+            <Alert
+              style={{
+                width: "50%",
+                textAlign: "center",
+                margin: "0 auto",
+                marginBottom: "2%"
+              }}
+              message="โปรดกรอกข้อมูลเพื่อเพิ่มผู้สมัคร โดยเบอร์โทรศัพท์ต้องไม่ซ้ำกัน"
+              type="warning"
+            />
+          )}
         <FormItem {...formItemLayout} label="Invitation Code">
           {getFieldDecorator("series", {
             rules: [
@@ -237,24 +250,24 @@ class InformationForm extends Component {
           </FormItem>
         )}
         {getFieldValue("isAlumni") === "false" && (
-          <FormItem {...formItemLayout} label="ความเกี่ยวข้อง">
-            {getFieldDecorator("relative", {
-              rules: [
-                {
-                  required: true,
-                  message: "กรุณากรอกความเกี่ยวข้อง"
-                }
-              ]
-            })(<Input />)}
-          </FormItem>
-        )}
-        {getFieldValue("isAlumni") === "false" && (
           <FormItem {...formItemLayout} label="ชื่อ-สกุล ผู้ลงทะเบียนให้">
             {getFieldDecorator("referalName", {
               rules: [
                 {
                   required: true,
                   message: "กรุณากรอกชื่อ-สกุล ผู้ลงทะเบียนให้"
+                }
+              ]
+            })(<Input />)}
+          </FormItem>
+        )}
+        {getFieldValue("isAlumni") === "false" && (
+          <FormItem {...formItemLayout} label="ความเกี่ยวข้อง">
+            {getFieldDecorator("relative", {
+              rules: [
+                {
+                  required: true,
+                  message: "กรุณากรอกความเกี่ยวข้อง"
                 }
               ]
             })(<Input />)}

@@ -113,24 +113,13 @@ class RegistrationForm extends Component {
             type="warning"
           /> */}
 
-          {this.props.isRegistered && (
-            <Alert
-              style={{
-                width: "50%",
-                textAlign: "center",
-                margin: "0 auto",
-                marginBottom: "2%"
-              }}
-              message="โปรดกรอกข้อมูลเพื่อเพิ่มผู้สมัคร โดยเบอร์โทรศัพท์ต้องไม่ซ้ำกัน"
-              type="warning"
-            />
-          )}
+          
           <FormItem {...formItemLayout} label="ชื่อ / Name">
             {getFieldDecorator("name", {
               rules: [
                 {
                   required: true,
-                  message: "กรุณากรอกชื่อไทย หรือ ภาษาอังกฤษ"
+                  message: "กรุณากรอกชื่อไทย หรือ ภาษาอังกฤษ ไม่ต้องใส่นามสกุล"
                 }
               ]
             })(<Input placeholder={"ปฐมพงศ์"} />)}
