@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { ReCaptcha } from "react-recaptcha-google";
-import { Form, Input, Button , Alert} from "antd";
+import { Form, Input, Button, Alert } from "antd";
 import DateInput from "../components/DateInput";
-import API from "../api/index"
+import API from "../api/index";
 
 const FormItem = Form.Item;
 
@@ -12,9 +12,26 @@ class RegistrationForm extends Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
-        this.props.set(values);
-        this.props.confirmData.length > 0 ? this.props.history.push("/information") : this.props.history.push("/termandcondition");
+        let { day, month, year } = values.birthDate;
+        let data = {
+          ...values,
+          dateOfBirth: `${year}-${("0" + month).slice(-2)}-${("0" + day).slice(
+            -2
+          )}`
+        };
+        delete data.birthDate;
+        API.getApplicant(data)
+          .then(res => {
+            const date = res.data.dateOfBirth.split("-");
+            let birthDate = { day: date[2], month: date[1], year: date[0] };
+            this.props.set({ ...res.data, birthDate });
+          })
+          .catch(err => {
+            this.props.set(values);
+          });
+        this.props.confirmData.length > 0
+          ? this.props.history.push("/information")
+          : this.props.history.push("/termandcondition");
       }
     });
   };
@@ -26,9 +43,6 @@ class RegistrationForm extends Component {
   }
 
   componentDidMount() {
-    API.getApplicant({ name: "ปฐมพงศ์","phone": "0881112345", "dateOfBirth": "1990-03-30"}).then(res => {
-      console.log(res)
-    })
     if (this.captchaDemo) {
       this.captchaDemo.reset();
     }
@@ -57,13 +71,13 @@ class RegistrationForm extends Component {
         xs: { span: 24 },
         sm: { span: 8 },
         md: { span: 8 },
-        lg: { span: 8 },
+        lg: { span: 8 }
       },
       wrapperCol: {
         xs: { span: 24 },
         sm: { span: 16 },
         md: { span: 12 },
-        lg: { span: 8 },
+        lg: { span: 8 }
       }
     };
     const tailFormItemLayout = {
@@ -79,16 +93,16 @@ class RegistrationForm extends Component {
       }
     };
     return (
-
-
-    <div >
-      <p style={{textAlign : "center" , margin : "10"}}>โปรดกรอกข้อมูลด้านล่าง เพื่อทำการค้นหาข้อมูลในระบบ</p>
-      <Form onSubmit={this.handleSubmit}>
+      <div>
+        <p style={{ textAlign: "center", margin: "10" }}>
+          โปรดกรอกข้อมูลด้านล่าง เพื่อทำการค้นหาข้อมูลในระบบ
+        </p>
+        <Form onSubmit={this.handleSubmit}>
           {/* <FormItem {...tailFormItemLayout} style={{ margin: 0}}>
             <p style={{ margin: 20}}>โปรดกรอกข้อมูลด้านล่าง เพื่อทำการค้นหาข้อมูลในระบบ</p>
           </FormItem> */}
 
-        {/* {this.props.isRegistered && (
+          {/* {this.props.isRegistered && (
           <FormItem {...tailFormItemLayout} style={{ margin: 0}}>
             <p style={{ margin: 0}}>กรอกข้อมูลเพื่อเพิ่มผู้สมัคร</p>
           </FormItem>
@@ -99,64 +113,68 @@ class RegistrationForm extends Component {
             type="warning"
           /> */}
 
-           {this.props.isRegistered && (
-          <Alert
-          style= {{width : "50%" , textAlign : "center" , margin : "0 auto" , marginBottom : "2%"}}
-          message="โปรดกรอกข้อมูลเพื่อเพิ่มผู้สมัคร โดยเบอร์โทรศัพท์ต้องไม่ซ้ำกัน"
-          type="warning"
-        />
-        )}
-          <FormItem {...formItemLayout} label="ชื่อ / Name">
-          {getFieldDecorator("name", {
-            rules: [
-              {
-                required: true,
-                message: "กรุณากรอกชื่อไทย หรือ ภาษาอังกฤษ"
-              }
-            ]
-          })(<Input placeholder={"ปฐมพงศ์"}/>)}
-        </FormItem>
-        <FormItem {...formItemLayout} label="Tel">
-          {getFieldDecorator("phone", {
-            rules: [
-              {
-                required: true,
-                message: "โปรดใส่เบอร์ติดต่อของคุณ"
-              }
-            ]
-          })(<Input placeholder={"0869999999"} />)}
-        </FormItem>
-        <FormItem {...formItemLayout} label="Birth date">
-          {getFieldDecorator("birthDate", {
-            rules: [{ validator: this.checkBirthDate }]
-          })(<DateInput />)}
-        </FormItem>
-        <FormItem {...tailFormItemLayout}>
-          <div style={{ overflow: "hidden" }}>
-            <ReCaptcha
-              ref={el => {
-                this.captchaDemo = el;
+          {this.props.isRegistered && (
+            <Alert
+              style={{
+                width: "50%",
+                textAlign: "center",
+                margin: "0 auto",
+                marginBottom: "2%"
               }}
-              size="normal"
-              render="explicit"
-              sitekey="6LdLQXMUAAAAAJmSKLvWmTo0Tzp7h7AxP-Bamhsn"
-              onloadCallback={this.onLoadRecaptcha}
-              verifyCallback={this.verifyCallback}
+              message="โปรดกรอกข้อมูลเพื่อเพิ่มผู้สมัคร โดยเบอร์โทรศัพท์ต้องไม่ซ้ำกัน"
+              type="warning"
             />
-          </div>
-        </FormItem>
-        <FormItem {...tailFormItemLayout}>
-          <Button
-            type="primary"
-            htmlType="submit"
-            disabled={this.state.recaptchaToken ? false : true}
-          >
-            ยืนยัน
-          </Button>
-        
-        </FormItem>
-      </Form>
-    </div>  
+          )}
+          <FormItem {...formItemLayout} label="ชื่อ / Name">
+            {getFieldDecorator("name", {
+              rules: [
+                {
+                  required: true,
+                  message: "กรุณากรอกชื่อไทย หรือ ภาษาอังกฤษ"
+                }
+              ]
+            })(<Input placeholder={"ปฐมพงศ์"} />)}
+          </FormItem>
+          <FormItem {...formItemLayout} label="Tel">
+            {getFieldDecorator("phone", {
+              rules: [
+                {
+                  required: true,
+                  message: "โปรดใส่เบอร์ติดต่อของคุณ"
+                }
+              ]
+            })(<Input placeholder={"0869999999"} />)}
+          </FormItem>
+          <FormItem {...formItemLayout} label="Birth date">
+            {getFieldDecorator("birthDate", {
+              rules: [{ validator: this.checkBirthDate }]
+            })(<DateInput />)}
+          </FormItem>
+          <FormItem {...tailFormItemLayout}>
+            <div style={{ overflow: "hidden" }}>
+              <ReCaptcha
+                ref={el => {
+                  this.captchaDemo = el;
+                }}
+                size="normal"
+                render="explicit"
+                sitekey="6LdLQXMUAAAAAJmSKLvWmTo0Tzp7h7AxP-Bamhsn"
+                onloadCallback={this.onLoadRecaptcha}
+                verifyCallback={this.verifyCallback}
+              />
+            </div>
+          </FormItem>
+          <FormItem {...tailFormItemLayout}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              disabled={this.state.recaptchaToken ? false : true}
+            >
+              ยืนยัน
+            </Button>
+          </FormItem>
+        </Form>
+      </div>
     );
   }
 }

@@ -9,6 +9,6 @@ export default {
     api.get(
       `api/applicant?name=${name}&phone=${phone}&dateOfBirth=${dateOfBirth}`
     ),
-  applyEvent: data => api.post("api/events", data),
+  applyEvent: data => api.post("api/event", data),
   getOrderById: id => axios.post(`api/order/${id}`)
 };

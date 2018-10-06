@@ -106,8 +106,8 @@ class InformationForm extends Component {
             rules: [{ required: true, message: "กรุณาเลือกเพศ" }]
           })(
             <Select placeholder="เลือกเพศ">
-              <Option value="male">ชาย</Option>
-              <Option value="female">หญิง</Option>
+              <Option value="MALE">ชาย</Option>
+              <Option value="FEMALE">หญิง</Option>
             </Select>
           )}
         </FormItem>
@@ -157,10 +157,16 @@ class InformationForm extends Component {
         </FormItem>
         <FormItem {...formItemLayout} label="Shirt size" hasFeedback>
           {getFieldDecorator("shirtSize", {
-            rules: [{ required: true, message: "กรุณาเลือกเพศ" }]
+            rules: [{ required: true, message: "กรุณาเลือกขนาดเสื้อ" }]
           })(
             <Select placeholder="เลือกขนาดเสื้อ">
-              <Option value="xs">XS - 34"</Option>
+              <Option value="XXS">XXS - 34"</Option>
+              <Option value="XS">XS - 36"</Option>
+              <Option value="S">XS - 38"</Option>
+              <Option value="M">XS - 40"</Option>
+              <Option value="L">XS - 42"</Option>
+              <Option value="XL">XS - 44"</Option>
+              <Option value="XXL">XS - 46"</Option>
             </Select>
           )}
         </FormItem>
@@ -169,12 +175,13 @@ class InformationForm extends Component {
             rules: [{ required: true, message: "กรุณาประเภทการวิ่ง" }]
           })(
             <Select placeholder="เลือกประเภทการวิ่ง">
-              <Option value="3">Fun run - 3 km"</Option>
+              <Option value="3km">3 km</Option>
+              <Option value="10km">10 km</Option>
             </Select>
           )}
         </FormItem>
         <FormItem {...formItemLayout} label="Alumni">
-          {getFieldDecorator("alunmi", {
+          {getFieldDecorator("isAlumni", {
             rules: [
               {
                 required: true,
@@ -214,7 +221,7 @@ class InformationForm extends Component {
         )}
         {getFieldValue("alunmi") === "false" && (
           <FormItem {...formItemLayout} label="ความเกี่ยวข้อง">
-            {getFieldDecorator("relationship", {
+            {getFieldDecorator("relative", {
               rules: [
                 {
                   required: true,
@@ -237,7 +244,7 @@ class InformationForm extends Component {
           </FormItem>
         )}
         <FormItem {...formItemLayout} label="ชื่อบนบิบ">
-          {getFieldDecorator("nameOnBib", {
+          {getFieldDecorator("bibName", {
             rules: [
               {
                 required: true,
@@ -247,7 +254,7 @@ class InformationForm extends Component {
           })(<Input placeholder="ถุงแป้ง"/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="คุณเคยวิ่งระยะ 10 กม มาก่อนหรือไม่">
-          {getFieldDecorator("didYouEverRun10KMBefore", {
+          {getFieldDecorator("isRunning", {
             rules: [
               {
                 required: true,
@@ -274,7 +281,7 @@ class InformationForm extends Component {
           </FormItem>
         )}
         <FormItem {...formItemLayout} label="ปีนี้ต้องการจะเปลี่ยนแปลงอะไร">
-          {getFieldDecorator("changeOnThisYear", {
+          {getFieldDecorator("changeAnswer", {
             rules: [
               {
                 required: true,

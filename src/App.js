@@ -15,19 +15,19 @@ class App extends Component {
     //   type: "10km"
     // }
     confirmData: [
-      {
-        name: "Samza",
-        lastname: "Montreewong",
-        email: "test4@icmm.com",
-        phone: "0881112345",
-        gender: "MALE",
-        dateOfBirth: "1990-03-22",
-        emergencyContact: "Naeun",
-        emergencyPhone: "0971520608",
-        series: "89",
-        type: "Fun Run 3KM",
-        shirtSize: "M"
-      }
+      // {
+      //   name: "Samza",
+      //   lastname: "Montreewong",
+      //   email: "test4@icmm.com",
+      //   phone: "0881112345",
+      //   gender: "MALE",
+      //   dateOfBirth: "1990-03-22",
+      //   emergencyContact: "Naeun",
+      //   emergencyPhone: "0971520608",
+      //   series: "89",
+      //   type: "Fun Run 3KM",
+      //   shirtSize: "M"
+      // }
       // {
       //   name: "John",
       //   lastname: "Doe",
