@@ -26,7 +26,14 @@ class InformationForm extends Component {
   }
 
   pushToSummary() {
-    this.props.history.push("/summary");
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        console.log("Received values of form: ", values);
+        this.props.add(values);
+        this.props.history.push("/summary");
+      }
+    });
+
 };
 
   checkBirthDate = (rule, value, callback) => {
@@ -76,6 +83,16 @@ class InformationForm extends Component {
     };
     return (
       <Form onSubmit={this.handleSubmit}>
+        <FormItem {...formItemLayout} label="Invitation Code">
+          {getFieldDecorator("series", {
+            rules: [
+              {
+                required: true,
+                message: "กรุณากรอกหมายเลขโทรศัพท์"
+              }
+            ]
+          })(<Input />)}
+        </FormItem>
         <FormItem {...formItemLayout} label="ชื่อ">
           {getFieldDecorator("name", {
             rules: [
@@ -190,12 +207,12 @@ class InformationForm extends Component {
             ]
           })(
             <Select>
-              <Option value="true">นิสิตเก่า</Option>
-              <Option value="false">ไม่เป็นนิสิตเก่า</Option>
+              <Option value = "true" >นิสิตเก่า</Option>
+              <Option value= "false" >ไม่เป็นนิสิตเก่า</Option>
             </Select>
           )}
         </FormItem>
-        {getFieldValue("alunmi") === "true" && (
+        {getFieldValue("isAlumni") === "true" && (
           <FormItem {...formItemLayout} label="หมายเลขรุ่น">
             {getFieldDecorator("seriesNo", {
               rules: [
@@ -207,7 +224,7 @@ class InformationForm extends Component {
             })(<Input placeholder="94" onBlur={e => this.handleSeriesNoChange(e.target.value)}/>)}
           </FormItem >
         )}
-        {getFieldValue("alunmi") === "true" && (
+        {getFieldValue("isAlumni") === "true" && (
           <FormItem {...formItemLayout} label="วศ">
             {getFieldDecorator("year", {
               rules: [
@@ -219,7 +236,7 @@ class InformationForm extends Component {
             })(<Input placeholder="53" onBlur={e => this.handleYearChange(e.target.value)} />)}
           </FormItem>
         )}
-        {getFieldValue("alunmi") === "false" && (
+        {getFieldValue("isAlumni") === "false" && (
           <FormItem {...formItemLayout} label="ความเกี่ยวข้อง">
             {getFieldDecorator("relative", {
               rules: [
@@ -231,7 +248,7 @@ class InformationForm extends Component {
             })(<Input />)}
           </FormItem>
         )}
-        {getFieldValue("alunmi") === "false" && (
+        {getFieldValue("isAlumni") === "false" && (
           <FormItem {...formItemLayout} label="ชื่อ-สกุล ผู้ลงทะเบียนให้">
             {getFieldDecorator("referalName", {
               rules: [
@@ -263,12 +280,12 @@ class InformationForm extends Component {
             ]
           })(
             <Select>
-              <Option value="true">เคย</Option>
+              <Option value="true" >เคย</Option>
               <Option value="false">ไม่เคย</Option>
             </Select>
           )}
         </FormItem>
-        {getFieldValue("didYouEverRun10KMBefore") === "true" && (
+        {getFieldValue("isRunning") === "true" && (
           <FormItem {...formItemLayout} label="เวลาส่วนตัวที่ดีที่สุดคือเท่าไหร่">
             {getFieldDecorator("personalBestTime", {
               rules: [

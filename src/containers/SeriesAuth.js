@@ -5,13 +5,14 @@ import { Form, Input, Button } from "antd";
 class SeriesAuth extends Component {
   constructor(props, context) {
     super(props, context);
-
+    this.pushToRegister = this.pushToRegister.bind(this);
     this.state = {
       invitationCode : null
     };
   }
 
   pushToRegister() {
+
     if(this.state.invitationCode != null){
       this.props.history.push("/register");
     }else{
@@ -33,7 +34,7 @@ class SeriesAuth extends Component {
           placeholder="Please enter invitation code"
           style={{ width: "50vh", margin: "0 auto", marginTop: "15vh" }}
         />
-        <Button onClick={this.pushToRegister.bind(this)}
+        <Button onClick={this.pushToRegister}
           style={{
             width: "35vh",
             margin: "0 auto",

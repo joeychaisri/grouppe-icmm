@@ -15,43 +15,27 @@ class App extends Component {
     //   type: "10km"
     // }
     confirmData: [
-      // {
-      //   name: "Samza",
-      //   lastname: "Montreewong",
-      //   email: "test4@icmm.com",
-      //   phone: "0881112345",
-      //   gender: "MALE",
-      //   dateOfBirth: "1990-03-22",
-      //   emergencyContact: "Naeun",
-      //   emergencyPhone: "0971520608",
-      //   series: "89",
-      //   type: "Fun Run 3KM",
-      //   shirtSize: "M"
-      // }
-      // {
-      //   name: "John",
-      //   lastname: "Doe",
-      //   email: "test@mail.com",
-      //   phone: "0000000000",
-      //   shirtSize: "F",
-      //   type: "10km"
-      // },
-      // {
-      //   name: "John2",
-      //   lastname: "Doe2",
-      //   email: "test@mail.com",
-      //   phone: "0000000000",
-      //   shirtSize: "F",
-      //   type: "10km"
-      // },
-      // {
-      //   name: "John2",
-      //   lastname: "Doe2",
-      //   email: "test@mail.com",
-      //   phone: "0000000000",
-      //   shirtSize: "F",
-      //   type: "10km"
-      // }
+    //   {
+
+    //             "name": "ปฐมพงศ์",
+    //             "lastname": "ไชย์ศรี",
+    //             "email": "test@icmm.com",
+    //             "phone": "0881112345",
+    //             "gender": "MALE",
+    //             "dateOfBirth": "1990-03-30",
+    //             "emergencyContact": "ถุงแป้ง",
+    //             "emergencyPhone": "0971520608",
+    //             "series": "89",
+    //             "type": "Fun Run 3KM",
+    //             "bibName": "test",
+    //             "isAlumni": false,
+    //             "relative": "someone",
+    //             "isRunning": true,
+    //             "bestTime": "10:42",
+    //             "changeAnswer": "คำถามต้องการเปลี่ยนอะไร",
+    //             "shirtSize": "M"
+
+    // }
     ]
   };
   componentDidMount() {
