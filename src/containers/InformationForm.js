@@ -21,6 +21,7 @@ class InformationForm extends Component {
   };
 
   componentDidMount() {
+    console.log(this.props.data)
     this.props.form.setFieldsValue(this.props.data);
   }
 
@@ -29,6 +30,24 @@ class InformationForm extends Component {
       if (!err) {
         this.props.add(values);
         this.props.history.push("/summary");
+      }
+    });
+  }
+
+  pushToSummaryFromEdit() {
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        this.props.edit({index: Number(this.props.history.location.pathname.split('/')[2]), data : values});
+        this.props.history.push("/summary");
+      }
+    });
+  }
+
+  saveEdit() {
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        this.props.edit({index: Number(this.props.history.location.pathname.split('/')[2]), data : values});
+        this.props.history.push("/series");
       }
     });
   }
@@ -44,8 +63,8 @@ class InformationForm extends Component {
 
   checkPhone = (rule, value, callback) => {
     if (this.props.confirmData.length > 0) {
-      let result = this.props.confirmData.find(item => {
-        return item.phone === value;
+      let result = this.props.confirmData.find((item, idx) => {
+        return item.phone === value && idx !== Number(this.props.history.location.pathname.split('/')[2]);
       });
       result &&
         callback(
@@ -82,9 +101,9 @@ class InformationForm extends Component {
       },
       wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 },
-        md: { span: 12 },
-        lg: { span: 8 }
+        sm: { span: 24 },
+        md: { span: 24 },
+        lg: { span: 12 }
       }
     };
     const tailFormItemLayout = {
@@ -367,7 +386,7 @@ class InformationForm extends Component {
           })(<Input placeholder= "Ex. อยากลดน้ำหนัก 3 กก / อยากชวนเพื่อนมาวิ่งให้ได้ 3 คน" />)}
         </FormItem>
 
-        <FormItem {...tailFormItemLayout}>
+        {this.props.history.location.pathname.split('/')[1] === 'information' && <FormItem {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
             เพิ่มผู้สมัคร
           </Button>
@@ -378,7 +397,22 @@ class InformationForm extends Component {
           >
             สรุปและชำระเงิน
           </Button>
-        </FormItem>
+        </FormItem>}
+        {this.props.history.location.pathname.split('/')[1] === 'edit' && <FormItem {...tailFormItemLayout}>
+          <Button
+            type="primary"
+            onClick={this.saveEdit.bind(this)}
+          >
+            บันทึกและเพิ่มผู้สมัคร
+          </Button>
+          <Button
+            style={{ marginLeft: "3%" }}
+            type="default"
+            onClick={this.pushToSummaryFromEdit.bind(this)}
+          >
+            บันทึกและชำระเงิน
+          </Button>
+        </FormItem>}
       </Form>
     );
   }

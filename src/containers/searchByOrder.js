@@ -21,22 +21,16 @@ class searchByOrder extends Component {
   }
 
   pushToSummary() {
-    if (this.state.orderID != null) {
-      console.log("if")
+    if (this.state.orderID !== null) {
       API.getOrderById(this.state.orderID)
-      .then(res => {
-        const { status } = res.data;
-        if (status) {
-          console.log(res.data.applicants)
-          this.props.setOrderData( res.data.applicants );
-          this.props.history.push("/summary");
-        } else {
-          alert("Your invitation code is invalid or already expired");
-        }
-      })
-      .catch(err => {
-        console.log(err)
-      });
+        .then(res => {
+          const { orderID } = res.data;
+          this.props.setOrderData(res.data);
+          this.props.history.push(`/order/${orderID}`);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     } else {
       alert("Please enter your order ID");
     }
@@ -48,12 +42,18 @@ class searchByOrder extends Component {
         <Input
           onChange={this.handleChange}
           placeholder="Please enter your orderID"
-          style={{ width: "50vh", margin: "0 auto", marginTop: "15vh" }}
+          style={{
+            width: "80vw",
+            maxWidth: "300px",
+            margin: "0 auto",
+            marginTop: "15vh"
+          }}
         />
         <Button
           onClick={this.pushToSummary}
           style={{
-            width: "35vh",
+            width: "80vw",
+            maxWidth: "300px",
             margin: "0 auto",
             marginTop: "10vh",
             marginBottom: "15vh"
