@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { Form, Input, Button } from "antd";
+import API from "../api";
 
 class searchByOrder extends Component {
   constructor(props, context) {
@@ -16,12 +17,20 @@ class searchByOrder extends Component {
   componentDidMount() {}
 
   handleChange(e) {
-    this.setState({ invitationCode: e.target.value });
+    this.setState({ orderID: e.target.value });
   }
 
   pushToSummary() {
-    if (this.state.invitationCode != null) {
-      this.props.history.push("/summary");
+    if (this.state.orderID !== null) {
+      API.getOrderById(this.state.orderID)
+        .then(res => {
+          const { orderID } = res.data;
+          this.props.setOrderData(res.data);
+          this.props.history.push(`/order/${orderID}`);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     } else {
       alert("Please enter your order ID");
     }
@@ -33,12 +42,18 @@ class searchByOrder extends Component {
         <Input
           onChange={this.handleChange}
           placeholder="Please enter your orderID"
-          style={{ width: "50vh", margin: "0 auto", marginTop: "15vh" }}
+          style={{
+            width: "80vw",
+            maxWidth: "300px",
+            margin: "0 auto",
+            marginTop: "15vh"
+          }}
         />
         <Button
           onClick={this.pushToSummary}
           style={{
-            width: "35vh",
+            width: "80vw",
+            maxWidth: "300px",
             margin: "0 auto",
             marginTop: "10vh",
             marginBottom: "15vh"

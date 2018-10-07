@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import API from "../api/index";
 import ReactDOM from "react-dom";
+import { withRouter } from "react-router-dom";
 import { Button, Divider, Collapse, Col, Row } from "antd";
 const { Panel } = Collapse;
 
@@ -56,14 +57,48 @@ class Summary extends Component {
         console.log(err);
       });
   };
+
+  payOnly = () => {
+    const {
+      merchantID,
+      description,
+      orderID,
+      currency,
+      amount,
+      version,
+      redirectURL,
+      paymentURL,
+      hash
+    } = this.props.payment;
+    const element = (
+      <form
+        id="myform2"
+        method="post"
+        action={paymentURL}
+        style={{ display: "none" }}
+      >
+        <input type="hidden" name="version" value={version} />
+        <input type="hidden" name="merchant_id" value={merchantID} />
+        <input type="hidden" name="currency" value={currency} />
+        <input type="hidden" name="result_url_1" value={redirectURL} />
+        <input type="hidden" name="hash_value" value={hash} />
+        <input type="hidden" name="payment_description" value={description} />
+        <input type="hidden" name="order_id" value={orderID} />
+        <input type="hidden" name="amount" value={amount} />
+        <input type="submit" name="submit" value="Confirm" />
+      </form>
+    );
+    ReactDOM.render(element, document.getElementById("payment"));
+    const form = document.getElementById("myform2");
+    HTMLFormElement.prototype.submit.call(form);
+  };
   render() {
     const { confirmData } = this.props;
     const total = confirmData.length * 550;
     // const nonVat = total / 1.07;
     // const vat = total - nonVat;
-    console.log(confirmData);
     return (
-      <div className="container">
+      <div>
         <Collapse>
           {confirmData.length > 0 &&
             confirmData.map((item, idx) => (
@@ -101,13 +136,26 @@ class Summary extends Component {
             </Col>
           </Row>
         </div>
-        <Button type="primary" block onClick={() => this.pay()}>
-          Pay !!
-        </Button>
+        {this.props.history.location.pathname.split("/")[1] === "order" && (
+          <p>
+            สถานะการจ่ายเงิน:
+            {this.props.orderStatus}
+          </p>
+        )}
+        {((this.props.orderStatus && this.props.orderStatus === "pending") ||
+          !this.props.payment) && (
+          <Button
+            type="primary"
+            block
+            onClick={() => (!!this.props.payment ? this.payOnly() : this.pay())}
+          >
+            Pay !!
+          </Button>
+        )}
         <div id="payment" />
       </div>
     );
   }
 }
 
-export default Summary;
+export default withRouter(Summary);

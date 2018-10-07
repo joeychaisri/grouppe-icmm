@@ -5,9 +5,8 @@ const { Header, Content, Footer } = Layout;
 
 const MainLayout = ({ confirmData, history, children, delData, editData }) => (
   <Layout style={{ minHeight: "100vh" }}>
-    {console.log(history.location.pathname)}
     <Header style={{ backgroundColor: "#c43a43", textAlign: "center" }}>
-      <h1 style={{ color: "white" }}>ICMM 2019</h1>
+      <h1 style={{ color: "white", marginTop: '7px' }}>ICMM 2019</h1>
     </Header>
     <Content className="container" style={{ padding: "10px 10px 0 10px" }}>
       <Row type="flex">
@@ -35,8 +34,6 @@ const MainLayout = ({ confirmData, history, children, delData, editData }) => (
                   renderItem={(item, idx) => (
                     <List.Item>
                       <Card>
-                        {console.log(idx)}
-
                         <Icon
                           style={{ float: "right" }}
                           onClick={() => delData(idx)}

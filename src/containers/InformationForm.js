@@ -113,7 +113,7 @@ class InformationForm extends Component {
             type="warning"
           />
         )}
-        <FormItem {...formItemLayout} label="Invitation Code">
+        {/* <FormItem {...formItemLayout} label="Invitation Code">
           {getFieldDecorator("invitationCode", {
             rules: [
               {
@@ -122,7 +122,7 @@ class InformationForm extends Component {
               }
             ]
           })(<Input disabled />)}
-        </FormItem>
+        </FormItem> */}
         <FormItem {...formItemLayout} label="ชื่อ">
           {getFieldDecorator("name", {
             rules: [
@@ -131,7 +131,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกชื่อ"
               }
             ]
-          })(<Input placeholder="จอห์น" />)}
+          })(<Input placeholder="กรรณิกา" />)}
         </FormItem>
         <FormItem {...formItemLayout} label="นามสกุล">
           {getFieldDecorator("lastname", {
@@ -141,7 +141,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกนามสกุล"
               }
             ]
-          })(<Input placeholder="เม็ดแอปเปิล" />)}
+          })(<Input placeholder="ภูนแสงหิรัญ"/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="วันเกิด">
           {getFieldDecorator("birthDate", {

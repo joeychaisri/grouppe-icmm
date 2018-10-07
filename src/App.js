@@ -63,9 +63,16 @@ class App extends Component {
     });
   };
 
+  setOrderData = ({ status, payment, applicants }) => {
+    this.setState({
+      confirmData: applicants !== null ? applicants : [],
+      orderStatus: status,
+      payment
+      })
+  }
+
   render() {
     const isRegistered = this.state.confirmData.length > 0;
-    console.log(this.state.confirmData);
     return (
       <BrowserRouter>
         <MainLayout
@@ -84,6 +91,10 @@ class App extends Component {
             data={this.state.data}
             confirmData={this.state.confirmData}
             isRegistered={isRegistered}
+            setOrderData = {data => this.setOrderData(data)}
+            payment={this.state.payment}
+            orderStatus={this.state.orderStatus}
+
           />
         </MainLayout>
       </BrowserRouter>
