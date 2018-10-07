@@ -1,20 +1,19 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { Form, Input, Button, Select , TimePicker , Alert } from "antd";
+import { Form, Input, Button, Select, TimePicker, Alert } from "antd";
 import DateInput from "../components/DateInput";
-import moment from 'moment';
-
+import moment from "moment";
+import API from "../api";
 
 const FormItem = Form.Item;
 const Option = Select.Option;
-const format = 'HH:mm';
+const format = "HH:mm";
 
 class InformationForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
         this.props.add(values);
         this.props.history.push("/series");
       }
@@ -28,13 +27,11 @@ class InformationForm extends Component {
   pushToSummary() {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
         this.props.add(values);
         this.props.history.push("/summary");
       }
     });
-
-};
+  }
 
   checkBirthDate = (rule, value, callback) => {
     const { day = null, month = null, year = null } = value || {};
@@ -45,12 +42,33 @@ class InformationForm extends Component {
     return;
   };
 
-  handleSeriesNoChange = (value) => {
-    this.props.form.setFieldsValue({ year: Number(value) - 41 > 0 ? Number(value) - 41 : 0 })
-  }
-  handleYearChange = (value) => {
-    this.props.form.setFieldsValue({ year: Number(value) + 41 })
-  }
+  checkPhone = (rule, value, callback) => {
+    if (this.props.confirmData.length > 0) {
+      let result = this.props.confirmData.find(item => {
+        return item.phone === value;
+      });
+      result &&
+        callback(
+          `ขออภัย หมายเลขโทรศัพท์ของคุณซ้ำกับ ${result.name} โปรดใช้หมายเลขอื่น`
+        );
+    }
+    API.checkPhoneAvailable(value).then(res => {
+      const { status } = res;
+      !status &&
+        callback(`ขออภัย หมายเลขโทรศัพท์ของคุณซ้ำกับในระบบ โปรดใช้หมายเลขอื่น`);
+    });
+    callback();
+    return;
+  };
+
+  handleSeriesNoChange = value => {
+    this.props.form.setFieldsValue({
+      year: Number(value) - 41 > 0 ? Number(value) - 41 : 0
+    });
+  };
+  handleYearChange = value => {
+    this.props.form.setFieldsValue({ year: Number(value) + 41 });
+  };
 
   render() {
     const { getFieldDecorator, getFieldValue } = this.props.form;
@@ -60,13 +78,13 @@ class InformationForm extends Component {
         xs: { span: 24 },
         sm: { span: 8 },
         md: { span: 8 },
-        lg: { span: 8 },
+        lg: { span: 8 }
       },
       wrapperCol: {
         xs: { span: 24 },
         sm: { span: 16 },
         md: { span: 12 },
-        lg: { span: 8 },
+        lg: { span: 8 }
       }
     };
     const tailFormItemLayout = {
@@ -82,29 +100,28 @@ class InformationForm extends Component {
       }
     };
     return (
-      
       <Form onSubmit={this.handleSubmit}>
-      {this.props.isRegistered && (
-            <Alert
-              style={{
-                width: "50%",
-                textAlign: "center",
-                margin: "0 auto",
-                marginBottom: "2%"
-              }}
-              message="โปรดกรอกข้อมูลเพื่อเพิ่มผู้สมัคร โดยเบอร์โทรศัพท์ต้องไม่ซ้ำกัน"
-              type="warning"
-            />
-          )}
+        {this.props.isRegistered && (
+          <Alert
+            style={{
+              width: "50%",
+              textAlign: "center",
+              margin: "0 auto",
+              marginBottom: "2%"
+            }}
+            message="โปรดกรอกข้อมูลเพื่อเพิ่มผู้สมัคร โดยเบอร์โทรศัพท์ต้องไม่ซ้ำกัน"
+            type="warning"
+          />
+        )}
         <FormItem {...formItemLayout} label="Invitation Code">
-          {getFieldDecorator("series", {
+          {getFieldDecorator("invitationCode", {
             rules: [
               {
                 required: true,
-                message: "กรุณากรอกหมายเลขโทรศัพท์"
+                message: "กรุณากรอก invitation code"
               }
             ]
-          })(<Input />)}
+          })(<Input disabled />)}
         </FormItem>
         <FormItem {...formItemLayout} label="ชื่อ">
           {getFieldDecorator("name", {
@@ -124,7 +141,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกนามสกุล"
               }
             ]
-          })(<Input placeholder="เม็ดแอปเปิล"/>)}
+          })(<Input placeholder="เม็ดแอปเปิล" />)}
         </FormItem>
         <FormItem {...formItemLayout} label="วันเกิด">
           {getFieldDecorator("birthDate", {
@@ -147,9 +164,15 @@ class InformationForm extends Component {
               {
                 required: true,
                 message: "กรุณากรอกหมายเลขโทรศัพท์"
-              }
-            ]
-          })(<Input placeholder="0869999999"/>)}
+              },
+              {
+                len: 10,
+                message: "หมายเลขโทรศัพท์ไม่ถูกต้อง"
+              },
+              { validator: this.checkPhone }
+            ],
+            validateTrigger: "onBlur"
+          })(<Input placeholder="0869999999" />)}
         </FormItem>
         <FormItem {...formItemLayout} label="E-mail">
           {getFieldDecorator("email", {
@@ -163,7 +186,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกอีเมล"
               }
             ]
-          })(<Input placeholder="johnmedapple@google.com"/>)}
+          })(<Input placeholder="johnmedapple@google.com" />)}
         </FormItem>
         <FormItem {...formItemLayout} label="Emergency Contact">
           {getFieldDecorator("emergencyContact", {
@@ -173,7 +196,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกผู้ติดต่อสำหรับกรณีฉุกเฉิน"
               }
             ]
-          })(<Input placeholder="กรรณิการ์"/>)}
+          })(<Input placeholder="กรรณิการ์" />)}
         </FormItem>
         <FormItem {...formItemLayout} label="Emergency Tel.">
           {getFieldDecorator("emergencyPhone", {
@@ -181,9 +204,13 @@ class InformationForm extends Component {
               {
                 required: true,
                 message: "กรุณากรอกหมายเลขโทรศัพท์ฉุกเฉิน"
+              },
+              {
+                len: 10,
+                message: "หมายเลขโทรศัพท์ไม่ถูกต้อง"
               }
             ]
-          })(<Input placeholder="0869999999"/>)}
+          })(<Input placeholder="0869999999" />)}
         </FormItem>
         <FormItem {...formItemLayout} label="Shirt size" hasFeedback>
           {getFieldDecorator("shirtSize", {
@@ -192,11 +219,11 @@ class InformationForm extends Component {
             <Select placeholder="เลือกขนาดเสื้อ">
               <Option value="XXS">XXS - 34"</Option>
               <Option value="XS">XS - 36"</Option>
-              <Option value="S">XS - 38"</Option>
-              <Option value="M">XS - 40"</Option>
-              <Option value="L">XS - 42"</Option>
-              <Option value="XL">XS - 44"</Option>
-              <Option value="XXL">XS - 46"</Option>
+              <Option value="S">S - 38"</Option>
+              <Option value="M">M - 40"</Option>
+              <Option value="L">L - 42"</Option>
+              <Option value="XL">XL - 44"</Option>
+              <Option value="XXL">XXL - 46"</Option>
             </Select>
           )}
         </FormItem>
@@ -220,22 +247,27 @@ class InformationForm extends Component {
             ]
           })(
             <Select>
-              <Option value = "true" >นิสิตเก่า</Option>
-              <Option value= "false" >ไม่เป็นนิสิตเก่า</Option>
+              <Option value="true">นิสิตเก่า</Option>
+              <Option value="false">ไม่เป็นนิสิตเก่า</Option>
             </Select>
           )}
         </FormItem>
         {getFieldValue("isAlumni") === "true" && (
           <FormItem {...formItemLayout} label="หมายเลขรุ่น">
-            {getFieldDecorator("seriesNo", {
+            {getFieldDecorator("series", {
               rules: [
                 {
                   required: true,
                   message: "กรุณากรอกหมายเลขรุ่น"
                 }
               ]
-            })(<Input placeholder="94" onBlur={e => this.handleSeriesNoChange(e.target.value)}/>)}
-          </FormItem >
+            })(
+              <Input
+                placeholder="94"
+                onBlur={e => this.handleSeriesNoChange(e.target.value)}
+              />
+            )}
+          </FormItem>
         )}
         {getFieldValue("isAlumni") === "true" && (
           <FormItem {...formItemLayout} label="วศ">
@@ -246,7 +278,13 @@ class InformationForm extends Component {
                   message: "กรุณากรอก วศ"
                 }
               ]
-            })(<Input placeholder="53" onBlur={e => this.handleYearChange(e.target.value)} />)}
+            })(
+              <Input
+                placeholder="53"
+                onBlur={e => this.handleYearChange(e.target.value)}
+                disabled
+              />
+            )}
           </FormItem>
         )}
         {getFieldValue("isAlumni") === "false" && (
@@ -281,9 +319,12 @@ class InformationForm extends Component {
                 message: "กรุณากรอกชื่อบนบิบ"
               }
             ]
-          })(<Input placeholder="ถุงแป้ง"/>)}
+          })(<Input placeholder="ถุงแป้ง" />)}
         </FormItem>
-        <FormItem {...formItemLayout} label="คุณเคยวิ่งระยะ 10 กม มาก่อนหรือไม่">
+        <FormItem
+          {...formItemLayout}
+          label="คุณเคยวิ่งระยะ 10 กม มาก่อนหรือไม่"
+        >
           {getFieldDecorator("isRunning", {
             rules: [
               {
@@ -293,21 +334,25 @@ class InformationForm extends Component {
             ]
           })(
             <Select>
-              <Option value="true" >เคย</Option>
+              <Option value="true">เคย</Option>
               <Option value="false">ไม่เคย</Option>
             </Select>
           )}
         </FormItem>
         {getFieldValue("isRunning") === "true" && (
-          <FormItem {...formItemLayout} label="เวลาส่วนตัวที่ดีที่สุดคือเท่าไหร่">
-            {getFieldDecorator("personalBestTime", {
+          <FormItem
+            {...formItemLayout}
+            label="เวลาส่วนตัวที่ดีที่สุดคือเท่าไหร่"
+          >
+            {getFieldDecorator("bestTime", {
+              initialValue: moment("00:00", format),
               rules: [
                 {
                   required: true,
                   message: "กรุณากรอกเวลาส่วนตัวที่ดีที่สุดคือเท่าไหร่"
                 }
               ]
-            })(<TimePicker defaultValue={moment('00:00', format)} format={format} />)}
+            })(<TimePicker format={format} />)}
           </FormItem>
         )}
         <FormItem {...formItemLayout} label="ปีนี้ต้องการจะเปลี่ยนแปลงอะไร">
@@ -320,13 +365,16 @@ class InformationForm extends Component {
             ]
           })(<Input />)}
         </FormItem>
-        
+
         <FormItem {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
             เพิ่มผู้สมัคร
           </Button>
-          <Button style={{marginLeft : "3%" }} type="default" 
-          onClick={this.pushToSummary.bind(this)}>
+          <Button
+            style={{ marginLeft: "3%" }}
+            type="default"
+            onClick={this.pushToSummary.bind(this)}
+          >
             สรุปและชำระเงิน
           </Button>
         </FormItem>

@@ -1,7 +1,6 @@
-
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { Form, Input, Button ,Divider} from "antd";
+import { Form, Input, Button } from "antd";
 
 class searchByOrder extends Component {
   constructor(props, context) {
@@ -10,29 +9,29 @@ class searchByOrder extends Component {
     this.handleChange = this.handleChange.bind(this);
 
     this.state = {
-      orderID : null
+      orderID: null
     };
   }
 
   componentDidMount() {}
-  
+
   handleChange(e) {
-    this.setState({ invitationCode : e.target.value })
-    
+    this.setState({ invitationCode: e.target.value });
   }
 
   pushToSummary() {
-    if(this.state.invitationCode != null){
+    if (this.state.invitationCode != null) {
       this.props.history.push("/summary");
-    }else{
-      alert("Please enter your order ID")
+    } else {
+      alert("Please enter your order ID");
     }
   }
 
   render() {
     return (
-        <div style={{ display: "flex", flexFlow: "column wrap" }}>
-        <Input onChange={this.handleChange}
+      <div style={{ display: "flex", flexFlow: "column wrap" }}>
+        <Input
+          onChange={this.handleChange}
           placeholder="Please enter your orderID"
           style={{ width: "50vh", margin: "0 auto", marginTop: "15vh" }}
         />

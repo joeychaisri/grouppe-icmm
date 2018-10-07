@@ -6,8 +6,12 @@ const { Panel } = Collapse;
 
 class Summary extends Component {
   pay = () => {
+    let applicants = this.props.confirmData.map(item => {
+      delete item.birthDate;
+      return item;
+    });
     const data = {
-      applicants: this.props.confirmData
+      applicants
     };
     API.applyEvent(data)
       .then(res => {
@@ -54,9 +58,9 @@ class Summary extends Component {
   };
   render() {
     const { confirmData } = this.props;
-    const total = confirmData.length * 600;
-    const nonVat = total / 1.07;
-    const vat = total - nonVat;
+    const total = confirmData.length * 550;
+    // const nonVat = total / 1.07;
+    // const vat = total - nonVat;
     console.log(confirmData);
     return (
       <div className="container">
@@ -78,7 +82,7 @@ class Summary extends Component {
         </Collapse>
         <Divider />
         <div style={{ textAlign: "right", marginBottom: 16 }}>
-          <Row>
+          {/* <Row>
             <Col span={18}>Subtotal</Col>
             <Col span={6}>
               {Number(nonVat.toFixed(2)).toLocaleString("en")} THB
@@ -89,7 +93,7 @@ class Summary extends Component {
             <Col span={6}>
               {Number(vat.toFixed(2)).toLocaleString("en")} THB
             </Col>
-          </Row>
+          </Row> */}
           <Row>
             <Col span={18}>Total</Col>
             <Col span={6}>
