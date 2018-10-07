@@ -387,7 +387,7 @@ class InformationForm extends Component {
         </FormItem>
 
         {this.props.history.location.pathname.split('/')[1] === 'information' && <FormItem {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" disabled={this.props.confirmData.length === 4}>
             เพิ่มผู้สมัคร
           </Button>
           <Button
@@ -402,6 +402,7 @@ class InformationForm extends Component {
           <Button
             type="primary"
             onClick={this.saveEdit.bind(this)}
+            disabled={this.props.confirmData.length === 4}
           >
             บันทึกและเพิ่มผู้สมัคร
           </Button>
