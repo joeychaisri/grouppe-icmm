@@ -9,7 +9,7 @@ const MainLayout = ({ confirmData, set, history, children, delData, editData }) 
       <h1 style={{ color: "white", marginTop: '7px' }}>ICMM 2019</h1>
     </Header>
     <Content className="container" style={{ padding: "10px 10px 0 10px" }}>
-      <Row type="flex">
+      <Row type="flex" justify="center">
         {["series", "register", "information"].includes(
           history.location.pathname.split("/")[1]
         ) &&
