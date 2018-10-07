@@ -7,35 +7,7 @@ import momemt from "moment";
 class App extends Component {
   state = {
     data: {},
-    // {
-    //   firstname: "John",
-    //   surname: "Doe",
-    //   email: "test@mail.com",
-    //   tel: "0000000000",
-    //   shirt_size: "F",
-    //   type: "10km"
-    // }
-    confirmData: [
-      //   {
-      //             "name": "ปฐมพงศ์",
-      //             "lastname": "ไชย์ศรี",
-      //             "email": "test@icmm.com",
-      //             "phone": "0881112345",
-      //             "gender": "MALE",
-      //             "dateOfBirth": "1990-03-30",
-      //             "emergencyContact": "ถุงแป้ง",
-      //             "emergencyPhone": "0971520608",
-      //             "series": "89",
-      //             "type": "Fun Run 3KM",
-      //             "bibName": "test",
-      //             "isAlumni": false,
-      //             "relative": "someone",
-      //             "isRunning": true,
-      //             "bestTime": "10:42",
-      //             "changeAnswer": "คำถามต้องการเปลี่ยนอะไร",
-      //             "shirtSize": "M"
-      // }
-    ]
+    confirmData: []
   };
   componentDidMount() {
     loadReCaptcha();
@@ -91,20 +63,13 @@ class App extends Component {
     });
   };
 
-  // editData = index => {
-  //   this.setState({
-  //     data: this.state.confirmData[index]
-  //   });
-  //   window.location.href = "http://www.localhost:3000/2";
-  // };
-
   render() {
     const isRegistered = this.state.confirmData.length > 0;
     console.log(this.state.confirmData);
     return (
       <BrowserRouter>
         <MainLayout
-          showSider={false}
+          showSider={true}
           confirmData={this.state.confirmData}
           delData={idx => {
             this.delData(idx);

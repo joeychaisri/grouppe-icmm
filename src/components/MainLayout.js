@@ -1,68 +1,93 @@
 import React from "react";
-import { Layout, List, Card, Icon } from "antd";
+import { Layout, List, Card, Icon, Row, Col } from "antd";
+import { withRouter } from "react-router-dom";
+const { Header, Content, Footer } = Layout;
 
-const { Header, Content, Footer, Sider } = Layout;
-
-const MainLayout = ({ showSider, confirmData, children, delData, editData }) => (
+const MainLayout = ({ confirmData, history, children, delData, editData }) => (
   <Layout style={{ minHeight: "100vh" }}>
+    {console.log(history.location.pathname)}
     <Header style={{ backgroundColor: "#c43a43", textAlign: "center" }}>
       <h1 style={{ color: "white" }}>ICMM 2019</h1>
     </Header>
-    <Layout style={{ padding: "10px 10px 0 10px" }}>
-      {showSider &&  <Sider width={300} style={{ background: "#fff", padding: 16 }}>
-        {confirmData.length > 0 && (
-          <div>
-            <p>Ticket Summary</p>
-            <List
-              grid={{ gutter: 8, column: 1 }}
-              dataSource={confirmData}
-              renderItem={(item, idx) => (
-                <List.Item>
-                  <Card>
-                    {console.log(idx)}
+    <Content className="container" style={{ padding: "10px 10px 0 10px" }}>
+      <Row type="flex">
+        {["series", "register", "information"].includes(
+          history.location.pathname.split("/")[1]
+        ) &&
+          confirmData.length > 0 && (
+            <Col
+              xs={{ span: 24, order: 2 }}
+              sm={{ span: 24, order: 2 }}
+              md={{ span: 24, order: 2 }}
+              lg={{ span: 6, order: 1 }}
+              xl={{ span: 5, order: 1 }}
+              style={{
+                backgroundColor: "#FFF",
+                padding: 16,
+                minHeight: "calc(100vh - 144px)"
+              }}
+            >
+              <div>
+                <p>Ticket Summary</p>
+                <List
+                  grid={{ gutter: 8, column: 1 }}
+                  dataSource={confirmData}
+                  renderItem={(item, idx) => (
+                    <List.Item>
+                      <Card>
+                        {console.log(idx)}
 
-                    <Icon
-                      style={{ float: "right" }}
-                      onClick={() => delData(idx)}
-                      type="close"
-                    />
-                    <Icon
-                      type="edit"
-                      style={{ float: "right" }}
-                      onClick={() => editData(idx)}
-                    />
-                    <p>
-                      {item.name} {item.lastname} <br />
-                      Email: {item.email} <br />
-                      Tel: {item.phone}
-                      <br />
-                      Shirt Size: {item.shirtSize}
-                      <br />
-                      Type: {item.type}
-                    </p>
-                  </Card>
-                </List.Item>
-              )}
-            />
-          </div>
-        )}
-      </Sider>}
-      <Content>
-        <div
-          style={{
-            background: "#fff",
-            padding: 16,
-            minHeight: "calc(100vh - 144px)"
-          }}
+                        <Icon
+                          style={{ float: "right" }}
+                          onClick={() => delData(idx)}
+                          type="close"
+                        />
+                        <Icon
+                          type="edit"
+                          style={{ float: "right" }}
+                          onClick={() => editData(idx)}
+                        />
+                        <p>
+                          {item.name} {item.lastname} <br />
+                          Email: {item.email} <br />
+                          Tel: {item.phone}
+                          <br />
+                          Shirt Size: {item.shirtSize}
+                          <br />
+                          Type: {item.type}
+                        </p>
+                      </Card>
+                    </List.Item>
+                  )}
+                />
+              </div>
+            </Col>
+          )}
+        <Col
+          xs={{ span: 24, order: 1 }}
+          sm={{ span: 24, order: 1 }}
+          md={{ span: 24, order: 1 }}
+          lg={{ span: 18, order: 2 }}
+          xl={{ span: 19, order: 2 }}
         >
-          {children}
-        </div>
-      </Content>
-    </Layout>
+          {/* <Content> */}
+          <div
+            style={{
+              background: "#fff",
+              padding: 16,
+              minHeight: "calc(100vh - 144px)"
+            }}
+          >
+            {children}
+          </div>
+          {/* </Content> */}
+        </Col>
+      </Row>
+    </Content>
     <Footer style={{ textAlign: "center" }}>
       © ICMM 2019 Powered by Grouppe.co
     </Footer>
   </Layout>
 );
 
-export default MainLayout;
+export default withRouter(MainLayout);

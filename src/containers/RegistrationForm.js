@@ -77,7 +77,7 @@ class RegistrationForm extends Component {
         xs: { span: 24 },
         sm: { span: 16 },
         md: { span: 12 },
-        lg: { span: 8 }
+        lg: { span: 12 }
       }
     };
     const tailFormItemLayout = {
@@ -113,6 +113,7 @@ class RegistrationForm extends Component {
             type="warning"
           /> */}
 
+          
           <FormItem {...formItemLayout} label="ชื่อ / Name">
             {getFieldDecorator("name", {
               rules: [

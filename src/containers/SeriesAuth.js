@@ -25,7 +25,7 @@ class SeriesAuth extends Component {
           }
         })
         .catch(err => {
-          console.log(err)
+          console.log(err);
         });
     } else {
       alert("Please enter your invitation code");
@@ -44,12 +44,18 @@ class SeriesAuth extends Component {
         <Input
           onChange={this.handleChange.bind(this)}
           placeholder="Please enter invitation code"
-          style={{ width: "50vh", margin: "0 auto", marginTop: "15vh" }}
+          style={{
+            width: "80vw",
+            maxWidth: "300px",
+            margin: "0 auto",
+            marginTop: "15vh"
+          }}
         />
         <Button
           onClick={this.pushToRegister}
           style={{
-            width: "35vh",
+            width: "80vw",
+            maxWidth: "300px",
             margin: "0 auto",
             marginTop: "10vh",
             marginBottom: "15vh"
