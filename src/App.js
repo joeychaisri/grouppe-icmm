@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import MainLayout from "./components/MainLayout";
 import Routes from "./Routes";
 import { loadReCaptcha } from "react-recaptcha-google";
+import momemt from "moment";
 class App extends Component {
   state = {
     data: {},
@@ -15,27 +16,25 @@ class App extends Component {
     //   type: "10km"
     // }
     confirmData: [
-    //   {
-
-    //             "name": "ปฐมพงศ์",
-    //             "lastname": "ไชย์ศรี",
-    //             "email": "test@icmm.com",
-    //             "phone": "0881112345",
-    //             "gender": "MALE",
-    //             "dateOfBirth": "1990-03-30",
-    //             "emergencyContact": "ถุงแป้ง",
-    //             "emergencyPhone": "0971520608",
-    //             "series": "89",
-    //             "type": "Fun Run 3KM",
-    //             "bibName": "test",
-    //             "isAlumni": false,
-    //             "relative": "someone",
-    //             "isRunning": true,
-    //             "bestTime": "10:42",
-    //             "changeAnswer": "คำถามต้องการเปลี่ยนอะไร",
-    //             "shirtSize": "M"
-
-    // }
+      //   {
+      //             "name": "ปฐมพงศ์",
+      //             "lastname": "ไชย์ศรี",
+      //             "email": "test@icmm.com",
+      //             "phone": "0881112345",
+      //             "gender": "MALE",
+      //             "dateOfBirth": "1990-03-30",
+      //             "emergencyContact": "ถุงแป้ง",
+      //             "emergencyPhone": "0971520608",
+      //             "series": "89",
+      //             "type": "Fun Run 3KM",
+      //             "bibName": "test",
+      //             "isAlumni": false,
+      //             "relative": "someone",
+      //             "isRunning": true,
+      //             "bestTime": "10:42",
+      //             "changeAnswer": "คำถามต้องการเปลี่ยนอะไร",
+      //             "shirtSize": "M"
+      // }
     ]
   };
   componentDidMount() {
@@ -43,24 +42,48 @@ class App extends Component {
   }
 
   setData = (data = {}) => {
-    this.setState({ data });
+    data.hasOwnProperty("isRunning") &&
+      (data.isRunning = data.isRunning ? "true" : "false");
+    data.hasOwnProperty("isAlumni") &&
+      (data.isRunning = data.isAlumni ? "true" : "false");
+    this.setState({
+      data: {
+        ...this.state.data,
+        ...data
+      }
+    });
   };
   editData = (data = {}, index = 0) => {
     let confirmData = this.state.confirmData;
-    const { day, month, year } = data.birthDate
-    const updateData = {...data, dateOfBirth: `${year}-${('0' + month).slice(-2)}-${('0' + day).slice(-2)}`}
-    confirmData[index] = updateData
+    const { day, month, year } = data.birthDate;
+    const updateData = {
+      ...data,
+      dateOfBirth: `${year}-${("0" + month).slice(-2)}-${("0" + day).slice(
+        -2
+      )}`,
+      isAlumni: data.isAlumni === "true",
+      isRunning: data.isRunning === "true"
+    };
+    confirmData[index] = updateData;
     this.setState({ confirmData });
   };
   addData = (newData = {}) => {
     let confirmData = this.state.confirmData;
-    const { day, month, year } = newData.birthDate
-    confirmData.push({...newData, dateOfBirth: `${year}-${('0' + month).slice(-2)}-${('0' + day).slice(-2)}`});
+    const { day, month, year } = newData.birthDate;
+    newData.hasOwnProperty("bestTime") &&
+      (newData.bestTime = momemt(newData.bestTime).format("HH:mm"));
+    confirmData.push({
+      ...newData,
+      dateOfBirth: `${year}-${("0" + month).slice(-2)}-${("0" + day).slice(
+        -2
+      )}`,
+      isAlumni: newData.isAlumni === "true",
+      isRunning: newData.isRunning === "true"
+    });
     this.setState({ confirmData });
   };
 
   delData = index => {
-    alert("trigger");
     this.setState({
       confirmData: this.state.confirmData.filter((item, idx) => {
         return idx !== index;
@@ -68,16 +91,16 @@ class App extends Component {
     });
   };
 
-  editData = index => {
-    alert("trigger");
-    this.setState({
-      data: this.state.confirmData[index]
-    });
-    window.location.href = "http://www.localhost:3000/2";
-  };
+  // editData = index => {
+  //   this.setState({
+  //     data: this.state.confirmData[index]
+  //   });
+  //   window.location.href = "http://www.localhost:3000/2";
+  // };
 
   render() {
     const isRegistered = this.state.confirmData.length > 0;
+    console.log(this.state.confirmData);
     return (
       <BrowserRouter>
         <MainLayout

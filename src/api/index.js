@@ -10,5 +10,7 @@ export default {
       `api/applicant?name=${name}&phone=${phone}&dateOfBirth=${dateOfBirth}`
     ),
   applyEvent: data => api.post("api/event", data),
-  getOrderById: id => axios.post(`api/order/${id}`)
+  getOrderById: id => api.post(`api/order/${id}`),
+  checkPhoneAvailable: phone => api.get(`api/applicant/phone/${phone}`),
+  validateInvitation: code => api.get(`/api/applicant/series/${code}`)
 };

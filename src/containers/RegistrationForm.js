@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { ReCaptcha } from "react-recaptcha-google";
-import { Form, Input, Button, Alert } from "antd";
+import { Form, Input, Button } from "antd";
 import DateInput from "../components/DateInput";
 import API from "../api/index";
 
@@ -113,7 +113,6 @@ class RegistrationForm extends Component {
             type="warning"
           /> */}
 
-          
           <FormItem {...formItemLayout} label="ชื่อ / Name">
             {getFieldDecorator("name", {
               rules: [
