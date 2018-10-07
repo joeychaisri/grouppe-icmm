@@ -232,7 +232,7 @@ class InformationForm extends Component {
             rules: [{ required: true, message: "กรุณาประเภทการวิ่ง" }]
           })(
             <Select placeholder="เลือกประเภทการวิ่ง">
-              <Option value="3km">3 km</Option>
+              <Option value="5km">5 km</Option>
               <Option value="10km">10 km</Option>
             </Select>
           )}
@@ -311,7 +311,7 @@ class InformationForm extends Component {
             })(<Input />)}
           </FormItem>
         )}
-        <FormItem {...formItemLayout} label="ชื่อบนบิบ">
+        <FormItem {...formItemLayout} label="ชื่อบน BIB ของนักวิ่ง">
           {getFieldDecorator("bibName", {
             rules: [
               {
@@ -319,7 +319,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกชื่อบนบิบ"
               }
             ]
-          })(<Input placeholder="ถุงแป้ง" />)}
+          })(<Input placeholder="กรุณากรอกเป็นภาษาอังกฤษ ไม่เกิน 20 ตัวอักษร" />)}
         </FormItem>
         <FormItem
           {...formItemLayout}
@@ -340,7 +340,7 @@ class InformationForm extends Component {
           )}
         </FormItem>
         {getFieldValue("isRunning") === "true" && (
-          <FormItem
+          <FormItem 
             {...formItemLayout}
             label="เวลาส่วนตัวที่ดีที่สุดคือเท่าไหร่"
           >
@@ -352,10 +352,11 @@ class InformationForm extends Component {
                   message: "กรุณากรอกเวลาส่วนตัวที่ดีที่สุดคือเท่าไหร่"
                 }
               ]
-            })(<TimePicker format={format} />)}
+            })(<TimePicker  defaultValue={moment('13:30', format)} format={format} />)}
+            <p style={{marginTop : "-5px"}}>HH:mm</p>
           </FormItem>
         )}
-        <FormItem {...formItemLayout} label="ปีนี้ต้องการจะเปลี่ยนแปลงอะไร">
+        <FormItem {...formItemLayout}  label="อีก 3 เดือนจะถึงงาน #ICMM2019 มีสิ่งที่คุณต้องการจะเปลี่ยนแปลงก่อนถึงวันงานไหม">
           {getFieldDecorator("changeAnswer", {
             rules: [
               {
@@ -363,7 +364,7 @@ class InformationForm extends Component {
                 message: "ปีนี้ต้องการจะ เปลี่ยนแปลง อะไร"
               }
             ]
-          })(<Input />)}
+          })(<Input placeholder= "Ex. อยากลดน้ำหนัก 3 กก / อยากชวนเพื่อนมาวิ่งให้ได้ 3 คน" />)}
         </FormItem>
 
         <FormItem {...tailFormItemLayout}>

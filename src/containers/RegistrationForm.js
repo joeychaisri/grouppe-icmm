@@ -133,7 +133,7 @@ class RegistrationForm extends Component {
               ]
             })(<Input placeholder={"0869999999"} />)}
           </FormItem>
-          <FormItem {...formItemLayout} label="Birth date">
+          <FormItem {...formItemLayout} label="วันเกิด">
             {getFieldDecorator("birthDate", {
               rules: [{ validator: this.checkBirthDate }]
             })(<DateInput />)}

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import API from "../api/index";
 import ReactDOM from "react-dom";
-import { Button, Divider, Collapse, Col, Row } from "antd";
+import { Button, Divider, Collapse, Col, Row , Icon } from "antd";
 const { Panel } = Collapse;
 
 class Summary extends Component {
@@ -67,7 +67,7 @@ class Summary extends Component {
         <Collapse>
           {confirmData.length > 0 &&
             confirmData.map((item, idx) => (
-              <Panel header={`ข้อมูลผู้สมัครคนที่ ${idx + 1}`} key={idx + 1}>
+              <Panel header={`ข้อมูลผู้สมัครคนที่ ${idx + 1}`} key={idx + 1} >
                 <p>
                   {item.name} {item.lastname} <br />
                   Email: {item.email} <br />
@@ -77,9 +77,13 @@ class Summary extends Component {
                   <br />
                   Type: {item.type}
                 </p>
+                {/* <Icon type="close-circle" theme="outlined" /> */}
+                
               </Panel>
+              
             ))}
-        </Collapse>
+     
+        </Collapse>s
         <Divider />
         <div style={{ textAlign: "right", marginBottom: 16 }}>
           {/* <Row>
