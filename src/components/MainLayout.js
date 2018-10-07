@@ -3,7 +3,7 @@ import { Layout, List, Card, Icon, Row, Col } from "antd";
 import { withRouter } from "react-router-dom";
 const { Header, Content, Footer } = Layout;
 
-const MainLayout = ({ confirmData, history, children, delData, editData }) => (
+const MainLayout = ({ confirmData, set, history, children, delData, editData }) => (
   <Layout style={{ minHeight: "100vh" }}>
     <Header style={{ backgroundColor: "#c43a43", textAlign: "center" }}>
       <h1 style={{ color: "white", marginTop: '7px' }}>ICMM 2019</h1>
@@ -42,7 +42,10 @@ const MainLayout = ({ confirmData, history, children, delData, editData }) => (
                         <Icon
                           type="edit"
                           style={{ float: "right" }}
-                          onClick={() => editData(idx)}
+                          onClick={() => {
+                            set(item)
+                            history.push(`/edit/${idx}`)
+                          }}
                         />
                         <p>
                           {item.name} {item.lastname} <br />

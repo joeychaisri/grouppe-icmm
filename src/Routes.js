@@ -19,6 +19,7 @@ const Routes = props => {
       <Route exact path="/search" render={() => <SearchByOrder {...props} />} />
       <Route exact path="/summary" render={() => <Summary {...props} />} />
       <Route exact path="/order/:id" render={() => <Summary {...props} />} />
+      <Route exact path="/edit/:idx" render={() => <InformationForm {...props} />} />
     </Switch>
   );
 };

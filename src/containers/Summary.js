@@ -9,6 +9,8 @@ class Summary extends Component {
   pay = () => {
     let applicants = this.props.confirmData.map(item => {
       delete item.birthDate;
+      item.isAlumni = item.isAlumni === "true"
+      item.isRunning = item.isRunning === "true"
       return item;
     });
     const data = {
@@ -143,7 +145,7 @@ class Summary extends Component {
           </p>
         )}
         {((this.props.orderStatus && this.props.orderStatus === "pending") ||
-          !this.props.payment) && (
+          (!this.props.payment && !this.props.orderStatus) )&& (
           <Button
             type="primary"
             block

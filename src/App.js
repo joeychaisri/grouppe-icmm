@@ -14,10 +14,10 @@ class App extends Component {
   }
 
   setData = (data = {}) => {
-    data.hasOwnProperty("isRunning") &&
-      (data.isRunning = data.isRunning ? "true" : "false");
-    data.hasOwnProperty("isAlumni") &&
-      (data.isRunning = data.isAlumni ? "true" : "false");
+    // data.hasOwnProperty("isRunning") &&
+    //   (data.isRunning = data.isRunning ? "true" : "false");
+    // data.hasOwnProperty("isAlumni") &&
+    //   (data.isRunning = data.isAlumni ? "true" : "false");
     this.setState({
       data: {
         ...this.state.data,
@@ -25,16 +25,15 @@ class App extends Component {
       }
     });
   };
-  editData = (data = {}, index = 0) => {
+  editData = ({data = {}, index = 0}) => {
     let confirmData = this.state.confirmData;
     const { day, month, year } = data.birthDate;
     const updateData = {
+      ...confirmData[index],
       ...data,
       dateOfBirth: `${year}-${("0" + month).slice(-2)}-${("0" + day).slice(
         -2
       )}`,
-      isAlumni: data.isAlumni === "true",
-      isRunning: data.isRunning === "true"
     };
     confirmData[index] = updateData;
     this.setState({ confirmData });
@@ -45,12 +44,11 @@ class App extends Component {
     newData.hasOwnProperty("bestTime") &&
       (newData.bestTime = momemt(newData.bestTime).format("HH:mm"));
     confirmData.push({
+      ...this.state.data,
       ...newData,
       dateOfBirth: `${year}-${("0" + month).slice(-2)}-${("0" + day).slice(
         -2
       )}`,
-      isAlumni: newData.isAlumni === "true",
-      isRunning: newData.isRunning === "true"
     });
     this.setState({ confirmData });
   };
@@ -81,13 +79,12 @@ class App extends Component {
           delData={idx => {
             this.delData(idx);
           }}
-          editData={idx => {
-            this.editData(idx);
-          }}
+          set={data => this.setData(data)}
         >
           <Routes
             set={data => this.setData(data)}
             add={newData => this.addData(newData)}
+            edit={ obj => this.editData(obj) }
             data={this.state.data}
             confirmData={this.state.confirmData}
             isRegistered={isRegistered}
