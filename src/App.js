@@ -91,6 +91,12 @@ class App extends Component {
     });
   };
 
+  setOrderData = (data = {}) => {
+    this.setState({
+      confirmData: data
+      })
+  }
+
   // editData = index => {
   //   this.setState({
   //     data: this.state.confirmData[index]
@@ -119,6 +125,7 @@ class App extends Component {
             data={this.state.data}
             confirmData={this.state.confirmData}
             isRegistered={isRegistered}
+            setOrderData = {data => this.setOrderData(data)}
           />
         </MainLayout>
       </BrowserRouter>

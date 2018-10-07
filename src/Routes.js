@@ -5,7 +5,7 @@ import InformationForm from "./containers/InformationForm"
 import Termandcondition from "./containers/TermandCondition"
 import SeriesAuth from "./containers/SeriesAuth"
 import WelcomePage from "./containers/WelcomPage"
-import searchByOrder from "./containers/searchByOrder"
+import SearchByOrder from "./containers/searchByOrder"
 import Summary from "./containers/Summary"
 
 const Routes = props => {
@@ -23,7 +23,7 @@ const Routes = props => {
       <Route exact path="/register" render={() => <RegistrationForm {...props} />} />
       <Route exact path="/termandcondition" component={Termandcondition} />
       <Route exact path="/information" render={() => <InformationForm {...props} />} />
-      <Route exact path="/search" component={searchByOrder} />
+      <Route exact path="/search" render={() => <SearchByOrder {...props} />} />
       <Route exact path="/summary" render={() => <Summary {...props} />} />
     </Switch>
   );

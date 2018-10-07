@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { Form, Input, Button } from "antd";
+import API from "../api";
 
 class searchByOrder extends Component {
   constructor(props, context) {
@@ -16,12 +17,26 @@ class searchByOrder extends Component {
   componentDidMount() {}
 
   handleChange(e) {
-    this.setState({ invitationCode: e.target.value });
+    this.setState({ orderID: e.target.value });
   }
 
   pushToSummary() {
-    if (this.state.invitationCode != null) {
-      this.props.history.push("/summary");
+    if (this.state.orderID != null) {
+      console.log("if")
+      API.getOrderById(this.state.orderID)
+      .then(res => {
+        const { status } = res.data;
+        if (status) {
+          console.log(res.data.applicants)
+          this.props.setOrderData( res.data.applicants );
+          this.props.history.push("/summary");
+        } else {
+          alert("Your invitation code is invalid or already expired");
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      });
     } else {
       alert("Please enter your order ID");
     }
