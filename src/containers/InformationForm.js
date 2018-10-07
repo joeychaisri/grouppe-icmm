@@ -114,7 +114,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกชื่อ"
               }
             ]
-          })(<Input placeholder="จอห์น" />)}
+          })(<Input placeholder="กรรณิกา" />)}
         </FormItem>
         <FormItem {...formItemLayout} label="นามสกุล">
           {getFieldDecorator("lastname", {
@@ -124,7 +124,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกนามสกุล"
               }
             ]
-          })(<Input placeholder="เม็ดแอปเปิล"/>)}
+          })(<Input placeholder="ภูนแสงหิรัญ"/>)}
         </FormItem>
         <FormItem {...formItemLayout} label="วันเกิด">
           {getFieldDecorator("birthDate", {
