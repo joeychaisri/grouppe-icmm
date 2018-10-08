@@ -1,7 +1,6 @@
 import React from "react";
 import { Layout, List, Card, Icon, Row, Col } from "antd";
 import { withRouter } from "react-router-dom";
-import icmmBanner from'./../static/icmm_banner.png';
 import grouppe from'./../static/grouppe.png';
 const { Header, Content, Footer } = Layout;
 
@@ -97,7 +96,7 @@ const MainLayout = ({ confirmData, set, history, children, delData, editData }) 
     <Footer  style={{ backgroundColor: "white", textAlign: "center" }}>
     <div style={{ marginTop:"-28px" , marginBottom: "-30px" }}  >
       <p> powered by </p>
-       <img  src={grouppe} style={{ marginTop:"-12px" , width: "10%" }}/>
+       <img  src={grouppe} alt="grouppe" style={{ marginTop:"-12px" , width: "120px" }}/>
     </div>
     </Footer>
   </Layout>

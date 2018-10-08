@@ -24,7 +24,7 @@ class success extends Component {
           <h5> การชำระเงินของท่านเสร็จสมบูรณ์แล้ว โปรดตรวจสอบรายละเอียดได้ในอีเมลล์ที่ลงทะเบียนไว้ </h5>
           <br/>
           <br/>
-        <img  src={icmmBanner} style={{ margin: "0 auto" , maxWidth : "100%" , height : "auto"}}/>
+        <img  src={icmmBanner} alt="icmmbanner" style={{ margin: "0 auto" , maxWidth : "100%" , height : "auto"}}/>
       </div>
     );
   }
