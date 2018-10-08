@@ -11,6 +11,7 @@ class Summary extends Component {
       delete item.birthDate;
       item.isAlumni = item.isAlumni === "true"
       item.isRunning = item.isRunning === "true"
+      item.series = String(item.series)
       return item;
     });
     const data = {

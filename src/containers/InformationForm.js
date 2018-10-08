@@ -76,7 +76,7 @@ class InformationForm extends Component {
     return;
   };
 
-  checkPhone = (rule, value, callback) => {
+  checkPhone = async (rule, value, callback) => {
     if (this.props.confirmData.length > 0) {
       let result = this.props.confirmData.find((item, idx) => {
         return item.phone === value && idx !== Number(this.props.history.location.pathname.split('/')[2]);
@@ -86,12 +86,10 @@ class InformationForm extends Component {
           `ขออภัย หมายเลขโทรศัพท์ของคุณซ้ำกับ ${result.name} โปรดใช้หมายเลขอื่น`
         );
     }
-    API.checkPhoneAvailable(value).then(res => {
-      const { status } = res.data;
-      console.log(status)
-      !status &&
+    const res = await API.checkPhoneAvailable(value)
+    console.log(res)
+    !res.data.status &&
         callback(`ขออภัย หมายเลขโทรศัพท์ของคุณซ้ำกับในระบบ โปรดใช้หมายเลขอื่น`);
-    });
     callback();
     return;
   };
