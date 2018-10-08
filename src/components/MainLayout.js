@@ -2,6 +2,7 @@ import React from "react";
 import { Layout, List, Card, Icon, Row, Col } from "antd";
 import { withRouter } from "react-router-dom";
 import icmmBanner from'./../static/icmm_banner.png';
+import grouppe from'./../static/grouppe.png';
 const { Header, Content, Footer } = Layout;
 
 
@@ -13,7 +14,7 @@ const MainLayout = ({ confirmData, set, history, children, delData, editData }) 
     {/* <Header style={{ backgroundColor: "white"}}>
         <img  src={icmmBanner} style={{ margin: "0 auto" , maxWidth: "100%" , height : "200%" }}/>
     </Header> */}
-    <Content className="container" style={{ padding: "10px 10px 0 10px" }}>
+    <Content className="container" style={{ padding: "10px 10px 0 10px" , marginBottom: "10px" }}>
       <Row type="flex" justify="center">
         {["series", "register", "information"].includes(
           history.location.pathname.split("/")[1]
@@ -93,8 +94,11 @@ const MainLayout = ({ confirmData, set, history, children, delData, editData }) 
         </Col>
       </Row>
     </Content>
-    <Footer style={{ textAlign: "center" }}>
-      © ICMM 2019 Powered by Grouppe.co
+    <Footer  style={{ backgroundColor: "white", textAlign: "center" }}>
+    <div style={{ marginTop:"-28px" , marginBottom: "-30px" }}  >
+      <p> powered by </p>
+       <img  src={grouppe} style={{ marginTop:"-12px" , width: "10%" }}/>
+    </div>
     </Footer>
   </Layout>
 );

@@ -122,7 +122,7 @@ class RegistrationForm extends Component {
                   message: "กรุณากรอกชื่อไทย หรือ ภาษาอังกฤษ ไม่ต้องใส่นามสกุล"
                 }
               ]
-            })(<Input placeholder={"ปฐมพงศ์"} />)}
+            })(<Input placeholder={"กรุณากรอกชื่อไทย หรือ ภาษาอังกฤษ ไม่ต้องใส่นามสกุล"} />)}
           </FormItem>
           <FormItem {...formItemLayout} label="Tel">
             {getFieldDecorator("phone", {
