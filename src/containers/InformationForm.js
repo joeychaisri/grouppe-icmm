@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { Form, Input, Button, Select, TimePicker, Alert , Modal } from "antd";
+import { Form, Input, InputNumber, Button, Select, TimePicker, Alert , Modal } from "antd";
 import DateInput from "../components/DateInput";
 import moment from "moment";
 import API from "../api";
@@ -336,9 +336,11 @@ class InformationForm extends Component {
                 }
               ]
             })(
-              <Input
+              <InputNumber
                 placeholder="94"
                 onBlur={e => this.handleSeriesNoChange(e.target.value)}
+                min={85} max={98}
+                style={{ width: '100%'}}
               />
             )}
           </FormItem>
