@@ -1,13 +1,18 @@
 import React from "react";
 import { Layout, List, Card, Icon, Row, Col } from "antd";
 import { withRouter } from "react-router-dom";
+import icmmBanner from'./../static/icmm_banner.png';
 const { Header, Content, Footer } = Layout;
+
 
 const MainLayout = ({ confirmData, set, history, children, delData, editData }) => (
   <Layout style={{ minHeight: "100vh" }}>
     <Header style={{ backgroundColor: "#c43a43", textAlign: "center" }}>
       <h1 style={{ color: "white", marginTop: '7px' }}>ICMM 2019</h1>
     </Header>
+    {/* <Header style={{ backgroundColor: "white"}}>
+        <img  src={icmmBanner} style={{ margin: "0 auto" , maxWidth: "100%" , height : "200%" }}/>
+    </Header> */}
     <Content className="container" style={{ padding: "10px 10px 0 10px" }}>
       <Row type="flex" justify="center">
         {["series", "register", "information"].includes(
