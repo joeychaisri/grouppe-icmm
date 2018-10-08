@@ -241,7 +241,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกหมายเลขโทรศัพท์"
               },
               {
-                len: 10,
+                pattern: new RegExp("^[0-9]{10}$"),
                 message: "หมายเลขโทรศัพท์ไม่ถูกต้อง"
               },
               { validator: this.checkPhone }
@@ -281,7 +281,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกหมายเลขโทรศัพท์ฉุกเฉิน"
               },
               {
-                len: 10,
+                pattern: new RegExp("^[0-9]{10}$"),
                 message: "หมายเลขโทรศัพท์ไม่ถูกต้อง"
               }
             ]

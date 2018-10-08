@@ -130,6 +130,10 @@ class RegistrationForm extends Component {
                 {
                   required: true,
                   message: "โปรดใส่เบอร์ติดต่อของคุณ"
+                },
+                {
+                  pattern: new RegExp("^[0-9]{10}$"),
+                  message: "หมายเลขโทรศัพท์ไม่ถูกต้อง"
                 }
               ]
             })(<Input placeholder={"0869999999"} />)}
