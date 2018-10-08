@@ -23,7 +23,7 @@ class Welcomepage extends Component {
       <div style={{ display: "flex", flexFlow: "column wrap" }}>
         <Button
           onClick={this.pushToSeries.bind(this)}
-          style={{ width: "40%", margin: "0 auto", marginTop: "20vh" }}
+          style={{ width: "80%", margin: "0 auto", marginTop: "20vh" }}
         >
           ลงทะเบียน
         </Button>
@@ -32,9 +32,9 @@ class Welcomepage extends Component {
 
         <Button
           onClick={this.pushToSearch.bind(this)}
-          style={{ width: "30%", margin: "0 auto", marginTop: "10vh" }}
+          style={{  margin: "0 auto", marginTop: "10vh" }}
         >
-          ค้นหาผ่าน Order ID
+          <p>ค้นหา/ชำระเงิน</p>
         </Button>
       </div>
     );

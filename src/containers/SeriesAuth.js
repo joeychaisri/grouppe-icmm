@@ -21,14 +21,14 @@ class SeriesAuth extends Component {
             this.props.set({ invitationCode: this.state.invitationCode });
             this.props.history.push("/register");
           } else {
-            alert("Your invitation code is invalid or already expired");
+            alert("Invitation Code ของคุณไม่ถูกต้อง");
           }
         })
         .catch(err => {
           console.log(err);
         });
     } else {
-      alert("Please enter your invitation code");
+      alert("โปรดใส่ Invitation Code ของคุณ");
     }
   }
 

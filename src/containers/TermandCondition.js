@@ -32,7 +32,7 @@ class Termandcondition extends Component {
     return (
       // <Form >
         <div >
-        <div style={{ maxHeight : "60vh" , overflow : "scroll" , marginLeft: "10vh" , marginRight: "10vh" }}>
+        <div style={{ maxHeight : "60vh" , overflow : "scroll" , marginLeft: "2vh" , marginRight: "2vh" }}>
 
             <p>General&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
             <p >&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Intania Chula Mini Marathon (&ldquo;ICMM&rdquo;) 2019 aims to be an event for everyone to join and build a healthy activity. ICMM is organized the website by using Grouppe. ( &ldquo;The Organiser&rdquo;) in accordance with these Rules and Regulations (the &ldquo;R&amp;Rs&rdquo;) and all the terms and conditions (the &ldquo;T&amp;Cs&rdquo;) applicable to the Participants. By continuing to use The Organiser&rsquo;s services, accessing any part of the website icmm.run, registering for the ICMM, submitting information to The Organiser (and/ or its related entities) whether for the purpose of registering for the ICMM or otherwise, or using any features of the aforementioned website, you signify that you have read, understood and agreed to be bound by the Privacy Policy set forth below (as amended from time to time) in respect of The Organiser&rsquo;s collection, use and disclosure of your personal information. Further, you hereby expressly agree and consent to The Organiser&rsquo;s (including its related entities, as well as their respective agents&rsquo;), collection, use and disclosure of your personal information, in the manner set forth in the aforementioned Policy. Completion of the online registration form confirms the Participant&rsquo;s agreement to abide by these R&amp;Rs. Registration for the race is only confirmed upon payment and issuance of a race identification number. The Participant agrees to:</p>
@@ -175,7 +175,7 @@ class Termandcondition extends Component {
 
         <Divider style= {{ marginTop : "5vh" }} />
         <div style= {{display : "flex", flexFlow: "column wrap" }} >
-        <Checkbox style={{ marginLeft : "20vh"  }} onClick={this.onTickCheckbox} > คุณได้ยอมรับเงื่อนไขด้านบนทั้งหมดแล้ว</Checkbox>
+        <Checkbox style={{ margin : "15px auto"  }} onClick={this.onTickCheckbox} > คุณได้ยอมรับเงื่อนไขด้านบนทั้งหมดแล้ว</Checkbox>
         <Button  
         style= {{ width : "50vh" , margin: "0 auto" , marginTop : "2vh"}} 
         disabled={this.state.acceptCondition ? false : true} 

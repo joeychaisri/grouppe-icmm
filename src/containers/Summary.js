@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import API from "../api/index";
 import ReactDOM from "react-dom";
 import { withRouter } from "react-router-dom";
-import { Button, Divider, Collapse, Col, Row,Icon } from "antd";
+import { Button, Divider, Collapse, Col, Row} from "antd";
 const { Panel } = Collapse;
 
 class Summary extends Component {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { Form, Input, Button, Select, TimePicker, Alert } from "antd";
+import { Form, Input, Button, Select, TimePicker, Alert , Modal } from "antd";
 import DateInput from "../components/DateInput";
 import moment from "moment";
 import API from "../api";
@@ -10,6 +10,14 @@ const Option = Select.Option;
 const format = "HH:mm";
 
 class InformationForm extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      visible: null,
+      visible2: null
+    };
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
@@ -72,7 +80,8 @@ class InformationForm extends Component {
         );
     }
     API.checkPhoneAvailable(value).then(res => {
-      const { status } = res;
+      const { status } = res.data;
+      console.log(status)
       !status &&
         callback(`ขออภัย หมายเลขโทรศัพท์ของคุณซ้ำกับในระบบ โปรดใช้หมายเลขอื่น`);
     });
@@ -88,6 +97,48 @@ class InformationForm extends Component {
   handleYearChange = value => {
     this.props.form.setFieldsValue({ year: Number(value) + 41 });
   };
+
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  }
+
+  handleOk = (e) => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+    this.pushToSummary()
+  }
+
+  handleCancel = (e) => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  }
+
+  showModal2 = () => {
+    this.setState({
+      visible2: true,
+    });
+  }
+
+  handleOk2 = (e) => {
+    console.log(e);
+    this.setState({
+      visible2: false,
+    });
+    this.pushToSummaryFromEdit()
+  }
+
+  handleCancel2 = (e) => {
+    console.log(e);
+    this.setState({
+      visible2: false,
+    });
+  }
 
   render() {
     const { getFieldDecorator, getFieldValue } = this.props.form;
@@ -190,7 +241,7 @@ class InformationForm extends Component {
               },
               { validator: this.checkPhone }
             ],
-            validateTrigger: "onBlur"
+            // validateTrigger: "onBlur"
           })(<Input placeholder="0869999999" />)}
         </FormItem>
         <FormItem {...formItemLayout} label="E-mail">
@@ -375,7 +426,7 @@ class InformationForm extends Component {
             <p style={{marginTop : "-5px"}}>HH:mm</p>
           </FormItem>
         )}
-        <FormItem {...formItemLayout}  label="อีก 3 เดือนจะถึงงาน #ICMM2019 มีสิ่งที่คุณต้องการจะเปลี่ยนแปลงก่อนถึงวันงานไหม">
+        <FormItem {...formItemLayout} style={{margin : "0 auto"}} colon ={false} label="ความตั้งใจ">
           {getFieldDecorator("changeAnswer", {
             rules: [
               {
@@ -384,6 +435,7 @@ class InformationForm extends Component {
               }
             ]
           })(<Input placeholder= "Ex. อยากลดน้ำหนัก 3 กก / อยากชวนเพื่อนมาวิ่งให้ได้ 3 คน" />)}
+          <p style={{fontSize : "2vh"}}>อีก 3 เดือนจะถึงงาน #ICMM2019 มีสิ่งที่คุณตั้งใจเปลี่ยนแปลงก่อนถึงวันงานไหม?</p>
         </FormItem>
 
         {this.props.history.location.pathname.split('/')[1] === 'information' && <FormItem {...tailFormItemLayout}>
@@ -393,7 +445,7 @@ class InformationForm extends Component {
           <Button
             style={{ marginLeft: "3%" }}
             type="default"
-            onClick={this.pushToSummary.bind(this)}
+            onClick={this.showModal.bind(this)}
           >
             สรุปและชำระเงิน
           </Button>
@@ -409,12 +461,39 @@ class InformationForm extends Component {
           <Button
             style={{ marginLeft: "3%" }}
             type="default"
-            onClick={this.pushToSummaryFromEdit.bind(this)}
+            onClick={this.showModal2.bind(this)}
           >
             บันทึกและชำระเงิน
           </Button>
         </FormItem>}
+        <Modal
+        //beforePushToSummary
+          title="คำเตือน"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+          width={600}
+        >
+        <p style={{ textAlign : "center"}}>กรุณาตรวจสอบข้อมูลผู้สมัครให้ถูกต้องอีกครั้ง เนื่องจากจะไม่สามารถแก้ไขได้ในภายหลัง</p>
+        <br/>
+        <p style={{ textAlign : "center"}}>หากรับทราบกด OK เพื่อดำเนินการต่อ หรือกด Cancel เพื่อทำการตรวจข้อมูลอีกครั้ง</p>
+
+        </Modal>
+        <Modal
+        //beforePushToSummaryFromEdit
+          title="คำเตือน"
+          visible={this.state.visible2}
+          onOk={this.handleOk2}
+          onCancel={this.handleCancel2}
+          width={600}
+        >
+        <p style={{ textAlign : "center"}}>กรุณาตรวจสอบข้อมูลผู้สมัครให้ถูกต้องอีกครั้ง เนื่องจากจะไม่สามารถแก้ไขได้ในภายหลัง</p>
+        <br/>
+        <p style={{ textAlign : "center"}}>หากรับทราบกด OK เพื่อดำเนินการต่อ หรือกด Cancel เพื่อทำการตรวจข้อมูลอีกครั้ง</p>
+        </Modal>
       </Form>
+
+      
     );
   }
 }

@@ -29,6 +29,7 @@ class searchByOrder extends Component {
           this.props.history.push(`/order/${orderID}`);
         })
         .catch(err => {
+          alert("Order ID ของคุณไม่ถูกต้อง โปรดตรวจสอบได้ในอีเมลล์ที่ทำการสมัคร");
           console.log(err);
         });
     } else {
