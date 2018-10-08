@@ -30,6 +30,9 @@ class InformationForm extends Component {
 
   componentDidMount() {
     this.props.form.setFieldsValue(this.props.data);
+    if(!this.props.data || !this.props.data.invitationCode) {
+      this.props.history.push('/')
+    }
   }
   componentWillReceiveProps(nextProps) {
     if(this.props.data !== nextProps.data) {
