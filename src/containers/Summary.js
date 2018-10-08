@@ -57,6 +57,8 @@ class Summary extends Component {
         HTMLFormElement.prototype.submit.call(form);
       })
       .catch(err => {
+        alert("เกิดข้อผิดพลาด กรุณานาลงทะเบียนใหม่ ขออภัยในความไม่สะดวก")
+        window.location.href = 'https://icmm.run';
         console.log(err);
       });
   };
