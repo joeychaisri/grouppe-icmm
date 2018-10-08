@@ -29,8 +29,12 @@ class InformationForm extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props.data)
     this.props.form.setFieldsValue(this.props.data);
+  }
+  componentWillReceiveProps(nextProps) {
+    if(this.props.data !== nextProps.data) {
+      this.props.form.setFieldsValue(nextProps.data);
+    }
   }
 
   pushToSummary() {

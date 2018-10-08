@@ -78,6 +78,7 @@ class App extends Component {
     //   (data.isRunning = data.isRunning ? "true" : "false");
     // data.hasOwnProperty("isAlumni") &&
     //   (data.isRunning = data.isAlumni ? "true" : "false");
+    console.log('set:', data)
     this.setState({
       data: {
         ...this.state.data,
