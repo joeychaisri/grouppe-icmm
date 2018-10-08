@@ -32,11 +32,15 @@ const MainLayout = ({ confirmData, set, history, children, delData, editData }) 
                   grid={{ gutter: 8, column: 1 }}
                   dataSource={confirmData}
                   renderItem={(item, idx) => (
+                    
                     <List.Item>
                       <Card>
                         <Icon
                           style={{ float: "right" }}
-                          onClick={() => delData(idx)}
+                          onClick={() => {
+                            alert("คุณทำการลบข้อมูลของบุคคลที่  " + parseInt(idx+1))
+                            delData(idx)
+                          }}
                           type="close"
                         />
                         <Icon
