@@ -18,8 +18,8 @@ const MainLayout = ({ confirmData, set, history, children, delData, editData }) 
               xs={{ span: 24, order: 2 }}
               sm={{ span: 24, order: 2 }}
               md={{ span: 24, order: 2 }}
-              lg={{ span: 6, order: 1 }}
-              xl={{ span: 5, order: 1 }}
+              lg={{ span: 9, order: 1 }}
+              xl={{ span: 7, order: 1 }}
               style={{
                 backgroundColor: "#FFF",
                 padding: 16,
@@ -36,16 +36,16 @@ const MainLayout = ({ confirmData, set, history, children, delData, editData }) 
                     <List.Item>
                       <Card>
                         <Icon
-                          style={{ float: "right" }}
+                          style={{ float: "right" , paddingLeft : "2vh"}}
                           onClick={() => {
-                            alert("คุณทำการลบข้อมูลของบุคคลที่  " + parseInt(idx+1))
+                            alert("คุณทำการลบข้อมูลของบุคคลที่  " + parseInt(idx+1,10))
                             delData(idx)
                           }}
                           type="close"
                         />
                         <Icon
                           type="edit"
-                          style={{ float: "right" }}
+                          style={{ float: "right"  }}
                           onClick={() => {
                             set(item)
                             history.push(`/edit/${idx}`)
@@ -71,8 +71,8 @@ const MainLayout = ({ confirmData, set, history, children, delData, editData }) 
           xs={{ span: 24, order: 1 }}
           sm={{ span: 24, order: 1 }}
           md={{ span: 24, order: 1 }}
-          lg={{ span: 18, order: 2 }}
-          xl={{ span: 19, order: 2 }}
+          lg={{ span: 15, order: 2 }}
+          xl={{ span: 17, order: 2 }}
         >
           {/* <Content> */}
           <div
