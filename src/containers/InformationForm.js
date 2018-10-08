@@ -435,7 +435,7 @@ class InformationForm extends Component {
               }
             ]
           })(<Input placeholder= "Ex. อยากลดน้ำหนัก 3 กก / อยากชวนเพื่อนมาวิ่งให้ได้ 3 คน" />)}
-          <p style={{fontSize : "2vh"}}>อีก 3 เดือนจะถึงงาน #ICMM2019 มีสิ่งที่คุณตั้งใจเปลี่ยนแปลงก่อนถึงวันงานไหม?</p>
+          <p style={{fontSize : "11px"}}>อีก 3 เดือนจะถึงงาน #ICMM2019 มีสิ่งที่คุณตั้งใจเปลี่ยนแปลงก่อนถึงวันงานไหม?</p>
         </FormItem>
 
         {this.props.history.location.pathname.split('/')[1] === 'information' && <FormItem {...tailFormItemLayout}>
