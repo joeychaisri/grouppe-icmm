@@ -2,7 +2,8 @@ import axios from "axios";
 
 const api = axios.create({
   // baseURL: `https://dev.icmm.run/`
-  baseURL: `https://api.icmm.run/`
+  // baseURL: `https://api.icmm.run/`
+  baseURL: `https://icmm-api-1409305271.ap-southeast-1.elb.amazonaws.com`
   
 });
 
