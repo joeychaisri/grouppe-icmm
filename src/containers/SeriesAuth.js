@@ -14,7 +14,29 @@ class SeriesAuth extends Component {
 
   pushToRegister() {
     if (this.state.invitationCode != null) {
-      API.validateInvitation(this.state.invitationCode)
+      if (this.props.confirmData.length > 0) {
+        let result = this.props.confirmData.find((item, idx) => {
+         if(item.invitationCode == this.state.invitationCode){
+            alert("Invitation ของคุณซ้ำกับผู้สมัครก่อนหน้า")
+         }else{
+          API.validateInvitation(this.state.invitationCode)
+          .then(res => {
+            const { status } = res.data;
+            if (status) {
+              this.props.set({ invitationCode: this.state.invitationCode });
+              this.props.history.push("/register");
+            } else {
+              alert("Invitation Code ของคุณไม่ถูกต้อง");
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+         }
+         
+        });
+      }else{
+        API.validateInvitation(this.state.invitationCode)
         .then(res => {
           const { status } = res.data;
           if (status) {
@@ -27,6 +49,7 @@ class SeriesAuth extends Component {
         .catch(err => {
           console.log(err);
         });
+      }
     } else {
       alert("โปรดใส่ Invitation Code ของคุณ");
     }
