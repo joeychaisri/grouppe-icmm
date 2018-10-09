@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import API from "../api/index";
 import ReactDOM from "react-dom";
 import { withRouter } from "react-router-dom";
-import { Button, Divider, Collapse, Col, Row} from "antd";
+import { Button, Divider, Collapse, Col, Row, Alert} from "antd";
 const { Panel } = Collapse;
 
 class Summary extends Component {
@@ -153,6 +153,7 @@ class Summary extends Component {
         )}
         {((this.props.orderStatus && this.props.orderStatus === "pending") ||
           (!this.props.payment && !this.props.orderStatus) )&& (
+            <div id="payment">
           <Button
             type="primary"
             block
@@ -160,8 +161,17 @@ class Summary extends Component {
           >
             Pay !!
           </Button>
+          <Alert message="ในกรณีกด Pay แล้วยังไม่พร้อมทำรายการ โปรดกดปิดหน้าเว็บด้วย X (มุมขวาบน) แทนการกด cancel เพื่อป้องกันการผิดพลาดของข้อมูล" type="warning"
+          style={{
+            width: "70%",
+            textAlign: "center",
+            margin: "0 auto",
+            marginTop: "5vh"
+          }} />
+          </div>
         )}
-        <div id="payment" />
+          
+        
       </div>
     );
   }
