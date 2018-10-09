@@ -65,6 +65,27 @@ class SeriesAuth extends Component {
           {" "}
           ยืนยัน{" "}
         </Button>
+
+
+        {this.props.isRegistered && (
+           <Button
+           type="primary"
+           onClick={ ()=>{
+             this.props.history.push("/summary");
+           }}
+           style={{
+             width: "80vw",
+             maxWidth: "300px",
+             margin: "0 auto",
+             marginTop: "10vh",
+             marginBottom: "15vh"
+           }}
+         >
+           {" "}
+           สรุปและจ่ายเงิน{" "}
+         </Button>
+        )}
+       
         <p  style={{    fontSize: "11px", paddingTop: "7vh"}} >
         
         การรับสมัครช่องทางนี้ เป็นการรับสมัครแบบภายใน เฉพาะศิษย์เก่า ศิษย์ปัจจุบัน และครอบครัวเท่านั้น
