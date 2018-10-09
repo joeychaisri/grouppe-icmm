@@ -307,8 +307,8 @@ class InformationForm extends Component {
             rules: [{ required: true, message: "กรุณาประเภทการวิ่ง" }]
           })(
             <Select placeholder="เลือกประเภทการวิ่ง">
-              <Option value="5km">5 km</Option>
-              <Option value="10km">10 km</Option>
+              <Option value="Fun Run 5km">5 km</Option>
+              <Option value="Mini Marathon 10km">10 km</Option>
             </Select>
           )}
         </FormItem>
