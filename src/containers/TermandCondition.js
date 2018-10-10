@@ -15,10 +15,6 @@ class Termandcondition extends Component {
     }
   }
 
-  componentDidMount() {
-    
-  }
-
   onTickCheckbox(){
     this.setState({ acceptCondition : !this.state.acceptCondition });
   }

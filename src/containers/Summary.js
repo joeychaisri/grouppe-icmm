@@ -99,7 +99,10 @@ class Summary extends Component {
   };
   render() {
     const { confirmData } = this.props;
-    const total = confirmData.length * 550;
+    const total = confirmData.reduce((acc, item) => {
+      let price = Number(item.series) >= 90 ? 800 : 500
+      return acc + price
+    }, 0)
     // const nonVat = total / 1.07;
     // const vat = total - nonVat;
     return (
@@ -109,13 +112,9 @@ class Summary extends Component {
             confirmData.map((item, idx) => (
               <Panel header={`ข้อมูลผู้สมัครคนที่ ${idx + 1}`} key={idx + 1} >
                 <p>
-                  {item.name} {item.lastname} <br />
-                  Email: {item.email} <br />
-                  Tel: {item.phone}
-                  <br />
-                  Shirt Size: {item.shirtSize}
-                  <br />
-                  Type: {item.type}
+                  {item.name} {item.lastname} {item.series} <br />
+                  {item.phone} {item.email} <br />
+                  เลือกห้อง {item.room}
                 </p>
                 {/* <Icon type="close-circle" theme="outlined" /> */}
                 
@@ -157,7 +156,7 @@ class Summary extends Component {
           <Button
             type="primary"
             block
-            onClick={() => (!!this.props.payment ? this.payOnly() : this.pay())}
+            // onClick={() => (!!this.props.payment ? this.payOnly() : this.pay())}
           >
             Pay !!
           </Button>

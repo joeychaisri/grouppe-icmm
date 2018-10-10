@@ -7,15 +7,15 @@ const { Header, Content, Footer } = Layout;
 
 const MainLayout = ({ confirmData, set, history, children, delData, editData }) => (
   <Layout style={{ minHeight: "100vh" }}>
-    <Header style={{ backgroundColor: "#c43a43", textAlign: "center" }}>
-      <h1 style={{ color: "white", marginTop: '7px' }}>ICMM 2019</h1>
+    <Header style={{ backgroundColor: "#2F496E", textAlign: "center" }}>
+      <h2 style={{ color: "white", marginTop: '15px' }}>IYA Forum 2018</h2>
     </Header>
     {/* <Header style={{ backgroundColor: "white"}}>
         <img  src={icmmBanner} style={{ margin: "0 auto" , maxWidth: "100%" , height : "200%" }}/>
     </Header> */}
     <Content className="container" style={{ padding: "10px 10px 0 10px" , marginBottom: "10px" }}>
       <Row type="flex" justify="center">
-        {["series", "register", "information"].includes(
+        {/* {["series", "register", "information"].includes(
           history.location.pathname.split("/")[1]
         ) &&
           confirmData.length > 0 && (
@@ -71,13 +71,13 @@ const MainLayout = ({ confirmData, set, history, children, delData, editData }) 
                 />
               </div>
             </Col>
-          )}
+          )} */}
         <Col
           xs={{ span: 24, order: 1 }}
           sm={{ span: 24, order: 1 }}
           md={{ span: 24, order: 1 }}
-          lg={{ span: 15, order: 2 }}
-          xl={{ span: 17, order: 2 }}
+          lg={{ span: 24, order: 1 }}
+          xl={{ span: 24, order: 1 }}
         >
           {/* <Content> */}
           <div
@@ -93,10 +93,10 @@ const MainLayout = ({ confirmData, set, history, children, delData, editData }) 
         </Col>
       </Row>
     </Content>
-    <Footer  style={{ backgroundColor: "white", textAlign: "center" }}>
-    <div style={{ marginTop:"-28px" , marginBottom: "-30px" }}  >
-      <p> powered by </p>
-       <img  src={grouppe} alt="grouppe" style={{ marginTop:"-12px" , width: "120px" }}/>
+    <Footer  style={{ backgroundColor: "white", textAlign: "center", padding: 0 }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}  >
+      <p style={{ margin: 0}}> powered by </p>
+       <img src={grouppe} alt="grouppe" style={{ width: "120px" }}/>
     </div>
     </Footer>
   </Layout>

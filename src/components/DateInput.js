@@ -54,11 +54,11 @@ class DateInput extends Component {
       const month = Array.from(new Array(12), (val, index) => index + 1);
       const year = Array.from(new Array(100), (val, index) => index + 1919);
       return (
-        <Row>
+        <Row gutter={5}>
           <Col span={8}>
             <Select
               placeholder="Day"
-              style={{ maxWidth: 120, width: "100%" }}
+              style={{width: "100%"}}
               value={state.day}
               onChange={this.handleDayChange}
               showSearch
@@ -71,7 +71,7 @@ class DateInput extends Component {
           <Col span={8}>
             <Select
               placeholder="Month"
-              style={{ maxWidth: 120, width: "100%" }}
+              style={{width: "100%" }}
               value={state.month}
               onChange={this.handleMonthChange}
               showSearch
@@ -84,7 +84,7 @@ class DateInput extends Component {
           <Col span={8}>
             <Select
               placeholder="Year"
-              style={{ maxWidth: 120, width: "100%" }}
+              style={{width: "100%" }}
               value={state.year}
               onChange={this.handleYearChange}
               showSearch

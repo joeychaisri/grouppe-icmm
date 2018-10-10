@@ -15,8 +15,8 @@ class SeriesAuth extends Component {
   pushToRegister() {
     if (this.state.invitationCode != null) {
       if (this.props.confirmData.length > 0) {
-        let result = this.props.confirmData.find((item, idx) => {
-         if(item.invitationCode == this.state.invitationCode){
+        this.props.confirmData.find((item, idx) => {
+         if(item.invitationCode === this.state.invitationCode){
             alert("Invitation ของคุณซ้ำกับผู้สมัครก่อนหน้า")
          }else{
           API.validateInvitation(this.state.invitationCode)

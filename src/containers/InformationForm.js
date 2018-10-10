@@ -1,13 +1,18 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { Form, Input, InputNumber, Button, Select, TimePicker, Alert , Modal } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Select,
+  Alert,
+  Modal
+} from "antd";
 import DateInput from "../components/DateInput";
-import moment from "moment";
 import API from "../api";
 
 const FormItem = Form.Item;
 const Option = Select.Option;
-const format = "HH:mm";
 
 class InformationForm extends Component {
   constructor(props, context) {
@@ -30,12 +35,12 @@ class InformationForm extends Component {
 
   componentDidMount() {
     this.props.form.setFieldsValue(this.props.data);
-    if(!this.props.data || !this.props.data.invitationCode) {
-      this.props.history.push('/')
-    }
+    // if(!this.props.data || !this.props.data.invitationCode) {
+    //   this.props.history.push('/')
+    // }
   }
   componentWillReceiveProps(nextProps) {
-    if(this.props.data !== nextProps.data) {
+    if (this.props.data !== nextProps.data) {
       this.props.form.setFieldsValue(nextProps.data);
     }
   }
@@ -52,7 +57,10 @@ class InformationForm extends Component {
   pushToSummaryFromEdit() {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        this.props.edit({index: Number(this.props.history.location.pathname.split('/')[2]), data : values});
+        this.props.edit({
+          index: Number(this.props.history.location.pathname.split("/")[2]),
+          data: values
+        });
         this.props.history.push("/summary");
       }
     });
@@ -61,7 +69,10 @@ class InformationForm extends Component {
   saveEdit() {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        this.props.edit({index: Number(this.props.history.location.pathname.split('/')[2]), data : values});
+        this.props.edit({
+          index: Number(this.props.history.location.pathname.split("/")[2]),
+          data: values
+        });
         this.props.history.push("/series");
       }
     });
@@ -79,17 +90,20 @@ class InformationForm extends Component {
   checkPhone = async (rule, value, callback) => {
     if (this.props.confirmData.length > 0) {
       let result = this.props.confirmData.find((item, idx) => {
-        return item.phone === value && idx !== Number(this.props.history.location.pathname.split('/')[2]);
+        return (
+          item.phone === value &&
+          idx !== Number(this.props.history.location.pathname.split("/")[2])
+        );
       });
       result &&
         callback(
           `ขออภัย หมายเลขโทรศัพท์ของคุณซ้ำกับ ${result.name} โปรดใช้หมายเลขอื่น`
         );
     }
-    const res = await API.checkPhoneAvailable(value)
-    console.log(res)
+    const res = await API.checkPhoneAvailable(value);
+    console.log(res);
     !res.data.status &&
-        callback(`ขออภัย หมายเลขโทรศัพท์ของคุณซ้ำกับในระบบ โปรดใช้หมายเลขอื่น`);
+      callback(`ขออภัย หมายเลขโทรศัพท์ของคุณซ้ำกับในระบบ โปรดใช้หมายเลขอื่น`);
     callback();
     return;
   };
@@ -105,54 +119,54 @@ class InformationForm extends Component {
 
   showModal = () => {
     this.setState({
-      visible: true,
+      visible: true
     });
-  }
+  };
 
-  handleOk = (e) => {
+  handleOk = e => {
     console.log(e);
     this.setState({
-      visible: false,
+      visible: false
     });
-    this.pushToSummary()
-  }
+    this.pushToSummary();
+  };
 
-  handleCancel = (e) => {
+  handleCancel = e => {
     console.log(e);
     this.setState({
-      visible: false,
+      visible: false
     });
-  }
+  };
 
   showModal2 = () => {
     this.setState({
-      visible2: true,
+      visible2: true
     });
-  }
+  };
 
-  handleOk2 = (e) => {
+  handleOk2 = e => {
     console.log(e);
     this.setState({
-      visible2: false,
+      visible2: false
     });
-    this.pushToSummaryFromEdit()
-  }
+    this.pushToSummaryFromEdit();
+  };
 
-  handleCancel2 = (e) => {
+  handleCancel2 = e => {
     console.log(e);
     this.setState({
-      visible2: false,
+      visible2: false
     });
-  }
+  };
 
   render() {
-    const { getFieldDecorator, getFieldValue } = this.props.form;
+    const { getFieldDecorator } = this.props.form;
 
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 8 },
-        md: { span: 8 },
+        sm: { span: 24 },
+        md: { span: 24 },
         lg: { span: 8 }
       },
       wrapperCol: {
@@ -198,7 +212,7 @@ class InformationForm extends Component {
             ]
           })(<Input disabled />)}
         </FormItem> */}
-        <FormItem {...formItemLayout} label="ชื่อ">
+        <FormItem {...formItemLayout} label="ชื่อ (ภาษาอังกฤษ)">
           {getFieldDecorator("name", {
             rules: [
               {
@@ -208,7 +222,7 @@ class InformationForm extends Component {
             ]
           })(<Input placeholder="สิริภัทร" />)}
         </FormItem>
-        <FormItem {...formItemLayout} label="นามสกุล">
+        <FormItem {...formItemLayout} label="สกุล (ภาษาอังกฤษ)">
           {getFieldDecorator("lastname", {
             rules: [
               {
@@ -216,7 +230,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกนามสกุล"
               }
             ]
-          })(<Input placeholder="ไชยศรี"/>)}
+          })(<Input placeholder="ไชยศรี" />)}
         </FormItem>
         <FormItem {...formItemLayout} label="วันเกิด">
           {getFieldDecorator("birthDate", {
@@ -233,7 +247,7 @@ class InformationForm extends Component {
             </Select>
           )}
         </FormItem>
-        <FormItem {...formItemLayout} label="Tel.">
+        <FormItem {...formItemLayout} label="โทร">
           {getFieldDecorator("phone", {
             rules: [
               {
@@ -243,10 +257,8 @@ class InformationForm extends Component {
               {
                 pattern: new RegExp("^[0-9]{10}$"),
                 message: "หมายเลขโทรศัพท์ไม่ถูกต้อง"
-              },
-              { validator: this.checkPhone }
-            ],
-            // validateTrigger: "onBlur"
+              }
+            ]
           })(<Input placeholder="0869999999" />)}
         </FormItem>
         <FormItem {...formItemLayout} label="E-mail">
@@ -263,244 +275,170 @@ class InformationForm extends Component {
             ]
           })(<Input placeholder="johnmedapple@google.com" />)}
         </FormItem>
-        <FormItem {...formItemLayout} label="Emergency Contact">
-          {getFieldDecorator("emergencyContact", {
-            rules: [
-              {
-                required: true,
-                message: "กรุณากรอกผู้ติดต่อสำหรับกรณีฉุกเฉิน"
-              }
-            ]
-          })(<Input placeholder="กรรณิการ์" />)}
-        </FormItem>
-        <FormItem {...formItemLayout} label="Emergency Tel.">
-          {getFieldDecorator("emergencyPhone", {
-            rules: [
-              {
-                required: true,
-                message: "กรุณากรอกหมายเลขโทรศัพท์ฉุกเฉิน"
-              },
-              {
-                pattern: new RegExp("^[0-9]{10}$"),
-                message: "หมายเลขโทรศัพท์ไม่ถูกต้อง"
-              }
-            ]
-          })(<Input placeholder="0869999999" />)}
-        </FormItem>
-        <FormItem {...formItemLayout} label="Shirt size" hasFeedback>
-          {getFieldDecorator("shirtSize", {
-            rules: [{ required: true, message: "กรุณาเลือกขนาดเสื้อ" }]
+        <FormItem {...formItemLayout} label="Intania/วศ." hasFeedback>
+          {getFieldDecorator("series", {
+            rules: [{ required: true, message: "กรุณาเลือก วศ." }]
           })(
-            <Select placeholder="เลือกขนาดเสื้อ">
-              <Option value="XXS">XXS - 34"</Option>
-              <Option value="XS">XS - 36"</Option>
-              <Option value="S">S - 38"</Option>
-              <Option value="M">M - 40"</Option>
-              <Option value="L">L - 42"</Option>
-              <Option value="XL">XL - 44"</Option>
-              <Option value="XXL">XXL - 46"</Option>
+            <Select placeholder="เลือก วศ.">
+              <Option value="grads">ป.โท/ป.เอก"</Option>
+              <Option value="85">85/44</Option>
+              <Option value="86">86/45</Option>
+              <Option value="87">87/46</Option>
+              <Option value="88">88/47</Option>
+              <Option value="89">89/48</Option>
+              <Option value="90">90/49</Option>
+              <Option value="91">91/50</Option>
+              <Option value="92">92/51</Option>
+              <Option value="93">93/52</Option>
+              <Option value="94">94/53</Option>
+              <Option value="95">95/54</Option>
+              <Option value="96">96/55</Option>
+              <Option value="97">97/56</Option>
+              <Option value="98">98/57</Option>
             </Select>
           )}
         </FormItem>
-        <FormItem {...formItemLayout} label="Running type" hasFeedback>
+        <FormItem {...formItemLayout} label="ปีที่เข้าศึกษา">
+          {getFieldDecorator("year", {
+            rules: [
+              {
+                required: true,
+                message: "กรุณากรอกปีที่เข้าศึกษา"
+              }
+            ]
+          })(<Input placeholder="53" />)}
+        </FormItem>
+        <FormItem {...formItemLayout} label="ชื่อหน่วยงาน/บริษัท">
+          {getFieldDecorator("company", {
+            rules: [
+              {
+                required: true,
+                message: "กรุณากรอกชื่อหน่วยงาน/บริษัท"
+              }
+            ]
+          })(<Input />)}
+        </FormItem>
+        <FormItem {...formItemLayout} label="ประเภทธุรกิจ" hasFeedback>
           {getFieldDecorator("type", {
-            rules: [{ required: true, message: "กรุณาประเภทการวิ่ง" }]
+            rules: [{ required: true, message: "กรุณาเลือกประเภทธุรกิจ" }]
           })(
-            <Select placeholder="เลือกประเภทการวิ่ง">
-              <Option value="Fun Run 5km">5 km</Option>
-              <Option value="Mini Marathon 10km">10 km</Option>
+            <Select placeholder="เลือกประเภทธุรกิจ">
+              <Option value="การศึกษา">การศึกษา</Option>
             </Select>
           )}
         </FormItem>
-        <FormItem {...formItemLayout} label="Alumni">
-          {getFieldDecorator("isAlumni", {
-            rules: [
-              {
-                required: true,
-                message: "กรุณาระบุการเป็นนิสิตเก่า"
-              }
-            ]
+        <FormItem {...formItemLayout} label="เลือกห้อง" hasFeedback>
+          {getFieldDecorator("room", {
+            rules: [{ required: true, message: "กรุณาเลือกห้อง" }]
           })(
-            <Select>
-              <Option value="true">นิสิตเก่า</Option>
-              <Option value="false">ไม่เป็นนิสิตเก่า</Option>
+            <Select placeholder="เลือกห้อง">
+              <Option value="TOPIC3">TOPIC3: "CHANGE" for our wisdom</Option>
             </Select>
           )}
-        </FormItem>
-        {getFieldValue("isAlumni") === "true" && (
-          <FormItem {...formItemLayout} label="หมายเลขรุ่น">
-            {getFieldDecorator("series", {
-              rules: [
-                {
-                  required: true,
-                  message: "กรุณากรอกหมายเลขรุ่น"
-                }
-              ]
-            })(
-              <InputNumber
-                placeholder="94"
-                onBlur={e => this.handleSeriesNoChange(e.target.value)}
-                min={85} max={98}
-                style={{ width: '100%'}}
-              />
-            )}
-          </FormItem>
-        )}
-        {getFieldValue("isAlumni") === "true" && (
-          <FormItem {...formItemLayout} label="วศ">
-            {getFieldDecorator("year", {
-              rules: [
-                {
-                  required: true,
-                  message: "กรุณากรอก วศ"
-                }
-              ]
-            })(
-              <Input
-                placeholder="53"
-                onBlur={e => this.handleYearChange(e.target.value)}
-                disabled
-              />
-            )}
-          </FormItem>
-        )}
-        {getFieldValue("isAlumni") === "false" && (
-          <FormItem {...formItemLayout} label="ชื่อ-สกุล ผู้ลงทะเบียนให้">
-            {getFieldDecorator("referalName", {
-              rules: [
-                {
-                  required: true,
-                  message: "กรุณากรอกชื่อ-สกุล ผู้ลงทะเบียนให้"
-                }
-              ]
-            })(<Input />)}
-          </FormItem>
-        )}
-        {getFieldValue("isAlumni") === "false" && (
-          <FormItem {...formItemLayout} label="ความเกี่ยวข้อง">
-            {getFieldDecorator("relative", {
-              rules: [
-                {
-                  required: true,
-                  message: "กรุณากรอกความเกี่ยวข้อง"
-                }
-              ]
-            })(<Input />)}
-          </FormItem>
-        )}
-        <FormItem {...formItemLayout} label="ชื่อบน BIB ของนักวิ่ง">
-          {getFieldDecorator("bibName", {
-            rules: [
-              {
-                required: true,
-                message: "กรุณากรอกชื่อบนบิบ"
-              }
-            ]
-          })(<Input placeholder="กรุณากรอกเป็นภาษาอังกฤษ ไม่เกิน 20 ตัวอักษร" />)}
         </FormItem>
         <FormItem
           {...formItemLayout}
-          label="คุณเคยวิ่งระยะ 10 กม มาก่อนหรือไม่"
+          label="สิ่งที่สามารถแบ่งปันในกลุ่ม IYA Forum อื่นๆ"
+          hasFeedback
         >
-          {getFieldDecorator("isRunning", {
-            rules: [
-              {
-                required: true,
-                message: "คุณเคยวิ่งระยะ 10 กม มาก่อนหรือไม่"
-              }
-            ]
+          {getFieldDecorator("share", {
+            rules: [{ required: true, message: "กรุณาเลือก" }]
           })(
             <Select>
-              <Option value="true">เคย</Option>
-              <Option value="false">ไม่เคย</Option>
+              <Option value="การศึกษา">ร่วมเป็น Speaker</Option>
             </Select>
           )}
         </FormItem>
-        {getFieldValue("isRunning") === "true" && (
-          <FormItem 
-            {...formItemLayout}
-            label="เวลาส่วนตัวที่ดีที่สุดคือเท่าไหร่"
-          >
-            {getFieldDecorator("bestTime", {
-              initialValue: moment("00:00", format),
-              rules: [
-                {
-                  required: true,
-                  message: "กรุณากรอกเวลาส่วนตัวที่ดีที่สุดคือเท่าไหร่"
-                }
-              ]
-            })(<TimePicker  defaultValue={moment('13:30', format)} format={format} />)}
-            <p style={{marginTop : "-5px"}}>HH:mm</p>
-          </FormItem>
-        )}
-        <FormItem {...formItemLayout} style={{margin : "0 auto"}} colon ={false} label="ความตั้งใจ">
-          {getFieldDecorator("changeAnswer", {
+        <FormItem
+          {...formItemLayout}
+          label="คำถามฝากถึง Speaker ห้องที่ตนเองเลือก"
+        >
+          {getFieldDecorator("question")(<Input />)}
+        </FormItem>
+        <FormItem {...formItemLayout} label="PROMO CODE">
+          {getFieldDecorator("promoCode", {
             rules: [
               {
                 required: true,
-                message: "ปีนี้ต้องการจะ เปลี่ยนแปลง อะไร"
+                message: "กรุณากรอก PROMO CODE"
               }
             ]
-          })(<Input placeholder= "Ex. อยากลดน้ำหนัก 3 กก / อยากชวนเพื่อนมาวิ่งให้ได้ 3 คน" />)}
-          <p style={{fontSize : "11px"}}>อีก 3 เดือนจะถึงงาน #ICMM2019 มีสิ่งที่คุณตั้งใจเปลี่ยนแปลงก่อนถึงวันงานไหม?</p>
+          })(<Input />)}
         </FormItem>
-
-        {this.props.history.location.pathname.split('/')[1] === 'information' && <FormItem {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit" disabled={this.props.confirmData.length === 4}>
-            เพิ่มผู้สมัคร
-          </Button>
-          <Button
-            style={{ marginLeft: "3%" }}
-            type="default"
-            onClick={this.showModal.bind(this)}
-          >
-            สรุปและชำระเงิน
-          </Button>
-        </FormItem>}
-        {this.props.history.location.pathname.split('/')[1] === 'edit' && <FormItem {...tailFormItemLayout}>
-          <Button
-            type="primary"
-            onClick={this.saveEdit.bind(this)}
-            disabled={this.props.confirmData.length === 4}
-          >
-            บันทึกและเพิ่มผู้สมัคร
-          </Button>
-          <Button
-            style={{ marginLeft: "3%" }}
-            type="default"
-            onClick={this.showModal2.bind(this)}
-          >
-            บันทึกและชำระเงิน
-          </Button>
-        </FormItem>}
+        {this.props.history.location.pathname.split("/")[1] ===
+          "information" && (
+          <FormItem {...tailFormItemLayout}>
+            {/* <Button
+              type="primary"
+              htmlType="submit"
+              disabled={this.props.confirmData.length === 4}
+            >
+              เพิ่มผู้สมัคร
+            </Button> */}
+            <Button
+              style={{ marginLeft: "3%" }}
+              type="primary"
+              onClick={this.showModal.bind(this)}
+            >
+              สรุปและชำระเงิน
+            </Button>
+          </FormItem>
+        )}
+        {this.props.history.location.pathname.split("/")[1] === "edit" && (
+          <FormItem {...tailFormItemLayout}>
+            {/* <Button
+              type="primary"
+              onClick={this.saveEdit.bind(this)}
+              disabled={this.props.confirmData.length === 4}
+            >
+              บันทึกและเพิ่มผู้สมัคร
+            </Button> */}
+            <Button
+              style={{ marginLeft: "3%" }}
+              type="primary"
+              onClick={this.showModal2.bind(this)}
+            >
+              บันทึกและชำระเงิน
+            </Button>
+          </FormItem>
+        )}
         <Modal
-        //beforePushToSummary
+          //beforePushToSummary
           title="คำเตือน"
           visible={this.state.visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
           width={600}
         >
-        <p style={{ textAlign : "center"}}>กรุณาตรวจสอบข้อมูลผู้สมัครให้ถูกต้องอีกครั้ง เนื่องจากจะไม่สามารถแก้ไขได้ในภายหลัง</p>
-        <br/>
-        <p style={{ textAlign : "center"}}>หากรับทราบกด OK เพื่อดำเนินการต่อ หรือกด Cancel เพื่อทำการตรวจข้อมูลอีกครั้ง</p>
-
+          <p style={{ textAlign: "center" }}>
+            กรุณาตรวจสอบข้อมูลผู้สมัครให้ถูกต้องอีกครั้ง
+            เนื่องจากจะไม่สามารถแก้ไขได้ในภายหลัง
+          </p>
+          <br />
+          <p style={{ textAlign: "center" }}>
+            หากรับทราบกด OK เพื่อดำเนินการต่อ หรือกด Cancel
+            เพื่อทำการตรวจข้อมูลอีกครั้ง
+          </p>
         </Modal>
         <Modal
-        //beforePushToSummaryFromEdit
+          //beforePushToSummaryFromEdit
           title="คำเตือน"
           visible={this.state.visible2}
           onOk={this.handleOk2}
           onCancel={this.handleCancel2}
           width={600}
         >
-        <p style={{ textAlign : "center"}}>กรุณาตรวจสอบข้อมูลผู้สมัครให้ถูกต้องอีกครั้ง เนื่องจากจะไม่สามารถแก้ไขได้ในภายหลัง</p>
-        <br/>
-        <p style={{ textAlign : "center"}}>หากรับทราบกด OK เพื่อดำเนินการต่อ หรือกด Cancel เพื่อทำการตรวจข้อมูลอีกครั้ง</p>
+          <p style={{ textAlign: "center" }}>
+            กรุณาตรวจสอบข้อมูลผู้สมัครให้ถูกต้องอีกครั้ง
+            เนื่องจากจะไม่สามารถแก้ไขได้ในภายหลัง
+          </p>
+          <br />
+          <p style={{ textAlign: "center" }}>
+            หากรับทราบกด OK เพื่อดำเนินการต่อ หรือกด Cancel
+            เพื่อทำการตรวจข้อมูลอีกครั้ง
+          </p>
         </Modal>
       </Form>
-
-      
     );
   }
 }
