@@ -220,7 +220,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกชื่อ"
               }
             ]
-          })(<Input placeholder="สิริภัทร" />)}
+          })(<Input placeholder="(ภาษาอังกฤษ)" />)}
         </FormItem>
         <FormItem {...formItemLayout} label="สกุล (ภาษาอังกฤษ)">
           {getFieldDecorator("lastname", {
@@ -230,7 +230,7 @@ class InformationForm extends Component {
                 message: "กรุณากรอกนามสกุล"
               }
             ]
-          })(<Input placeholder="ไชยศรี" />)}
+          })(<Input placeholder="(ภาษาอังกฤษ)" />)}
         </FormItem>
         <FormItem {...formItemLayout} label="วันเกิด">
           {getFieldDecorator("birthDate", {
@@ -280,7 +280,7 @@ class InformationForm extends Component {
             rules: [{ required: true, message: "กรุณาเลือก วศ." }]
           })(
             <Select placeholder="เลือก วศ.">
-              <Option value="grads">ป.โท/ป.เอก"</Option>
+              <Option value="grads">ป.โท/ป.เอก</Option>
               <Option value="85">85/44</Option>
               <Option value="86">86/45</Option>
               <Option value="87">87/46</Option>
@@ -359,8 +359,12 @@ class InformationForm extends Component {
           {getFieldDecorator("promoCode", {
             rules: [
               {
-                required: true,
+                required: false,
                 message: "กรุณากรอก PROMO CODE"
+              },
+              {
+                pattern: new RegExp("^[A-Za-z0-9_.]+$"),
+                message: "PROMO CODE ไม่ถูกต้อง"
               }
             ]
           })(<Input />)}
