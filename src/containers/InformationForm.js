@@ -332,7 +332,10 @@ class InformationForm extends Component {
             rules: [{ required: true, message: "กรุณาเลือกห้อง" }]
           })(
             <Select placeholder="เลือกห้อง">
-              <Option value="TOPIC3">TOPIC3: "CHANGE" for our wisdom</Option>
+              <Option value="TOPIC1">TOPIC1: "CHANGE" of Thailand Future Cities in 4.0 Era</Option>
+              <Option value="TOPIC2">TOPIC2: "CHANGE" of Sustain Business in Dynamic World</Option>
+              <Option value="TOPIC3">TOPIC3: "CHANGE" of our Wisdom</Option>
+              <Option value="TOPIC4">TOPIC4: "CHANGE" of Future Energy</Option>
             </Select>
           )}
         </FormItem>
@@ -345,7 +348,13 @@ class InformationForm extends Component {
             rules: [{ required: true, message: "กรุณาเลือก" }]
           })(
             <Select>
-              <Option value="การศึกษา">ร่วมเป็น Speaker</Option>
+              <Option value="การศึกษา">1.Power of Team กับ ธุรกิจในกลุ่มเดียวกัน</Option>
+              <Option value="การศึกษา">2.เข้าร่วมกิจกรรมของ Intania Young Alumni</Option>
+              <Option value="การศึกษา">3.ร่วมเป็น Speaker</Option>
+              <Option value="การศึกษา">4.สปอนเซอร์สนับสนุนงาน Intania Young Alumni</Option>
+              <Option value="การศึกษา">5.ออกบู๊ทรับสมัครงาน</Option>
+              <Option value="การศึกษา">6.สินค้าราคาพิเศษ</Option>
+              <Option value="การศึกษา">7.เข้าร่วมเป็นผู้จัดงานของ Intania Young Alumni</Option>
             </Select>
           )}
         </FormItem>

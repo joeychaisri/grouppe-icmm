@@ -8,11 +8,13 @@ import WelcomePage from "./containers/WelcomPage"
 import SearchByOrder from "./containers/searchByOrder"
 import Summary from "./containers/Summary"
 import Success from "./containers/success"
+import LandingPage from "./containers/LandingPage"
 
 const Routes = props => {
   return (
     <Switch>
-      <Route exact path="/" component={WelcomePage} />
+      <Route exact path="/" component={LandingPage} />
+      <Route exact path="/home" component={WelcomePage} />
       {/* <Route exact path="/series" render={() => <SeriesAuth {...props} />} /> */}
       {/* <Route exact path="/register" render={() => <RegistrationForm {...props} />} /> */}
       <Route exact path="/termandcondition" component={Termandcondition} />
