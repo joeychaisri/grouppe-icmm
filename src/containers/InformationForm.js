@@ -1,13 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import {
-  Form,
-  Input,
-  Button,
-  Select,
-  Alert,
-  Modal
-} from "antd";
+import { Form, Input, Button, Select, Alert, Modal } from "antd";
 import DateInput from "../components/DateInput";
 import API from "../api";
 
@@ -101,9 +94,24 @@ class InformationForm extends Component {
         );
     }
     const res = await API.checkPhoneAvailable(value);
-    console.log(res);
     !res.data.status &&
       callback(`ขออภัย หมายเลขโทรศัพท์ของคุณซ้ำกับในระบบ โปรดใช้หมายเลขอื่น`);
+    callback();
+    return;
+  };
+
+  checkPromoCode = async (rule, value, callback) => {
+    const res = await API.validatePromocode(value);
+    !res.data.status && callback(`ไม่สามารถใช้รหัสนี้ได้`);
+    callback();
+    return;
+  };
+
+  checkEventAvailable = async (rule, value, callback) => {
+    const res = await API.getEvent();
+    let result = res.data.availableRoom.find(item => item.title === value);
+    result && result.maxTicket === result.currentTicket &&
+      callback(`ห้องเต็มแล้ว ไม่สามารถเลือกห้องนี้ได้`);
     callback();
     return;
   };
@@ -279,7 +287,10 @@ class InformationForm extends Component {
           {getFieldDecorator("series", {
             rules: [{ required: true, message: "กรุณาเลือก วศ." }]
           })(
-            <Select placeholder="เลือก วศ.">
+            <Select
+              placeholder="เลือก วศ."
+              onChange={this.handleSeriesNoChange}
+            >
               <Option value="grads">ป.โท/ป.เอก</Option>
               <Option value="85">85/44</Option>
               <Option value="86">86/45</Option>
@@ -329,13 +340,28 @@ class InformationForm extends Component {
         </FormItem>
         <FormItem {...formItemLayout} label="เลือกห้อง" hasFeedback>
           {getFieldDecorator("selectedRoom", {
-            rules: [{ required: true, message: "กรุณาเลือกห้อง" }]
+            rules: [
+              { required: true, message: "กรุณาเลือกห้อง" },
+              { validator: this.checkEventAvailable }
+            ]
           })(
             <Select placeholder="เลือกห้อง">
-              <Option value="TOPIC1">TOPIC1: "CHANGE" of Thailand Future Cities in 4.0 Era</Option>
-              <Option value="TOPIC2">TOPIC2: "CHANGE" of Sustain Business in Dynamic World</Option>
-              <Option value="TOPIC3">TOPIC3: "CHANGE" of our Wisdom</Option>
-              <Option value="TOPIC4">TOPIC4: "CHANGE" of Future Energy</Option>
+              <Option
+                value={`TOPIC1: "CHANGE" of Thailand Future Cities in 4.0 Era`}
+              >
+                TOPIC1: "CHANGE" of Thailand Future Cities in 4.0 Era
+              </Option>
+              <Option
+                value={`TOPIC2: "CHANGE" of Sustain Business in Dynamic World`}
+              >
+                TOPIC2: "CHANGE" of Sustain Business in Dynamic World
+              </Option>
+              <Option value={`TOPIC3: "CHANGE" of our Wisdo`}>
+                TOPIC3: "CHANGE" of our Wisdom
+              </Option>
+              <Option value={`TOPIC4: "CHANGE" of Future Energy`}>
+                TOPIC4: "CHANGE" of Future Energy
+              </Option>
             </Select>
           )}
         </FormItem>
@@ -348,13 +374,21 @@ class InformationForm extends Component {
             rules: [{ required: true, message: "กรุณาเลือก" }]
           })(
             <Select>
-              <Option value="การศึกษา">1.Power of Team กับ ธุรกิจในกลุ่มเดียวกัน</Option>
-              <Option value="การศึกษา">2.เข้าร่วมกิจกรรมของ Intania Young Alumni</Option>
-              <Option value="การศึกษา">3.ร่วมเป็น Speaker</Option>
-              <Option value="การศึกษา">4.สปอนเซอร์สนับสนุนงาน Intania Young Alumni</Option>
-              <Option value="การศึกษา">5.ออกบู๊ทรับสมัครงาน</Option>
-              <Option value="การศึกษา">6.สินค้าราคาพิเศษ</Option>
-              <Option value="การศึกษา">7.เข้าร่วมเป็นผู้จัดงานของ Intania Young Alumni</Option>
+              <Option value="1">
+                1.Power of Team กับ ธุรกิจในกลุ่มเดียวกัน
+              </Option>
+              <Option value="2">
+                2.เข้าร่วมกิจกรรมของ Intania Young Alumni
+              </Option>
+              <Option value="3">3.ร่วมเป็น Speaker</Option>
+              <Option value="4">
+                4.สปอนเซอร์สนับสนุนงาน Intania Young Alumni
+              </Option>
+              <Option value="5">5.ออกบู๊ทรับสมัครงาน</Option>
+              <Option value="6">6.สินค้าราคาพิเศษ</Option>
+              <Option value="7">
+                7.เข้าร่วมเป็นผู้จัดงานของ Intania Young Alumni
+              </Option>
             </Select>
           )}
         </FormItem>
@@ -366,6 +400,8 @@ class InformationForm extends Component {
         </FormItem>
         <FormItem {...formItemLayout} label="PROMO CODE">
           {getFieldDecorator("promotionCode", {
+            validateTrigger: "onBlur",
+            validateFirst: true,
             rules: [
               {
                 required: false,
@@ -374,7 +410,8 @@ class InformationForm extends Component {
               {
                 pattern: new RegExp("^[A-Za-z0-9_.]+$"),
                 message: "PROMO CODE ไม่ถูกต้อง"
-              }
+              },
+              { validator: this.checkPromoCode }
             ]
           })(<Input />)}
         </FormItem>

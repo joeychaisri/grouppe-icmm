@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout, List, Card, Icon, Row, Col } from "antd";
+import { Layout, Row, Col } from "antd";
 import { withRouter } from "react-router-dom";
 import grouppe from'./../static/grouppe.png';
 const { Header, Content, Footer } = Layout;
