@@ -319,7 +319,7 @@ class InformationForm extends Component {
           })(<Input />)}
         </FormItem>
         <FormItem {...formItemLayout} label="ประเภทธุรกิจ" hasFeedback>
-          {getFieldDecorator("type", {
+          {getFieldDecorator("businessType", {
             rules: [{ required: true, message: "กรุณาเลือกประเภทธุรกิจ" }]
           })(
             <Select placeholder="เลือกประเภทธุรกิจ">
@@ -328,7 +328,7 @@ class InformationForm extends Component {
           )}
         </FormItem>
         <FormItem {...formItemLayout} label="เลือกห้อง" hasFeedback>
-          {getFieldDecorator("room", {
+          {getFieldDecorator("selectedRoom", {
             rules: [{ required: true, message: "กรุณาเลือกห้อง" }]
           })(
             <Select placeholder="เลือกห้อง">
@@ -344,7 +344,7 @@ class InformationForm extends Component {
           label="สิ่งที่สามารถแบ่งปันในกลุ่ม IYA Forum อื่นๆ"
           hasFeedback
         >
-          {getFieldDecorator("share", {
+          {getFieldDecorator("sharingForum", {
             rules: [{ required: true, message: "กรุณาเลือก" }]
           })(
             <Select>
@@ -362,10 +362,10 @@ class InformationForm extends Component {
           {...formItemLayout}
           label="คำถามฝากถึง Speaker ห้องที่ตนเองเลือก"
         >
-          {getFieldDecorator("question")(<Input />)}
+          {getFieldDecorator("questionToSpeaker")(<Input />)}
         </FormItem>
         <FormItem {...formItemLayout} label="PROMO CODE">
-          {getFieldDecorator("promoCode", {
+          {getFieldDecorator("promotionCode", {
             rules: [
               {
                 required: false,
