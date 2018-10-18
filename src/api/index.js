@@ -2,8 +2,8 @@ import axios from "axios";
 
 const api = axios.create({
   // baseURL: `https://dev.icmm.run/`
-  baseURL: `https://api.icmm.run/`
-  // baseURL: `https://api3.icmm.run`
+  // baseURL: `https://api.icmm.run/`
+  baseURL: `https://api3.icmm.run`
   
 });
 
