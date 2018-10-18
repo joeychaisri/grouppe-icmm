@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { Input, Button } from "antd";
+import { Input, Button , Alert } from "antd";
 import API from "../api";
 
 class SeriesAuth extends Component {
@@ -64,7 +64,8 @@ class SeriesAuth extends Component {
   render() {
     return (
       <div style={{ display: "flex", flexFlow: "column wrap" }}>
-     
+         <Alert message="หลังจากทำการสมัครแล้วกรุณาทำการชำระเงินภายใน 24 ชั่วโมง หรือ ภายในวันที่ 19 ก่อนเที่ยงตรง เท่านั้น (นับเวลาที่น้อยกว่า)
+*ระบบจะทำการปิดทันทีในวันที่19 เวลา 12:00pm" type="warning" />
         <Input
           onChange={this.handleChange.bind(this)}
           placeholder="Please enter invitation code"
