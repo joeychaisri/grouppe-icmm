@@ -12,7 +12,8 @@ class InformationForm extends Component {
     super(props, context);
     this.state = {
       visible: null,
-      visible2: null
+      visible2: null,
+      roomOptions: []
     };
   }
 
@@ -28,10 +29,24 @@ class InformationForm extends Component {
 
   componentDidMount() {
     this.props.form.setFieldsValue(this.props.data);
+    this.getRoomOptions();
     // if(!this.props.data || !this.props.data.invitationCode) {
     //   this.props.history.push('/')
     // }
   }
+
+  getRoomOptions = async () => {
+    const res = await API.getEvent();
+    res &&
+      this.setState({
+        roomOptions: res.data.availableRoom.map(item => {
+          return {
+            name: `${item.title} (${item.currentSeat}/${item.maxSeat})`,
+            value: item.title
+          };
+        })
+      });
+  };
   componentWillReceiveProps(nextProps) {
     if (this.props.data !== nextProps.data) {
       this.props.form.setFieldsValue(nextProps.data);
@@ -112,9 +127,10 @@ class InformationForm extends Component {
   checkEventAvailable = async (rule, value, callback) => {
     const res = await API.getEvent();
     let result = res.data.availableRoom.find(item => item.title === value);
-    result &&
-      result.maxTicket === result.currentTicket &&
+    console.log(result);
+    if (result && result.maxSeat === result.currentSeat) {
       callback(`ห้องเต็มแล้ว ไม่สามารถเลือกห้องนี้ได้`);
+    }
     callback();
     return;
   };
@@ -354,11 +370,16 @@ class InformationForm extends Component {
           {getFieldDecorator("selectedRoom", {
             rules: [
               { required: true, message: "กรุณาเลือกห้อง" },
-              // { validator: this.checkEventAvailable }
+              { validator: this.checkEventAvailable }
             ]
           })(
             <Select placeholder="เลือกห้อง">
-              <Option
+              {this.state.roomOptions.map((item, idx) => (
+                <Option key={`room-${idx}`} value={item.value}>
+                  {item.name}
+                </Option>
+              ))}
+              {/* <Option
                 value={`TOPIC1: "CHANGE" of Thailand Future Cities in 4.0 Era`}
               >
                 TOPIC1: "CHANGE" of Thailand Future Cities in 4.0 Era
@@ -373,7 +394,7 @@ class InformationForm extends Component {
               </Option>
               <Option value={`TOPIC4: "CHANGE" of Future Energy`}>
                 TOPIC4: "CHANGE" of Future Energy
-              </Option>
+              </Option> */}
             </Select>
           )}
         </FormItem>
