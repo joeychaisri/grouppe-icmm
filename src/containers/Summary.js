@@ -32,6 +32,7 @@ class Summary extends Component {
         } = res.data;
         if (status === "successful") {
           alert("ทำรายการสำเร็จแล้ว");
+          this.props.clear()
           this.props.history.push("/");
         } else {
           const element = (
