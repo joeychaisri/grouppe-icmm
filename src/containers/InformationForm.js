@@ -101,8 +101,10 @@ class InformationForm extends Component {
   };
 
   checkPromoCode = async (rule, value, callback) => {
-    const res = await API.validatePromocode(value);
-    !res.data.status && callback(`ไม่สามารถใช้รหัสนี้ได้`);
+    if (value) {
+      const res = await API.validatePromocode(value);
+      !res.data.status && callback(`ไม่สามารถใช้รหัสนี้ได้`);
+    }
     callback();
     return;
   };
@@ -110,7 +112,8 @@ class InformationForm extends Component {
   checkEventAvailable = async (rule, value, callback) => {
     const res = await API.getEvent();
     let result = res.data.availableRoom.find(item => item.title === value);
-    result && result.maxTicket === result.currentTicket &&
+    result &&
+      result.maxTicket === result.currentTicket &&
       callback(`ห้องเต็มแล้ว ไม่สามารถเลือกห้องนี้ได้`);
     callback();
     return;
@@ -291,21 +294,21 @@ class InformationForm extends Component {
               placeholder="เลือก วศ."
               onChange={this.handleSeriesNoChange}
             >
-              <Option value="grads">ป.โท/ป.เอก</Option>
-              <Option value={"85"}>85/44</Option>
-              <Option value={86}>86/45</Option>
-              <Option value="87" >87/46</Option>
-              <Option value="88" >88/47</Option>
-              <Option value={parseInt("89")}>89/48</Option>
-              <Option value={parseInt("90")}>90/49</Option>
-              <Option value={parseInt("91")}>91/50</Option>
-              <Option value={parseInt("92")}>92/51</Option>
-              <Option value={parseInt("93")}>93/52</Option>
-              <Option value={parseInt("94")}>94/53</Option>
-              <Option value={parseInt(95)}>95/54</Option>
-              <Option value={parseInt(96)}>96/55</Option>
-              <Option value={parseInt(97)}>97/56</Option>
-              <Option value={parseInt(98)}>98/57</Option>
+              <Option value="-1">ป.โท/ป.เอก</Option>
+              <Option value="85">85/44</Option>
+              <Option value="86">86/45</Option>
+              <Option value="87">87/46</Option>
+              <Option value="88">88/47</Option>
+              <Option value="89">89/48</Option>
+              <Option value="90">90/49</Option>
+              <Option value="91">91/50</Option>
+              <Option value="92">92/51</Option>
+              <Option value="93">93/52</Option>
+              <Option value="94">94/53</Option>
+              <Option value="95">95/54</Option>
+              <Option value="96">96/55</Option>
+              <Option value="97">97/56</Option>
+              <Option value="98">98/57</Option>
             </Select>
           )}
         </FormItem>
@@ -334,30 +337,16 @@ class InformationForm extends Component {
             rules: [{ required: true, message: "กรุณาเลือกประเภทธุรกิจ" }]
           })(
             <Select placeholder="เลือกประเภทธุรกิจ">
-              <Option value="1">
-                1.Agro and Food
-              </Option>
-              <Option value="2">
-                2.Consumer Products
-              </Option>
+              <Option value="1">1.Agro and Food</Option>
+              <Option value="2">2.Consumer Products</Option>
               <Option value="3">3.Financial</Option>
-              <Option value="4">
-                4.Industrials
-              </Option>
+              <Option value="4">4.Industrials</Option>
               <Option value="5">5.Property and Contructions</Option>
               <Option value="6">6.Resources</Option>
-              <Option value="7">
-                7.Services
-              </Option>
-              <Option value="8">
-                8.Technology
-              </Option>
-              <Option value="9">
-                9.Education
-              </Option>
-              <Option value="10">
-                10.Consultant
-              </Option>
+              <Option value="7">7.Services</Option>
+              <Option value="8">8.Technology</Option>
+              <Option value="9">9.Education</Option>
+              <Option value="10">10.Consultant</Option>
             </Select>
           )}
         </FormItem>
@@ -365,7 +354,7 @@ class InformationForm extends Component {
           {getFieldDecorator("selectedRoom", {
             rules: [
               { required: true, message: "กรุณาเลือกห้อง" },
-              { validator: this.checkEventAvailable }
+              // { validator: this.checkEventAvailable }
             ]
           })(
             <Select placeholder="เลือกห้อง">
@@ -426,10 +415,6 @@ class InformationForm extends Component {
             validateTrigger: "onBlur",
             validateFirst: true,
             rules: [
-              {
-                required: false,
-                message: "กรุณากรอก PROMO CODE"
-              },
               {
                 pattern: new RegExp("^[A-Za-z0-9_.]+$"),
                 message: "PROMO CODE ไม่ถูกต้อง"

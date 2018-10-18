@@ -123,6 +123,12 @@ class App extends Component {
     });
   };
 
+  clearData = () => {
+    this.setState({
+      confirmData: []
+    })
+  }
+
   setOrderData = ({ status, payment, applicants }) => {
     this.setState({
       confirmData: applicants !== null ? applicants : [],
@@ -146,7 +152,8 @@ class App extends Component {
           <Routes
             set={data => this.setData(data)}
             add={newData => this.addData(newData)}
-            edit={ obj => this.editData(obj) }
+            edit={ obj => this.editData(obj)}
+            clear={this.clearData}
             data={this.state.data}
             confirmData={this.state.confirmData}
             isRegistered={isRegistered}

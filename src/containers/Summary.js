@@ -10,7 +10,7 @@ class Summary extends Component {
     let applicants = this.props.confirmData.map(item => {
       delete item.year;
       delete item.birthDate;
-      item.series && (item.series = String(item.series));
+      item.series && (item.series = Number(item.series));
       return item;
     });
     const data = {
@@ -63,6 +63,7 @@ class Summary extends Component {
       })
       .catch(err => {
         alert("เกิดข้อผิดพลาด กรุณานาลงทะเบียนใหม่ ขออภัยในความไม่สะดวก");
+        this.props.clear()
         this.props.history.push("/");
       });
   };
@@ -104,7 +105,7 @@ class Summary extends Component {
   render() {
     const { confirmData } = this.props;
     const total = confirmData.reduce((acc, item) => {
-      let price = Number(item.series) <= 90 ? 800 : 500;
+      let price = item.promotionCode ? 0 : ( (Number(item.series) <= 90 || Number(item.series) === -1 ) ? 800 : 500 )
       return acc + price;
     }, 0);
     // const nonVat = total / 1.07;
