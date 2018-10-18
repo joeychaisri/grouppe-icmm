@@ -353,16 +353,16 @@ class InformationForm extends Component {
             rules: [{ required: true, message: "กรุณาเลือกประเภทธุรกิจ" }]
           })(
             <Select placeholder="เลือกประเภทธุรกิจ">
-              <Option value="1">1.Agro and Food</Option>
-              <Option value="2">2.Consumer Products</Option>
-              <Option value="3">3.Financial</Option>
-              <Option value="4">4.Industrials</Option>
-              <Option value="5">5.Property and Contructions</Option>
-              <Option value="6">6.Resources</Option>
-              <Option value="7">7.Services</Option>
-              <Option value="8">8.Technology</Option>
-              <Option value="9">9.Education</Option>
-              <Option value="10">10.Consultant</Option>
+              <Option value="1">Agro and Food</Option>
+              <Option value="2">Consumer Products</Option>
+              <Option value="3">Financial</Option>
+              <Option value="4">Industrials</Option>
+              <Option value="5">Property and Contructions</Option>
+              <Option value="6">Resources</Option>
+              <Option value="7">Services</Option>
+              <Option value="8">Technology</Option>
+              <Option value="9">Education</Option>
+              <Option value="10">Consultant</Option>
             </Select>
           )}
         </FormItem>
