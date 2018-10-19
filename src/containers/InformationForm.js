@@ -315,6 +315,11 @@ class InformationForm extends Component {
               onChange={this.handleSeriesNoChange}
             >
               <Option value="-1">ป.โท/ป.เอก</Option>
+              <Option value="80">80/39</Option>
+              <Option value="81">81/40</Option>
+              <Option value="82">82/41</Option>
+              <Option value="83">83/42</Option>
+              <Option value="84">84/43</Option>
               <Option value="85">85/44</Option>
               <Option value="86">86/45</Option>
               <Option value="87">87/46</Option>
@@ -362,7 +367,7 @@ class InformationForm extends Component {
               <Option value="3">Financial</Option>
               <Option value="4">Industrials</Option>
               <Option value="5">Property and Contructions</Option>
-              <Option value="6">Resources</Option>
+              <Option value="6">Resources & Energy</Option>
               <Option value="7">Services</Option>
               <Option value="8">IT & Technology</Option>
               <Option value="9">Education</Option>

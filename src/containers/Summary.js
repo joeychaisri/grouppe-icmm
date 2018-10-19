@@ -118,7 +118,7 @@ class Summary extends Component {
             confirmData.map((item, idx) => (
               <Panel header={`ข้อมูลผู้สมัครคนที่ ${idx + 1}`} key={idx + 1}>
                 <p>
-                  {item.name} {item.lastname} {item.series} <br />
+                  {item.name} {item.lastname} #{item.series} <br />
                   {item.phone} {item.email} <br />
                   เลือกห้อง {item.selectedRoom}
                 </p>
