@@ -2,6 +2,8 @@ import React from "react";
 import { Layout, Row, Col } from "antd";
 import { withRouter } from "react-router-dom";
 import grouppe from'./../static/grouppe.png';
+import iyaHeader from'./../static/header.png';
+import iyaLogo from'./../static/iyaLogo.jpg';
 const { Header, Content, Footer } = Layout;
 
 
@@ -9,6 +11,8 @@ const MainLayout = ({ confirmData, set, history, children, delData, editData }) 
   <Layout style={{ minHeight: "100vh" }}>
     <Header style={{ backgroundColor: "#2F496E", textAlign: "center" }}>
       <h2 style={{ color: "white", marginTop: '15px' }}>IYA Forum 2018</h2>
+    
+     {/* <img  src={iyaHeader} style={{ zIndex: "100",margin: "0 auto" , maxWidth: "100%" , height : "200%" }}/> */}
     </Header>
     {/* <Header style={{ backgroundColor: "white"}}>
         <img  src={icmmBanner} style={{ margin: "0 auto" , maxWidth: "100%" , height : "200%" }}/>
@@ -97,6 +101,7 @@ const MainLayout = ({ confirmData, set, history, children, delData, editData }) 
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}  >
       <p style={{ margin: 0}}> powered by </p>
        <img src={grouppe} alt="grouppe" style={{ width: "120px" }}/>
+       <img src={iyaLogo} alt="iyaLogos" style={{ width: "120px" }}/>
     </div>
     </Footer>
   </Layout>

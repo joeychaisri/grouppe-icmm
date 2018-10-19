@@ -1,7 +1,9 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: 'https://dev.iyaforum.com/'
+  // baseURL: 'https://dev.iyaforum.com/'
+  baseURL: 'https://api.iyaforum.com'
+
   
 });
 

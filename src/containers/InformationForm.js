@@ -1,12 +1,17 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { Form, Input, Button, Select, Alert, Modal } from "antd";
+import { Form, Input, Button, Select, Alert, Modal, TreeSelect } from "antd";
 import DateInput from "../components/DateInput";
 import API from "../api";
 import speakerImg from '../static/speaker.jpg';
+import topic1 from '../static/topic1.jpg';
+import topic2 from '../static/topic2.jpg';
+import topic3 from '../static/topic3.jpg';
+import topic4 from '../static/topic4.jpg';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
+const TreeNode = TreeSelect.TreeNode;
 
 class InformationForm extends Component {
   constructor(props, context) {
@@ -373,10 +378,49 @@ class InformationForm extends Component {
               <Option value="8">IT & Technology</Option>
               <Option value="9">Education</Option>
               <Option value="10">Consultant</Option>
-              <Option value="10">Logistics & Transport</Option>
+              <Option value="11">Logistics & Transport</Option>
+              <Option value="12">Other</Option>
             </Select>
           )}
         </FormItem>
+        {/* {getFieldValue("isAlumni") === "true" && (
+          <FormItem {...formItemLayout} label="หมายเลขรุ่น">
+            {getFieldDecorator("series", {
+              rules: [
+                {
+                  required: true,
+                  message: "กรุณากรอกหมายเลขรุ่น"
+                }
+              ]
+            })(
+              <InputNumber
+                placeholder="94"
+                onBlur={e => this.handleSeriesNoChange(e.target.value)}
+                min={85} max={98}
+                style={{ width: '100%'}}
+              />
+            )}
+          </FormItem>
+        )} */}
+        <div style={{textAlign : "center"}}>
+        <p><strong>กำหนดการ</strong></p>
+        <p><strong>13:30 &ndash; 14:30 น. ลงทะเบียนเข้างาน</strong></p>
+        <p><strong>14:30 &ndash; 17.00 น. </strong><strong>Intania Young Alumni Round Table Session </strong></p>
+        <p><strong>ชั้น 1 อาคารเรียนรวมและวิจัย (ตึก 100 ปี) คณะวิศวกรรมศาสตร์</strong></p>
+        <p><strong>&nbsp;</strong></p>
+        <p><strong>ห้อง 1 &ldquo;</strong><strong>CHANGE&rdquo; of Thailand Future Cities in <span>4.0</span> era</strong></p>
+        <p><strong>ห้อง 2 &ldquo;</strong><strong>CHANGE&rdquo; to drive businesses in dynamic world</strong></p>
+        <p><strong>ห้อง 3 &ldquo;</strong><strong>CHANGE&rdquo; of our Wisdom</strong></p>
+        <p><strong>ห้อง 4 &ldquo;</strong><strong>CHANGE&rdquo; of Future Energy</strong></p>
+        <p><strong>&nbsp;</strong></p>
+        <p><strong>17:30 &ndash; 18:00 น. ลงทะเบียนเข้างานเลี้ยงช่วงเย็น</strong></p>
+        <p><strong>18:00 &ndash; 18:30 น. การเปิดกิจกรรม </strong><strong>Intania Young Alumni Forum</strong></p>
+        <p><strong>18:30 &ndash; 21:00 น. ร่วมรับประทานอาหาร และกิจกรรมภายในงาน</strong></p>
+        </div>
+        <img style={{marginLeft : "15%" , marginBottom: "25px", width:"70%" , height:"50%"}} src={topic1}  />
+        <img style={{marginLeft : "15%" , marginBottom: "25px", width:"70%" , height:"50%"}} src={topic2}  />
+        <img style={{marginLeft : "15%" , marginBottom: "25px", width:"70%" , height:"50%"}} src={topic3}  />
+        <img style={{marginLeft : "15%" , marginBottom: "25px", width:"70%" , height:"50%"}} src={topic4}  />
         <FormItem {...formItemLayout} label="เลือกห้อง" hasFeedback>
           {getFieldDecorator("selectedRoom", {
             rules: [
@@ -410,9 +454,39 @@ class InformationForm extends Component {
             
           )}
         </FormItem>
-        <img style={{marginLeft : "14%" , marginBottom: "25px", width:"70%" , height:"50%"}} src={speakerImg}  />
+        {/* <img style={{marginLeft : "14%" , marginBottom: "25px", width:"70%" , height:"50%"}} src={speakerImg}  /> */}
         
         <FormItem
+          {...formItemLayout}
+          label="สิ่งที่สามารถแบ่งปันในกลุ่ม IYA Forum อื่นๆ"
+          hasFeedback
+        >
+          {getFieldDecorator("sharingForum", {
+            rules: [{ required: true, message: "กรุณาเลือก" }]
+          })(
+            <TreeSelect
+            showSearch
+            style={{ width: 300 }}
+            placeholder="Please select"
+            allowClear
+            multiple
+            treeDefaultExpandAll
+          >
+       
+                <TreeNode value="1" title="1.ร่วมกับกลุ่มธุรกิจในกลุ่มเดียวกัน" key="1" />
+                <TreeNode value="2" title="2.เข้าร่วมกิจกรรมของ CUEA/ IYA" key="2" />
+                <TreeNode value="3" title="3.ร่วมเป็น Speaker" key="3" />
+                <TreeNode value="4" title="4.Open House ในธุรกิจของตน" key="4" />
+                <TreeNode value="5" title="5.สปอนเซอร์สนับสนุนงาน IYA" key="5" />
+                <TreeNode value="6" title="6.ออกบู๊ท รับสมัครงาน ในกิจกรรมต่างๆ" key="6" />
+                <TreeNode value="7" title="7.เสนอขายสินค้าราคาพิเศษ" key="7" />
+                <TreeNode value="8" title="8.ช่วยจัดกิจกรรมต่างๆ" key="8" />
+
+          </TreeSelect>
+     
+          )}
+        </FormItem>
+        {/* <FormItem
           {...formItemLayout}
           label="สิ่งที่สามารถแบ่งปันในกลุ่ม IYA Forum อื่นๆ"
           hasFeedback
@@ -438,7 +512,7 @@ class InformationForm extends Component {
               </Option>
             </Select>
           )}
-        </FormItem>
+        </FormItem> */}
         <FormItem
           {...formItemLayout}
           label="คำถามฝากถึง Speaker ห้องที่ตนเองเลือก"
