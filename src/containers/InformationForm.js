@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import { Form, Input, Button, Select, Alert, Modal } from "antd";
 import DateInput from "../components/DateInput";
 import API from "../api";
+import speakerImg from '../static/speaker.jpg';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -217,7 +218,7 @@ class InformationForm extends Component {
     };
     return (
       <Form onSubmit={this.handleSubmit}>
-        {this.props.isRegistered && (
+        {/* {this.props.isRegistered && (
           <Alert
             style={{
               width: "50%",
@@ -228,7 +229,7 @@ class InformationForm extends Component {
             message="โปรดกรอกข้อมูลเพื่อเพิ่มผู้สมัคร โดยเบอร์โทรศัพท์ต้องไม่ซ้ำกัน"
             type="warning"
           />
-        )}
+        )} */}
         {/* <FormItem {...formItemLayout} label="Invitation Code">
           {getFieldDecorator("invitationCode", {
             rules: [
@@ -406,8 +407,11 @@ class InformationForm extends Component {
                 TOPIC4: "CHANGE" of Future Energy
               </Option> */}
             </Select>
+            
           )}
         </FormItem>
+        <img style={{marginLeft : "14%" , marginBottom: "25px", width:"70%" , height:"50%"}} src={speakerImg}  />
+        
         <FormItem
           {...formItemLayout}
           label="สิ่งที่สามารถแบ่งปันในกลุ่ม IYA Forum อื่นๆ"
