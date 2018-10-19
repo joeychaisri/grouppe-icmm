@@ -243,8 +243,12 @@ class InformationForm extends Component {
           {getFieldDecorator("name", {
             rules: [
               {
+                pattern: new RegExp("^[A-Za-z_.]+$"),
+                message: "กรุณากรอกชื่อเป็นภาษาอังกฤษ"
+              },
+              {
                 required: true,
-                message: "กรุณากรอกชื่อ"
+                message: "กรุณากรอกชื่อเป็นภาษาอังกฤษ"
               }
             ]
           })(<Input placeholder="(ภาษาอังกฤษ)" />)}
@@ -261,7 +265,7 @@ class InformationForm extends Component {
         </FormItem>
         <FormItem {...formItemLayout} label="วันเกิด">
           {getFieldDecorator("birthDate", {
-            rules: [{ validator: this.checkBirthDate }]
+            rules: [{ required: true,validator: this.checkBirthDate }]
           })(<DateInput />)}
         </FormItem>
         <FormItem {...formItemLayout} label="เพศ" hasFeedback>
@@ -360,9 +364,10 @@ class InformationForm extends Component {
               <Option value="5">Property and Contructions</Option>
               <Option value="6">Resources</Option>
               <Option value="7">Services</Option>
-              <Option value="8">Technology</Option>
+              <Option value="8">IT & Technology</Option>
               <Option value="9">Education</Option>
               <Option value="10">Consultant</Option>
+              <Option value="10">Logistics & Transport</Option>
             </Select>
           )}
         </FormItem>
