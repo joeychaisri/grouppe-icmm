@@ -30,30 +30,16 @@ class Termandcondition extends Component {
         <div >
         <div style={{ maxHeight : "60vh" , overflow : "scroll" , marginLeft: "2vh" , marginRight: "2vh" }}>
         <p style={{textAlign: "center"}}><strong>Privacy Policy&nbsp;</strong></p>
-            <p>Introduction</p>
-            <p>Grouppe (&ldquo;Organizer&rdquo;) and www.iyaforum.com (&ldquo;Website&rdquo;) understands any information that identifies the customer to whom such information pertains is of utmost importance. Organizer, therefore, has established the following privacy policy for its handling and protection of personal information.</p>
+            <p>ด้วยสมาคมนิสิตเก่าวิศวกรรมศาสตร์แห่งจุฬาลงกรณ์มหาวิทยาลัย เห็นว่าปัจจุบันการดำเนินงานกิจกรรมต่างๆของสมาคมฯ มีนิสิตเก่ารุ่นเยาว์เข้าไปมีบทบาทและเข้าร่วมกิจกรรมค่อนข้างน้อย อย่างไรก็ดี ในช่วงหลัง นิสิตเก่ารุ่นเยาว์เริ่มมีบทบาทมากขึ้น ผ่านกิจกรรมใหม่ๆ ซึ่งเข้ากับการดำเนินชีวิตของนิสิตเก่ารุ่นเหล่านั้น อาทิ งาน Intania Chula Mini Marathon <span>หรือ </span>Intania Open Innovation Club (IOIC) <span>คณะกรรมการสมาคมนิสิตเก่าวิศวกรรมศาสตร์แห่งจุฬาลงกรณ์มหาวิทยาลัย และคณะกรรมการฝ่ายสมาชิกสัมพันธ์จึงมีความเห็นร่วมกันให้มีการรวมกลุ่มนิสิตเก่าคณะวิศวกรรมศาสตร์แห่งจุฬาลงกรณ์มหาวิทยาลัยรุ่นเยาว์ หรือ </span>Intania Young Alumni <span>ขึ้นในปี </span>2560<span> เพื่อเป็นการขยายกิจกรรมต่างๆของสมาคมให้มีความหลากหลาย เข้าถึงนิสิตเก่าในทุกกลุ่มอายุ เปิดโอกาสให้นิสิตเก่ารุ่นเยาว์ได้มีโอกาสคิดและเสนอกิจกรรมใหม่ๆเพื่อตอบโจทย์สังคมในยุคปัจจุบัน เข้าถึงยุคสมัย มากยิ่งขึ้น</span></p>
+            <p>โดยในปี 2561 <span>นี้ </span>Intania Young Alumni <span>ได้มีกำหนดจัดกิจกรรม </span>Intania Young Alumni Forum 2561 <span>ขึ้นในวันเสาร์ที่ </span>24 <span>พฤศจิกายน </span>2561 <span>เวลา </span>13:30 <span>น. &ndash; </span>21:00 <span>น. หรือ กิจกรรมการสร้างเครือข่าย (</span>Networking) <span>สไตล์ </span>IYA <span>มีวัตถุประสงค์ เพื่อตอบโจทย์ด้าน &ldquo;</span>Gather&rdquo; <span>และ &ldquo;</span>Branding&rdquo; <span>ซึ่งเป็นหนึ่งในวัตถุประสงค์ของกลุ่ม โดยในปีนี้ มีวัตถุประสงค์ของการจัดงานเน้นไปเรื่อง การเปลี่ยนแปลงเพื่ออนาคต (</span>Change)</p>
             <p>Personal Information Collection and Usage</p>
             <p>When you use, services provided on www.iyaforum.com you will be asked to provide personal information such as name, e-mail, telephone number, Bank account number or credit card details, etc. and including, but not limited to, users' behavior. Organizer generally collect this information for the following purposes:</p>
             <ul>
             <li>To facilitate your use of the Services (as defined in the Terms of Use) and/or access to the website;</li>
             <li>To facilitate your use of the Services by communicating via phone call, email or text message on the usage of the Service of the Website or any activities from another third-parties&rsquo; website to acknowledge or answer the questions.</li>
             <li>To deliver the sales promotion to the target market from Personal Information Collection and Non-Personal Information Collection through the platform, from the time to use the platform and product categories or any of benefits from the Website.</li>
-            <li>To deliver the Sales Offer to the target market from Personal Information Collection.</li>
+            <li>To deliver the Sales Offer to the target market from Personal Information Collection</li>
             </ul>
-            <p>Disclosure of Personal Information</p>
-            <ul>
-            <li>The Organizer will not disclose your personal identification information to any third parties without your prior consent.</li>
-            <li>The Organizer may share only the personal information that is relevant to the job or the event for the Manager of the event.</li>
-            <li>The Organizer may share our third-party service providers, including but not limited to those who provide the credit card processor, payment, or the e-mail service provider etc.</li>
-            <li>The Organizer will not reveal your personal information to any third party unless required under law or by any government enforcement agency or to protect the rights of property and the safety of employees, agents, and other web site users etc.</li>
-            <li>In case of transfer of business mergers and acquisitions, asset sales or loans. The Organizer may be required to disclose some information to those involved in such transactions accordingly.</li>
-            </ul>
-            <p>Modification to Privacy and Disclaimer</p>
-            <p>Organizer reserves the right to change this Privacy Policy and disclaimer at any time. The content presented on this page is considered the latest version. Should any modification to our Privacy Policy occur, we will post the updated version on the page so that you are always aware of how we safeguard your personal data.</p>
-            <p>Security</p>
-            <p>Organizer has implemented the appropriate technical, physical security management and loss prevention using disproportionate access the data without permission to disclosure or adjustment change personal information.</p>
-            <p>However, The Organizer reserves the liability protection of such security as there is not a single system or public network that can guarantee to be completely and thoroughly secured.</p>
-            <p>&nbsp;</p>
         </div>
 
         <Divider style= {{ marginTop : "5vh" }} />
