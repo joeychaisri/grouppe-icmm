@@ -493,7 +493,7 @@ class InformationForm extends Component {
         
         <FormItem
           {...formItemLayout}
-          label="สิ่งที่สามารถแบ่งปันในกลุ่ม IYA Forum อื่นๆ"
+          label="สิ่งที่สามารถแบ่งปันในกลุ่ม IYA Forum อื่นๆ (เลือกได้หลายข้อ)"
           hasFeedback
         >
           {getFieldDecorator("sharingForum", {
