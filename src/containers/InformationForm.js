@@ -133,7 +133,6 @@ class InformationForm extends Component {
   checkEventAvailable = async (rule, value, callback) => {
     const res = await API.getEvent();
     let result = res.data.availableRoom.find(item => item.title === value);
-    console.log(result);
     if (result && result.maxSeat === result.currentSeat) {
       callback(`ห้องเต็มแล้ว ไม่สามารถเลือกห้องนี้ได้`);
     }
@@ -157,7 +156,6 @@ class InformationForm extends Component {
   };
 
   handleOk = e => {
-    console.log(e);
     this.setState({
       visible: false
     });
@@ -165,7 +163,6 @@ class InformationForm extends Component {
   };
 
   handleCancel = e => {
-    console.log(e);
     this.setState({
       visible: false
     });
@@ -178,7 +175,6 @@ class InformationForm extends Component {
   };
 
   handleOk2 = e => {
-    console.log(e);
     this.setState({
       visible2: false
     });
@@ -186,7 +182,6 @@ class InformationForm extends Component {
   };
 
   handleCancel2 = e => {
-    console.log(e);
     this.setState({
       visible2: false
     });

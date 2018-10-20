@@ -30,7 +30,7 @@ class SeriesAuth extends Component {
             }
           })
           .catch(err => {
-            console.log(err);
+            console.err(err);
           });
          }
          
@@ -47,7 +47,7 @@ class SeriesAuth extends Component {
           }
         })
         .catch(err => {
-          console.log(err);
+          console.err(err);
         });
       }
     } else {
