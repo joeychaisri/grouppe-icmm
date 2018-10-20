@@ -22,8 +22,8 @@ class LandingPage extends Component {
     return (
       <div style={{ textAlign : "center" }}>
 
-          <img  src={prposter} style={{  maxWidth: "100%" , height : "200%" }}/>
-          <img  src={sponsor} style={{marginTop:"10px" , maxWidth: "100%" , height : "200%" }}/>
+          <img  src={prposter} width="100%"/>
+          <img  src={sponsor} width="100%" style={{marginTop:"10px"}} />
 
   
           <br/>

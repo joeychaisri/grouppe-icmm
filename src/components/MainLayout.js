@@ -9,10 +9,10 @@ const { Header, Content, Footer } = Layout;
 
 const MainLayout = ({ confirmData, set, history, children, delData, editData }) => (
   <Layout style={{ minHeight: "100vh" }}>
-    <Header style={{ backgroundColor: "#2F496E", textAlign: "center" }}>
-      <h2 style={{ color: "white", marginTop: '15px' }}>CHANGE</h2>
+    <Header style={{ backgroundColor: "#FFF", textAlign: "center", height: 'auto' }}>
+      {/* <h2 style={{ color: "white", marginTop: '15px' }}>CHANGE</h2> */}
     
-     {/* <img  src={iyaHeader} style={{ zIndex: "100",margin: "0 auto" , maxWidth: "100%" , height : "200%" }}/> */}
+     <img  src={iyaHeader} width="50%" style={{ margin: "0 auto", maxWidth: "350px"}}/>
     </Header>
     {/* <Header style={{ backgroundColor: "white"}}>
         <img  src={icmmBanner} style={{ margin: "0 auto" , maxWidth: "100%" , height : "200%" }}/>
