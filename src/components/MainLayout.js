@@ -10,7 +10,7 @@ const { Header, Content, Footer } = Layout;
 const MainLayout = ({ confirmData, set, history, children, delData, editData }) => (
   <Layout style={{ minHeight: "100vh" }}>
     <Header style={{ backgroundColor: "#2F496E", textAlign: "center" }}>
-      <h2 style={{ color: "white", marginTop: '15px' }}>IYA Forum 2018</h2>
+      <h2 style={{ color: "white", marginTop: '15px' }}>CHANGE</h2>
     
      {/* <img  src={iyaHeader} style={{ zIndex: "100",margin: "0 auto" , maxWidth: "100%" , height : "200%" }}/> */}
     </Header>

@@ -193,7 +193,7 @@ class InformationForm extends Component {
   };
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const { getFieldDecorator, getFieldValue } = this.props.form;
 
     const formItemLayout = {
       labelCol: {
@@ -216,9 +216,11 @@ class InformationForm extends Component {
           offset: 0
         },
         sm: {
-          span: 16,
-          offset: 8
-        }
+          span: 24,
+          offset: 0
+        },
+        md: { span: 24, offset: 0 },
+        lg: { span: 12, offset: 8 }
       }
     };
     return (
@@ -383,25 +385,22 @@ class InformationForm extends Component {
             </Select>
           )}
         </FormItem>
-        {/* {getFieldValue("isAlumni") === "true" && (
-          <FormItem {...formItemLayout} label="หมายเลขรุ่น">
-            {getFieldDecorator("series", {
+        {getFieldValue("businessType") === "12" && (
+          <FormItem {...tailFormItemLayout} >
+            {getFieldDecorator("bussinessTypeOther", {
               rules: [
                 {
                   required: true,
-                  message: "กรุณากรอกหมายเลขรุ่น"
+                  message: "กรุณากรอกประเภทธุรกิจ"
                 }
               ]
             })(
-              <InputNumber
-                placeholder="94"
-                onBlur={e => this.handleSeriesNoChange(e.target.value)}
-                min={85} max={98}
-                style={{ width: '100%'}}
+              <Input
+                placeholder="Bussiness type"
               />
             )}
           </FormItem>
-        )} */}
+        )}
         <div style={{textAlign : "center"}}>
         <p><strong>กำหนดการ</strong></p>
         <p><strong>13:30 &ndash; 14:30 น. ลงทะเบียนเข้างาน</strong></p>
