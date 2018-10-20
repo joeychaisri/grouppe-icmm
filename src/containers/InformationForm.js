@@ -319,6 +319,10 @@ class InformationForm extends Component {
               onChange={this.handleSeriesNoChange}
             >
               <Option value="-1">ป.โท/ป.เอก</Option>
+              <Option value="102">102/61</Option>
+              <Option value="101">101/60</Option>
+              <Option value="100">100/59</Option>
+              <Option value="99">99/58</Option>
               <Option value="98">98/57</Option>
               <Option value="97">97/56</Option>
               <Option value="96">96/55</Option>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import icmmBanner from'./../static/icmm_banner.png';
+import prposter from'./../static/prposter.png';
 
 
 class success extends Component {
@@ -19,12 +20,12 @@ class success extends Component {
   render() {
     return (
       <div style={{ textAlign : "center" }}>
-          <h4> ยินดีด้วย </h4>
+          {/* <h4> ยินดีด้วย </h4> */}
           <br/>
-          <h5> การชำระเงินของท่านเสร็จสมบูรณ์แล้ว โปรดเริ่มฟิตร่างกายซ้อมออกกำลังแล้วพบกันในงาน #ICMM2019 โดยรายละเอียดสามารถตรวจสอบได้ในอีเมลล์ที่ลงทะเบียนไว้</h5>
+          <h5> โปรดตรวจสอบรายละเอียดการชำระเงินอีกครั้ง จากการนำ order id ที่ได้รับในอีเมล มาตรวจสอบที่หน้าเว็บ</h5>
           <br/>
           <br/>
-          <img  src={icmmBanner} alt="icmmbanner" style={{ margin: "0 auto" , maxWidth : "100%" , height : "auto"}}/>
+          <img  src={prposter} alt="iyaposter" style={{ margin: "0 auto" , maxWidth : "100%" , height : "auto"}}/>
           <br/>
           <br/>
           <br/>
