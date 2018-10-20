@@ -47,7 +47,8 @@ class InformationForm extends Component {
       this.setState({
         roomOptions: res.data.availableRoom.map(item => {
           return {
-            name: `${item.title} (${item.currentSeat}/${item.maxSeat})`,
+            // name: `${item.title} (${item.currentSeat}/${item.maxSeat})`,
+            name: item.title,
             value: item.title
           };
         })
