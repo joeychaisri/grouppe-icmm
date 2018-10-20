@@ -11,6 +11,8 @@ class Summary extends Component {
       delete item.year;
       delete item.birthDate;
       item.series && (item.series = Number(item.series));
+      item.bussinessType === 'Other' && (item.bussinessType = `Other / ${item.bussinessTypeOther}`)
+      delete item.bussinessTypeOther
       return item;
     });
     const data = {

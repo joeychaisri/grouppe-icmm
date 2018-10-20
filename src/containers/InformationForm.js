@@ -337,6 +337,8 @@ class InformationForm extends Component {
               <Option value="96">96/55</Option>
               <Option value="97">97/56</Option>
               <Option value="98">98/57</Option>
+              <Option value="99">99/58</Option>
+              <Option value="00">00/59</Option>
             </Select>
           )}
         </FormItem>
@@ -365,22 +367,22 @@ class InformationForm extends Component {
             rules: [{ required: true, message: "กรุณาเลือกประเภทธุรกิจ" }]
           })(
             <Select placeholder="เลือกประเภทธุรกิจ">
-              <Option value="1">Agro and Food</Option>
-              <Option value="2">Consumer Products</Option>
-              <Option value="3">Financial</Option>
-              <Option value="4">Industrials</Option>
-              <Option value="5">Property and Contructions</Option>
-              <Option value="6">Resources & Energy</Option>
-              <Option value="7">Services</Option>
-              <Option value="8">IT & Technology</Option>
-              <Option value="9">Education</Option>
-              <Option value="10">Consultant</Option>
-              <Option value="11">Logistics & Transport</Option>
-              <Option value="12">Other</Option>
+              <Option value="Agro and Food">Agro and Food</Option>
+              <Option value="Consumer Products">Consumer Products</Option>
+              <Option value="Financial">Financial</Option>
+              <Option value="Industrials">Industrials</Option>
+              <Option value="Property and Contructions">Property and Contructions</Option>
+              <Option value="Resources & Energy">Resources & Energy</Option>
+              <Option value="Services">Services</Option>
+              <Option value="IT & Technology">IT & Technology</Option>
+              <Option value="Education">Education</Option>
+              <Option value="Consultant">Consultant</Option>
+              <Option value="Logistics & Transport">Logistics & Transport</Option>
+              <Option value="Other">Other</Option>
             </Select>
           )}
         </FormItem>
-        {getFieldValue("businessType") === "12" && (
+        {getFieldValue("businessType") === "Other" && (
           <FormItem {...tailFormItemLayout} >
             {getFieldDecorator("bussinessTypeOther", {
               rules: [
@@ -396,17 +398,17 @@ class InformationForm extends Component {
             )}
           </FormItem>
         )}
-        <div style={{textAlign : "center"}}>
-        <p><strong>กำหนดการ</strong></p>
+        <div style={{textAlign : "left" , backgroundColor: '#01507c', color: '#FFF', padding: 10, borderRadius: 15, width: '100%', maxWidth: '768px', margin: '0 auto', marginBottom: 10}}>
+        <h5 style={{ color: '#FFF'}}>กำหนดการ</h5>
         <p><strong>13:30 &ndash; 14:30 น. ลงทะเบียนเข้างาน</strong></p>
-        <p><strong>14:30 &ndash; 17.00 น. </strong><strong>Intania Young Alumni Round Table Session </strong></p>
-        <p><strong>ชั้น 1 อาคารเรียนรวมและวิจัย (ตึก 100 ปี) คณะวิศวกรรมศาสตร์</strong></p>
-        <p><strong>&nbsp;</strong></p>
-        <p><strong>ห้อง 1 &ldquo;</strong><strong>CHANGE&rdquo; of Thailand Future Cities in <span>4.0</span> era</strong></p>
+        <p><strong>14:30 &ndash; 17.00 น. </strong><strong>Intania Young Alumni Round Table Session </strong><strong>ชั้น 1 อาคารเรียนรวมและวิจัย (ตึก 100 ปี) คณะวิศวกรรมศาสตร์</strong></p>
+        {/* <p></p>
+        <p><strong>&nbsp;</strong></p> */}
+        {/* <p><strong>ห้อง 1 &ldquo;</strong><strong>CHANGE&rdquo; of Thailand Future Cities in <span>4.0</span> era</strong></p>
         <p><strong>ห้อง 2 &ldquo;</strong><strong>CHANGE&rdquo; to drive businesses in dynamic world</strong></p>
         <p><strong>ห้อง 3 &ldquo;</strong><strong>CHANGE&rdquo; of our Wisdom</strong></p>
-        <p><strong>ห้อง 4 &ldquo;</strong><strong>CHANGE&rdquo; of Future Energy</strong></p>
-        <p><strong>&nbsp;</strong></p>
+        <p><strong>ห้อง 4 &ldquo;</strong><strong>CHANGE&rdquo; of Future Energy</strong></p> */}
+        {/* <p><strong>&nbsp;</strong></p> */}
         <p><strong>17:30 &ndash; 18:00 น. ลงทะเบียนเข้างานเลี้ยงช่วงเย็น</strong></p>
         <p><strong>18:00 &ndash; 18:30 น. การเปิดกิจกรรม </strong><strong>Intania Young Alumni Forum</strong></p>
         <p><strong>18:30 &ndash; 21:00 น. ร่วมรับประทานอาหาร และกิจกรรมภายในงาน</strong></p>
