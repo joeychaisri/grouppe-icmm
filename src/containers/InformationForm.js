@@ -512,14 +512,14 @@ class InformationForm extends Component {
             treeDefaultExpandAll
           >
        
-                <TreeNode value="1" title="1.ร่วมกับกลุ่มธุรกิจในกลุ่มเดียวกัน" key="1" />
-                <TreeNode value="2" title="2.เข้าร่วมกิจกรรมของ CUEA/ IYA" key="2" />
-                <TreeNode value="3" title="3.ร่วมเป็น Speaker" key="3" />
-                <TreeNode value="4" title="4.Open House ในธุรกิจของตน" key="4" />
-                <TreeNode value="5" title="5.สปอนเซอร์สนับสนุนงาน IYA" key="5" />
-                <TreeNode value="6" title="6.ออกบู๊ท รับสมัครงาน ในกิจกรรมต่างๆ" key="6" />
-                <TreeNode value="7" title="7.เสนอขายสินค้าราคาพิเศษ" key="7" />
-                <TreeNode value="8" title="8.ช่วยจัดกิจกรรมต่างๆ" key="8" />
+                <TreeNode value="1.ร่วมกับกลุ่มธุรกิจในกลุ่มเดียวกัน" title="1.ร่วมกับกลุ่มธุรกิจในกลุ่มเดียวกัน" key="1" />
+                <TreeNode value="2.เข้าร่วมกิจกรรมของ CUEA/ IYA" title="2.เข้าร่วมกิจกรรมของ CUEA/ IYA" key="2" />
+                <TreeNode value="3.ร่วมเป็น Speaker" title="3.ร่วมเป็น Speaker" key="3" />
+                <TreeNode value="4.Open House ในธุรกิจของตน" title="4.Open House ในธุรกิจของตน" key="4" />
+                <TreeNode value="5.สปอนเซอร์สนับสนุนงาน IYA" title="5.สปอนเซอร์สนับสนุนงาน IYA" key="5" />
+                <TreeNode value="6.ออกบู๊ท รับสมัครงาน ในกิจกรรมต่างๆ" title="6.ออกบู๊ท รับสมัครงาน ในกิจกรรมต่างๆ" key="6" />
+                <TreeNode value="7.เสนอขายสินค้าราคาพิเศษ" title="7.เสนอขายสินค้าราคาพิเศษ" key="7" />
+                <TreeNode value="8.ช่วยจัดกิจกรรมต่างๆ" title="8.ช่วยจัดกิจกรรมต่างๆ" key="8" />
 
           </TreeSelect>
      
