@@ -427,7 +427,7 @@ class InformationForm extends Component {
         </FormItem>
         {getFieldValue("businessType") === "Other" && (
           <FormItem {...tailFormItemLayout} >
-            {getFieldDecorator("bussinessTypeOther", {
+            {getFieldDecorator("businessTypeOther", {
               rules: [
                 {
                   required: true,
@@ -436,7 +436,7 @@ class InformationForm extends Component {
               ]
             })(
               <Input
-                placeholder="Bussiness type"
+                placeholder="Business type"
               />
             )}
           </FormItem>
