@@ -108,7 +108,28 @@ class Summary extends Component {
   render() {
     const { confirmData } = this.props;
     const total = confirmData.reduce((acc, item) => {
-      let price = item.promotionCode ? 0 : ( (Number(item.series) <= 90 || Number(item.series) === -1 ) ? 1000 : 700 )
+      // let price = item.promotionCode ? 0 : ( (Number(item.series) <= 90 || Number(item.series) === -1 ) ? 1000 : 700 )
+      // let price = item.promotionCode ? (item.promotionCode == "IYA1111" ? || ) : ( (Number(item.series) <= 90 || Number(item.series) === -1 ) ? 1000 : 700 )
+      let price = 0 ;
+      if(item.promotionCode){
+        if(item.promotionCode === "IYA1111"){
+          if(Number(item.series <= 90)){
+            price = 800;
+          }
+          else{
+            price = 500;
+          }
+        }else{
+          price = 0;
+        }
+      }else{
+        if(Number(item.series <= 90)){
+          price = 1000;
+        }
+        else{
+          price = 700
+        }
+      }
       return acc + price;
     }, 0);
     // const nonVat = total / 1.07;
