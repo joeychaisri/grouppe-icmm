@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import {Button } from "antd";
-import prposter from'./../static/prposter.png';
-import sponsor from'./../static/sponsor.jpg';
+import prposter from'./../static/prposter3.png';
+// import sponsor from'./../static/sponsor.jpg';
 
 
 
@@ -23,7 +23,7 @@ class LandingPage extends Component {
       <div style={{ textAlign : "center" }}>
 
           <img  src={prposter} width="100%"/>
-          <img  src={sponsor} width="100%" style={{marginTop:"10px"}} />
+          {/* <img  src={sponsor} width="100%" style={{marginTop:"10px"}} /> */}
 
   
           <br/>
